@@ -10,7 +10,7 @@ Authors@R:
              comment = c(ORCID = "0000-0003-4144-8402"))
     )
 Maintainer: Anatoly Tsyplenkov <atsyplenkov@fastmail.com>
-Description: What the package does (one paragraph).
+Description: R bindings to the Whitebox Workflows for Python.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
