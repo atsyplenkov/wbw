@@ -81,6 +81,7 @@ wbw_version <-
 
 #' @importFrom reticulate configure_environment
 .onLoad <- function(libname, pkgname) {
+  S7::methods_register()
   if (.has_python3()) {
     if (!.loadModules()) {
       x <- try(reticulate::configure_environment(pkgname), silent = TRUE)

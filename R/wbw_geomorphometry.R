@@ -16,6 +16,8 @@
 #' when the vertical and horizontal units are not the same in the DEM.
 #' When this is the case, the algorithm will multiply each elevation in the
 #' DEM by the Z conversion factor
+#' 
+#' @return WbwRaster object containing slope values
 #'
 #' @references
 #' Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes,
@@ -26,19 +28,25 @@
 #' @eval rd_input_raster("dem")
 #'
 #' @export
-wbw_slope <-
-  function(dem,
+wbw_slope <- S7::new_generic("wbw_slope", "x")
+
+S7::method(wbw_slope, WbwRaster) <-
+  function(x,
            units = "degrees",
            z_factor = 1.0) {
     # Checks
     check_env(wbe)
-    check_input_raster(dem)
-    units <-
-      checkmate::matchArg(
-        units,
-        choices = c("radians", "degrees", "percent")
-      )
+    units <- checkmate::matchArg(
+      units,
+      choices = c("radians", "degrees", "percent")
+    )
     checkmate::assert_double(z_factor)
-
-    wbe$slope(dem = dem, units = units, z_factor = z_factor)
+    # Estimate slope
+    out <- 
+      wbe$slope(dem = x@source, units = units, z_factor = z_factor)
+    # Return Raster
+    WbwRaster(
+      name = paste0("Slope (", units, ")"),
+      source = out
+    )
   }

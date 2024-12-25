@@ -65,6 +65,8 @@ wbw_install <-
       .success_message(wbw_version())
     } else if (venv_exists && !is.null(wbw_version)) {
       .success_message(wbw_version)
+      # TODO:
+      # - prompt to restart R console
     }
   }
 

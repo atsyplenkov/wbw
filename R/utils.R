@@ -14,7 +14,7 @@ rd_input_raster <-
   function(param) {
     paste0(
       "@param ", param, 
-      " WbW Raster object of class `builtin.Raster`. ",
+      " Raster object of class `WbwRaster`. ",
       "See [wbw_read_raster()] for more details." 
     )
   }

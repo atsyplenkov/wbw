@@ -18,7 +18,8 @@ RoxygenNote: 7.3.2
 Imports: 
     cli,
     checkmate,
-    reticulate
+    reticulate,
+    S7 (>= 0.2.0)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
