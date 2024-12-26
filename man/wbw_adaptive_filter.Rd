@@ -36,13 +36,13 @@ substantially different than their neighbouring values.
 
 Neighbourhood size, or filter size, is specified in the x and y dimensions
 using \code{filter_size_x} and \code{filter_size_y} These dimensions should be odd,
-positive integer values (e.g. 3, 5, 7, 9, etc.).
+positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
 }
 \examples{
 \dontrun{
 raster_path <- system.file("extdata/dem.tif", package = "wbw")
 wbw_read_raster(raster_path) |>
-  wbw_adaptive_filter()
+  wbw_adaptive_filter(filter_size_x = 3L, filter_size_y = 3L)
 }
 }
 \references{

@@ -34,7 +34,7 @@ estimate slope. Given the following clock-type grid cell numbering scheme
 \dontrun{
 raster_path <- system.file("extdata/dem.tif", package = "wbw")
 wbw_read_raster(raster_path) |>
-  wbw_slope()
+  wbw_slope(units = "radians")
 }
 }
 \references{

@@ -68,8 +68,8 @@ summary(slope_deg)
 #> Image minimum: 0
 #> Image maximum: 70.13195037841797
 #> Image range: 70.13195037841797
-#> Image total: 10474131.180865671
-#> Image average: 18.033972418845853
-#> Image variance: 102.85387528448399
-#> Image standard deviation: 10.141689961958214
+#> Image total: 10474131.18086567
+#> Image average: 18.03397241884585
+#> Image variance: 102.85387528448422
+#> Image standard deviation: 10.141689961958225
 ```

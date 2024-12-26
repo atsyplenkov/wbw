@@ -19,7 +19,7 @@
 #'
 #' Neighbourhood size, or filter size, is specified in the x and y dimensions
 #' using `filter_size_x` and `filter_size_y` These dimensions should be odd,
-#' positive integer values (e.g. 3, 5, 7, 9, etc.).
+#' positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
 #'
 #' @eval rd_input_raster("x")
 #' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
@@ -29,7 +29,8 @@
 #' @return [WhiteboxRaster] object containing filtered values
 #'
 #' @eval rd_wbw_link("adaptive_filter")
-#' @eval rd_example_geomorph("wbw_adaptive_filter")
+#' @eval rd_example_geomorph("wbw_adaptive_filter",
+#' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
 wbw_adaptive_filter <-

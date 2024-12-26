@@ -4,7 +4,7 @@
 \alias{rd_example_geomorph}
 \title{Create basic example}
 \usage{
-rd_example_geomorph(foo)
+rd_example_geomorph(foo, args = NULL)
 }
 \description{
 Create basic example

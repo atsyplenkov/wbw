@@ -27,7 +27,7 @@
 #' and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J.
 #'
 #' @eval rd_wbw_link("slope")
-#' @eval rd_example_geomorph("wbw_slope")
+#' @eval rd_example_geomorph("wbw_slope", args = c('units = "radians"'))
 #'
 #' @export
 wbw_slope <-

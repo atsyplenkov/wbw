@@ -42,6 +42,8 @@
     )
     # TODO:
     # - Coord Reference
+    # FIXME:
+    # - Min and Max values are always Inf after operations 
     cat("min values  :", conf$display_min, "\n")
     cat("max values  :", conf$display_max, "\n")
 
