@@ -1,5 +1,5 @@
 #' Print method for WbwRaster
-#' @param x WbwRaster object to print
+#' @param x [WbwRaster] object to print
 #' @param ... additional arguments passed to print
 #' @export
 `print.wbw::WbwRaster` <-

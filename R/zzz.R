@@ -93,26 +93,28 @@ wbw_version <-
 }
 
 
-# FIXME:
-# Update in accordance with
-# https://github.com/ropensci/openalexR/blob/main/R/openalexR-internal.R
-
 #' @importFrom utils packageVersion
 .onAttach <- function(libname, pkgname) {
   wbwv <- wbw_version()
-  if (is.null(wbwv)) {
+  supress <- !grepl("suppress", Sys.getenv("wbw.message"), ignore.case = TRUE)
+  if (is.null(wbwv) && supress) {
     packageStartupMessage(
-      cli::cli_alert_warning(c(
+      paste0(
         "Python package `whitebox-workflows` cannot be found. ",
-        "Run {.code wbw::install_wbw()} and reload R session."
-      ))
+        "Run `wbw::wbw_install()` and reload R session.\n",
+        "To suppress this message, add `wbw.message = suppressed`",
+        "to your .Renviron file."
+      )
     )
-  } else {
+  } else if (!is.null(wbwv) && supress) {
     packageStartupMessage(
-      cli::cli_alert_success(c(
-        "wbw v{utils::packageVersion('wbw')}",
-        " -- using whitebox-workflows v{wbwv}"
-      ))
+      paste0(
+        "wbw v",
+        utils::packageVersion("wbw"),
+        " -- using whitebox-workflows v", wbwv, "\n",
+        "To suppress this message, add `wbw.message = suppressed`",
+        "to your .Renviron file."
+      )
     )
   }
 }

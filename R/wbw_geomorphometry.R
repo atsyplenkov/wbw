@@ -1,4 +1,5 @@
 #' Slope
+#' @rdname wbw_slope
 #'
 #' @description
 #' This tool calculates slope gradient (i.e. slope steepness in degrees,
@@ -10,14 +11,18 @@
 #' estimate slope. Given the following clock-type grid cell numbering scheme
 #' (Gallant and Wilson, 2000).
 #'
+#' @usage wbw_slope(x, ..., units = "degrees", z_factor = 1.0)
+#'
+#' @eval rd_input_raster("x")
 #' @param units \code{character},
 #' units of slope: "radians", "degrees", or "percent"
 #' @param z_factor \code{double}, Z conversion factor is only important
 #' when the vertical and horizontal units are not the same in the DEM.
 #' When this is the case, the algorithm will multiply each elevation in the
 #' DEM by the Z conversion factor
-#' 
-#' @return WbwRaster object containing slope values
+#' @param ... Additional arguments passed to methods.
+#'
+#' @return [WbwRaster] object containing slope values
 #'
 #' @references
 #' Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes,
@@ -25,7 +30,7 @@
 #' and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J.
 #'
 #' @eval rd_wbw_link("slope")
-#' @eval rd_input_raster("dem")
+#' @eval rd_example_geomorph("wbw_slope")
 #'
 #' @export
 wbw_slope <- S7::new_generic("wbw_slope", "x")
@@ -42,11 +47,61 @@ S7::method(wbw_slope, WbwRaster) <-
     )
     checkmate::assert_double(z_factor)
     # Estimate slope
-    out <- 
+    out <-
       wbe$slope(dem = x@source, units = units, z_factor = z_factor)
     # Return Raster
     WbwRaster(
       name = paste0("Slope (", units, ")"),
+      source = out
+    )
+  }
+
+#' Terrain Ruggedness Index (TRI)
+#' @rdname wbw_ruggedness_index
+#'
+#' @description
+#' The terrain ruggedness index (TRI) is a measure of local topographic relief.
+#' The TRI calculates the root-mean-square-deviation (RMSD) for each grid cell
+#' in a digital elevation model (DEM), calculating the residuals (i.e.
+#' elevation differences) between a grid cell and its eight neighbours.
+#'
+#' @details
+#' Notice that, unlike the output of this tool, the original Riley et al.
+#' (1999) TRI did not normalize for the number of cells in the local window
+#'  (i.e. it is a root-square-deviation only). However, using the mean has
+#' the advantage of allowing for the varying number of neighbouring cells
+#' along the grid edges and in areas bordering NoData cells. This modification
+#' does however imply that the output of this tool cannot be directly compared
+#' with the index ranges of level to extremely rugged terrain provided in
+#' Riley et al. (1999)
+#'
+#' @usage wbw_ruggedness_index(x, ...)
+#'
+#' @eval rd_input_raster("x")
+#' @param ... Additional arguments passed to methods.
+#'
+#' @return [WbwRaster] object containing TRI values
+#'
+#' @references
+#' Riley, S. J., DeGloria, S. D., and Elliot, R. (1999). Index that quantifies
+#' topographic heterogeneity. Intermountain Journal of Sciences, 5(1-4), 23-27.
+#'
+#' @eval rd_wbw_link("ruggedness_index")
+#' @eval rd_example_geomorph("wbw_ruggedness_index")
+#'
+#' @export
+wbw_ruggedness_index <- S7::new_generic("wbw_ruggedness_index", "x")
+
+S7::method(wbw_ruggedness_index, WbwRaster) <-
+  function(x) {
+    # Checks
+    check_env(wbe)
+    # Estimate slope
+    out <-
+      wbe$ruggedness_index(input = x@source)
+    # Return Raster
+    WbwRaster(
+      name = paste0("TRI"),
       source = out
     )
   }
