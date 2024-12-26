@@ -8,8 +8,7 @@ test_that(
   desc = "wbw_read function works",
   {
     # Is S7 object
-    expect_true(inherits(x, "S7_object"))
-    expect_null(S7::check_is_S7(x))
+    expect_s7_class(x, class = WhiteboxRaster)
   }
 )
 
@@ -93,15 +92,15 @@ test_that(
     expect_true(file.exists(tmp_grd))
 
     # Check if files can be read back into R session
-    expect_true(inherits(wbw_read_raster(tmp_tif), "wbw::WhiteboxRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_tiff), "wbw::WhiteboxRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_sgrd), "wbw::WhiteboxRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_sdat), "wbw::WhiteboxRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_rst), "wbw::WhiteboxRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_rdc), "wbw::WhiteboxRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_bil), "wbw::WhiteboxRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_flt), "wbw::WhiteboxRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_grd), "wbw::WhiteboxRaster"))
+    expect_s7_class(wbw_read_raster(tmp_tif), class = WhiteboxRaster)
+    expect_s7_class(wbw_read_raster(tmp_tiff),class = WhiteboxRaster)
+    expect_s7_class(wbw_read_raster(tmp_sgrd),class = WhiteboxRaster)
+    expect_s7_class(wbw_read_raster(tmp_sdat),class = WhiteboxRaster)
+    expect_s7_class(wbw_read_raster(tmp_rst), class = WhiteboxRaster)
+    expect_s7_class(wbw_read_raster(tmp_rdc), class = WhiteboxRaster)
+    expect_s7_class(wbw_read_raster(tmp_bil), class = WhiteboxRaster)
+    expect_s7_class(wbw_read_raster(tmp_flt), class = WhiteboxRaster)
+    expect_s7_class(wbw_read_raster(tmp_grd), class = WhiteboxRaster)
 
     # Clean up
     try(file.remove(tmp_tif), silent = TRUE)
