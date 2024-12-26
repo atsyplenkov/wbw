@@ -1,13 +1,14 @@
 #' Returns a new WbwRaster object, read into memory from a path-file string.
-#' 
+#'
 #' @param file_name \code{character}, path to raster file.
-#' 
+#'
 #' @return [WbwRaster] object
-#' 
+#'
 #' @examples
+#' \dontrun{
 #' raster_path <- system.file("extdata/dem.tif", package = "wbw")
 #' wbw_read_raster(raster_path)
-#' 
+#' }
 #' @export
 wbw_read_raster <- function(file_name) {
   check_env(wbe)

@@ -13,5 +13,5 @@ library(wbw)
 have_wbw <- reticulate::py_module_available("whitebox_workflows")
 have_numpy <- reticulate::py_module_available("numpy")
 if (!have_wbw & !have_numpy) {
-  wbw::wbw_install(system = TRUE)
+  wbw_install(system = TRUE)
 }
