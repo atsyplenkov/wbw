@@ -36,12 +36,14 @@ rd_input_raster <-
 rd_example_geomorph <-
   function(foo) {
     paste(
-      '@examples',
-      '\\dontrun{',
+      "@examples",
+      "\\dontrun{",
       'raster_path <- system.file("extdata/dem.tif", package = "wbw")',
-      'wbw_read_raster(raster_path) |>',
-      paste0('  ', foo, '()'),
+      "wbw_read_raster(raster_path) |>",
+      # TODO:
+      # Add function params
+      paste0("  ", foo, "()"),
       "}",
-      sep = '\n'
+      sep = "\n"
     )
   }
