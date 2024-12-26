@@ -4,6 +4,8 @@
 # wbw
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The `wbw` R package provides R bindings to the [Whitebox Workflows for
