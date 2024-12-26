@@ -19,7 +19,13 @@ Writes an in-memory WbwRaster object to file.
 \details{
 Supported raster formats are GeoTIFF (\verb{*.tif}, \verb{*.tiff}), Big GeoTIFF
 (\verb{*.tif}, \verb{*.tiff}), SAGA Binary (\verb{*.sdat} and \verb{*.sgrd}),
-Idrisi (\verb{*.rst})
+Idrisi (\verb{*.rst} and \verb{*.rdc}), Surfer (\verb{*.grd}),
+Esri Binary (\verb{*.flt}), Esri BIL (\verb{*.bil}).
+
+\code{wbw} is able to read GeoTIFFs compressed using the PackBits, DEFLATE, and
+LZW methods. Compressed GeoTIFFs, created using the DEFLATE algorithm, can
+also be output from any tool that generates raster output files by using
+\code{compress=True}.
 }
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#write_raster}

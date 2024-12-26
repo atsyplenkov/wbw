@@ -9,8 +9,14 @@
 #'
 #' @details
 #' Supported raster formats are GeoTIFF (`*.tif`, `*.tiff`), Big GeoTIFF
-#' (`*.tif`, `*.tiff`), SAGA Binary (`*.sdat` and `*.sgrd`), 
-#' Idrisi (`*.rst`)
+#' (`*.tif`, `*.tiff`), SAGA Binary (`*.sdat` and `*.sgrd`),
+#' Idrisi (`*.rst` and `*.rdc`), Surfer (`*.grd`),
+#' Esri Binary (`*.flt`), Esri BIL (`*.bil`).
+#' 
+#' `wbw` is able to read GeoTIFFs compressed using the PackBits, DEFLATE, and
+#' LZW methods. Compressed GeoTIFFs, created using the DEFLATE algorithm, can
+#'  also be output from any tool that generates raster output files by using 
+#' `compress=True`.
 #'
 #' @export
 wbw_write_raster <-
