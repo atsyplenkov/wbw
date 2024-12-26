@@ -2,19 +2,24 @@
 % Please edit documentation in R/wbw_write.R
 \name{wbw_write_raster}
 \alias{wbw_write_raster}
-\title{Writes an in-memory Raster object to file.}
+\title{Writes an in-memory WbwRaster object to file.}
 \usage{
-wbw_write_raster(raster, file_name, compress = TRUE)
+wbw_write_raster(x, file_name, compress = TRUE)
 }
 \arguments{
-\item{raster}{Raster object of class \link{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
+\item{x}{Raster object of class \link{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 
 \item{file_name}{\code{character}, path to output file}
 
 \item{compress}{\code{logical}, whether to compress the output file}
 }
 \description{
-Writes an in-memory Raster object to file.
+Writes an in-memory WbwRaster object to file.
+}
+\details{
+Supported raster formats are GeoTIFF (\verb{*.tif}, \verb{*.tiff}), Big GeoTIFF
+(\verb{*.tif}, \verb{*.tiff}), SAGA Binary (\verb{*.sdat} and \verb{*.sgrd}),
+Idrisi (\verb{*.rst})
 }
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#write_raster}

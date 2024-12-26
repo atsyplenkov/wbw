@@ -32,7 +32,10 @@ check_input_file <-
       checkmate::assertFileExists(
         file_name,
         access = "r",
-        extension = c(".tif", ".tiff")
+        extension = c(
+          ".tif", ".tiff", ".sdat", ".sgrd", ".rst",
+          ".rdc", ".grd", ".flt", ".bil"
+        )
       )
     }
   }

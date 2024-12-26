@@ -1,18 +1,32 @@
-#' Writes an in-memory Raster object to file.
-#' 
+#' Writes an in-memory WbwRaster object to file.
+#' @rdname wbw_write_raster
+#'
 #' @eval rd_wbw_link("write_raster")
-#' @eval rd_input_raster("raster")
-#' 
+#' @eval rd_input_raster("x")
+#'
 #' @param file_name \code{character}, path to output file
 #' @param compress \code{logical}, whether to compress the output file
-#' 
+#'
+#' @details
+#' Supported raster formats are GeoTIFF (`*.tif`, `*.tiff`), Big GeoTIFF
+#' (`*.tif`, `*.tiff`), SAGA Binary (`*.sdat` and `*.sgrd`), 
+#' Idrisi (`*.rst`)
+#'
 #' @export
 wbw_write_raster <-
-  function(raster,
-           file_name,
-           compress = TRUE) {
+  S7::new_generic(
+    name = "wbw_write_raster",
+    dispatch_args = "x",
+    fun = function(x, file_name, compress = TRUE) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_write_raster, WbwRaster) <-
+  function(x, file_name, compress = TRUE) {
+    # Checks
     check_env(wbe)
-    check_input_raster(raster)
     checkmate::assert_logical(compress)
-    wbe$write_raster(raster, file_name = file_name, compress = compress)
+    # Write
+    wbe$write_raster(x@source, file_name = file_name, compress = compress)
   }
