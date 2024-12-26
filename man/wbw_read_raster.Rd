@@ -2,7 +2,7 @@
 % Please edit documentation in R/wbw_read.R
 \name{wbw_read_raster}
 \alias{wbw_read_raster}
-\title{Returns a new WbwRaster object, read into memory from a path-file string.}
+\title{Returns a new WhiteboxRaster object, read into memory from a path-file string.}
 \usage{
 wbw_read_raster(file_name)
 }
@@ -10,10 +10,10 @@ wbw_read_raster(file_name)
 \item{file_name}{\code{character}, path to raster file.}
 }
 \value{
-\link{WbwRaster} object
+\link{WhiteboxRaster} object
 }
 \description{
-Returns a new WbwRaster object, read into memory from a path-file string.
+Returns a new WhiteboxRaster object, read into memory from a path-file string.
 }
 \examples{
 \dontrun{

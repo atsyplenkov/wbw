@@ -29,8 +29,8 @@ wbw::wbw_install()
 
 ## Basic workflow
 
-The `wbw` R package introduces two new S7 classes, `WbwRaster` and
-`WbwVector` which serves as a bridge between Python and R.
+The `wbw` R package introduces two new S7 classes, `WhiteboxRaster` and
+`WhiteboxVector` which serves as a bridge between Python and R.
 
 ``` r
 library(wbw)
@@ -42,7 +42,7 @@ raster_path <-
 dem <- wbw_read_raster(raster_path)
 dem
 #> dem.tif 
-#> class       : wbw::WbwRaster 
+#> class       : wbw::WhiteboxRaster 
 #> bands       : 1 
 #> dimensions  : 726, 800  (nrow, ncol)
 #> resolution  : 5.002392, 5.000243  (x, y)

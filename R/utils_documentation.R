@@ -18,14 +18,14 @@ rd_wbw_link <-
 #' Create input parameter tag
 #'
 #' @description
-#' Description of input [WbwRaster] object
+#' Description of input [WhiteboxRaster] object
 #'
 #' @keywords internal
 rd_input_raster <-
   function(param) {
     paste0(
       "@param ", param,
-      " Raster object of class [WbwRaster]. ",
+      " Raster object of class [WhiteboxRaster]. ",
       "See [wbw_read_raster()] for more details."
     )
   }

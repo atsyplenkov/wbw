@@ -7,10 +7,10 @@
 wbw_ruggedness_index(dem)
 }
 \arguments{
-\item{dem}{Raster object of class \link{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
+\item{dem}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 }
 \value{
-\link{WbwRaster} object containing TRI values
+\link{WhiteboxRaster} object containing TRI values
 }
 \description{
 The terrain ruggedness index (TRI) is a measure of local topographic relief.

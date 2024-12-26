@@ -19,7 +19,7 @@
 #' When this is the case, the algorithm will multiply each elevation in the
 #' DEM by the Z conversion factor
 #'
-#' @return [WbwRaster] object containing slope values
+#' @return [WhiteboxRaster] object containing slope values
 #'
 #' @references
 #' Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes,
@@ -40,7 +40,7 @@ wbw_slope <-
   )
 
 
-S7::method(wbw_slope, WbwRaster) <-
+S7::method(wbw_slope, WhiteboxRaster) <-
   function(dem,
            units = "degrees",
            z_factor = 1.0) {
@@ -55,7 +55,7 @@ S7::method(wbw_slope, WbwRaster) <-
     out <-
       wbe$slope(dem = dem@source, units = units, z_factor = z_factor)
     # Return Raster
-    WbwRaster(
+    WhiteboxRaster(
       name = paste0("Slope (", units, ")"),
       source = out
     )
@@ -82,7 +82,7 @@ S7::method(wbw_slope, WbwRaster) <-
 #'
 #' @eval rd_input_raster("dem")
 #'
-#' @return [WbwRaster] object containing TRI values
+#' @return [WhiteboxRaster] object containing TRI values
 #'
 #' @references
 #' Riley, S. J., DeGloria, S. D., and Elliot, R. (1999). Index that quantifies
@@ -101,7 +101,7 @@ wbw_ruggedness_index <-
     }
   )
 
-S7::method(wbw_ruggedness_index, WbwRaster) <-
+S7::method(wbw_ruggedness_index, WhiteboxRaster) <-
   function(dem) {
     # Checks
     check_env(wbe)
@@ -109,7 +109,7 @@ S7::method(wbw_ruggedness_index, WbwRaster) <-
     out <-
       wbe$ruggedness_index(input = dem@source)
     # Return Raster
-    WbwRaster(
+    WhiteboxRaster(
       name = paste0("TRI"),
       source = out
     )

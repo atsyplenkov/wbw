@@ -1,8 +1,8 @@
-#' Print method for WbwRaster
-#' @param x [WbwRaster] object to print
+#' Print method for WhiteboxRaster
+#' @param x [WhiteboxRaster] object to print
 #' @param ... additional arguments passed to print
 #' @export
-`print.wbw::WbwRaster` <-
+`print.wbw::WhiteboxRaster` <-
   function(x, ...) {
     conf <- x@source$configs
     name <- if (nchar(conf$title) == 0) x@name else conf$title

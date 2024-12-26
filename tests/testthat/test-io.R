@@ -14,6 +14,15 @@ test_that(
 )
 
 test_that(
+  desc = "wbw_write works only with Wbw* objects",
+  {
+    expect_error(
+      wbw_write_raster(mtcars, file_name = tempfile(fileext = ".tif"))
+    )
+  }
+)
+
+test_that(
   desc = "geotiff compression works",
   {
     # Compressed
@@ -84,15 +93,15 @@ test_that(
     expect_true(file.exists(tmp_grd))
 
     # Check if files can be read back into R session
-    expect_true(inherits(wbw_read_raster(tmp_tif), "wbw::WbwRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_tiff), "wbw::WbwRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_sgrd), "wbw::WbwRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_sdat), "wbw::WbwRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_rst), "wbw::WbwRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_rdc), "wbw::WbwRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_bil), "wbw::WbwRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_flt), "wbw::WbwRaster"))
-    expect_true(inherits(wbw_read_raster(tmp_grd), "wbw::WbwRaster"))
+    expect_true(inherits(wbw_read_raster(tmp_tif), "wbw::WhiteboxRaster"))
+    expect_true(inherits(wbw_read_raster(tmp_tiff), "wbw::WhiteboxRaster"))
+    expect_true(inherits(wbw_read_raster(tmp_sgrd), "wbw::WhiteboxRaster"))
+    expect_true(inherits(wbw_read_raster(tmp_sdat), "wbw::WhiteboxRaster"))
+    expect_true(inherits(wbw_read_raster(tmp_rst), "wbw::WhiteboxRaster"))
+    expect_true(inherits(wbw_read_raster(tmp_rdc), "wbw::WhiteboxRaster"))
+    expect_true(inherits(wbw_read_raster(tmp_bil), "wbw::WhiteboxRaster"))
+    expect_true(inherits(wbw_read_raster(tmp_flt), "wbw::WhiteboxRaster"))
+    expect_true(inherits(wbw_read_raster(tmp_grd), "wbw::WhiteboxRaster"))
 
     # Clean up
     try(file.remove(tmp_tif), silent = TRUE)

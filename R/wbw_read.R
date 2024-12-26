@@ -1,8 +1,8 @@
-#' Returns a new WbwRaster object, read into memory from a path-file string.
+#' Returns a new WhiteboxRaster object, read into memory from a path-file string.
 #'
 #' @param file_name \code{character}, path to raster file.
 #'
-#' @return [WbwRaster] object
+#' @return [WhiteboxRaster] object
 #'
 #' @examples
 #' \dontrun{
@@ -14,7 +14,7 @@ wbw_read_raster <- function(file_name) {
   check_env(wbe)
   check_input_file(file_name, "r")
   r <- wbe$read_raster(file_name = file_name)
-  WbwRaster(
+  WhiteboxRaster(
     name = wbw_get_name(file_name),
     source = r
   )

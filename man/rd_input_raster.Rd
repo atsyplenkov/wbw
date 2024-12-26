@@ -7,6 +7,6 @@
 rd_input_raster(param)
 }
 \description{
-Description of input \link{WbwRaster} object
+Description of input \link{WhiteboxRaster} object
 }
 \keyword{internal}

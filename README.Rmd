@@ -38,7 +38,7 @@ wbw::wbw_install()
 
 ## Basic workflow
 
-The `wbw` R package introduces two new S7 classes, `WbwRaster` and `WbwVector`
+The `wbw` R package introduces two new S7 classes, `WhiteboxRaster` and `WhiteboxVector`
 which serves as a bridge between Python and R. 
 
 ```{r example}

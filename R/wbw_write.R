@@ -1,4 +1,4 @@
-#' Writes an in-memory WbwRaster object to file.
+#' Writes an in-memory WhiteboxRaster object to file.
 #' @rdname wbw_write_raster
 #'
 #' @eval rd_wbw_link("write_raster")
@@ -28,7 +28,7 @@ wbw_write_raster <-
     }
   )
 
-S7::method(wbw_write_raster, WbwRaster) <-
+S7::method(wbw_write_raster, WhiteboxRaster) <-
   function(x, file_name, compress = TRUE) {
     # Checks
     check_env(wbe)

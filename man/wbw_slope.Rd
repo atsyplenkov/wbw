@@ -7,7 +7,7 @@
 wbw_slope(dem, units = "degrees", z_factor = 1)
 }
 \arguments{
-\item{dem}{Raster object of class \link{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
+\item{dem}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 
 \item{units}{\code{character},
 units of slope: "radians", "degrees", or "percent"}
@@ -18,7 +18,7 @@ When this is the case, the algorithm will multiply each elevation in the
 DEM by the Z conversion factor}
 }
 \value{
-\link{WbwRaster} object containing slope values
+\link{WhiteboxRaster} object containing slope values
 }
 \description{
 This tool calculates slope gradient (i.e. slope steepness in degrees,
