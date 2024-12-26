@@ -7,7 +7,7 @@
 wbw_write_raster(raster, file_name, compress = TRUE)
 }
 \arguments{
-\item{raster}{Raster object of class \code{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
+\item{raster}{Raster object of class \link{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 
 \item{file_name}{\code{character}, path to output file}
 

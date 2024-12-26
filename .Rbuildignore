@@ -1,4 +1,6 @@
 ^wbw\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+^playground$
+^playground/
 /playground/

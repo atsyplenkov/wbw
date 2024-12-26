@@ -7,7 +7,7 @@
 \method{print}{`wbw::WbwRaster`}(x, ...)
 }
 \arguments{
-\item{x}{WbwRaster object to print}
+\item{x}{\link{WbwRaster} object to print}
 
 \item{...}{additional arguments passed to print}
 }

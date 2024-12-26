@@ -4,9 +4,13 @@
 \alias{wbw_slope}
 \title{Slope}
 \usage{
-wbw_slope(x, ...)
+wbw_slope(x, ..., units = "degrees", z_factor = 1.0)
 }
 \arguments{
+\item{x}{Raster object of class \link{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
+
+\item{...}{Additional arguments passed to methods.}
+
 \item{units}{\code{character},
 units of slope: "radians", "degrees", or "percent"}
 
@@ -14,11 +18,9 @@ units of slope: "radians", "degrees", or "percent"}
 when the vertical and horizontal units are not the same in the DEM.
 When this is the case, the algorithm will multiply each elevation in the
 DEM by the Z conversion factor}
-
-\item{dem}{Raster object of class \code{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 }
 \value{
-WbwRaster object containing slope values
+\link{WbwRaster} object containing slope values
 }
 \description{
 This tool calculates slope gradient (i.e. slope steepness in degrees,
@@ -29,6 +31,11 @@ model (DEM).
 The tool uses Horn's (1981) 3rd-order finite difference method to
 estimate slope. Given the following clock-type grid cell numbering scheme
 (Gallant and Wilson, 2000).
+}
+\examples{
+raster_path <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(raster_path) |>
+  wbw_slope()
 }
 \references{
 Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes,

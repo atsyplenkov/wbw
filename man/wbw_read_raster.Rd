@@ -2,10 +2,21 @@
 % Please edit documentation in R/wbw_read.R
 \name{wbw_read_raster}
 \alias{wbw_read_raster}
-\title{Returns a new Raster object, read into memory from a path-file string.}
+\title{Returns a new WbwRaster object, read into memory from a path-file string.}
 \usage{
 wbw_read_raster(file_name)
 }
+\arguments{
+\item{file_name}{\code{character}, path to raster file.}
+}
+\value{
+\link{WbwRaster} object
+}
 \description{
-Returns a new Raster object, read into memory from a path-file string.
+Returns a new WbwRaster object, read into memory from a path-file string.
+}
+\examples{
+raster_path <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(raster_path)
+
 }

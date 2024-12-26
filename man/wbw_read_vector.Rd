@@ -2,10 +2,13 @@
 % Please edit documentation in R/wbw_read.R
 \name{wbw_read_vector}
 \alias{wbw_read_vector}
-\title{Reads a vector from disc into an in-memory Vector object.}
+\title{Reads a vector from disc into an in-memory WbwVector object.}
 \usage{
 wbw_read_vector(file_name)
 }
+\arguments{
+\item{file_name}{\code{character}, path to ESRI shapefile.}
+}
 \description{
-Reads a vector from disc into an in-memory Vector object.
+Reads a vector from disc into an in-memory WbwVector object.
 }
