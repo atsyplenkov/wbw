@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/atsyplenkov/wbw/graph/badge.svg)](https://app.codecov.io/gh/atsyplenkov/wbw)
 <!-- badges: end -->
 
 The `wbw` R package provides R bindings to the [Whitebox Workflows for Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html) — a

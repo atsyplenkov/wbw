@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/atsyplenkov/wbw/graph/badge.svg)](https://app.codecov.io/gh/atsyplenkov/wbw)
 <!-- badges: end -->
 
 The `wbw` R package provides R bindings to the [Whitebox Workflows for
@@ -61,8 +63,8 @@ summary(slope_pct)
 #> Image minimum: 0
 #> Image maximum: 70.13195037841797
 #> Image range: 70.13195037841797
-#> Image total: 10479246.559940416
-#> Image average: 18.042779889704573
-#> Image variance: 102.8585380864028
-#> Image standard deviation: 10.141919842239082
+#> Image total: 10479246.559940413
+#> Image average: 18.042779889704565
+#> Image variance: 102.85853808640309
+#> Image standard deviation: 10.141919842239096
 ```

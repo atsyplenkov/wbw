@@ -6,3 +6,4 @@
 /playground/
 ^README\.Rmd$
 ^\.github$
+^codecov\.yml$
