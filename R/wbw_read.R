@@ -1,4 +1,5 @@
-#' Returns a new WhiteboxRaster object, read into memory from a path-file string.
+#' Returns a new WhiteboxRaster object, read into memory from a 
+#' path-file string.
 #'
 #' @param file_name \code{character}, path to raster file.
 #'
