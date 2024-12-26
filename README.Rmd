@@ -49,3 +49,11 @@ raster_path <-
 dem <- wbw_read_raster(raster_path)
 dem
 ```
+
+One can estimate slope in degrees based on the DEM as follows:
+
+```{r slope}
+slope_pct <- 
+  wbw_slope(dem, units = "d")
+summary(slope_pct)
+```
