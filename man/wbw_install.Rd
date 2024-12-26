@@ -4,9 +4,15 @@
 \alias{wbw_install}
 \title{Install Required Python Modules}
 \usage{
-wbw_install(...)
+wbw_install(system = FALSE, force = FALSE, ...)
 }
 \arguments{
+\item{system}{Use a \code{system()} call to \verb{python -m pip install --user ...}
+instead of \code{reticulate::py_install()}. Default: \code{FALSE}.}
+
+\item{force}{Force update (uninstall/reinstall) and ignore existing
+installed packages? Default: \code{FALSE}. Applies to \code{system=TRUE}.}
+
 \item{...}{Additional arguments passed to \code{reticulate::py_install()}}
 }
 \value{
@@ -25,7 +31,6 @@ find it) and installs the required python packages.
 }
 \examples{
 \dontrun{
-
 wbw_install()
 }
 }

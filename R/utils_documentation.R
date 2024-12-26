@@ -37,9 +37,11 @@ rd_example_geomorph <-
   function(foo) {
     paste(
       '@examples',
+      '\\dontrun{',
       'raster_path <- system.file("extdata/dem.tif", package = "wbw")',
       'wbw_read_raster(raster_path) |>',
       paste0('  ', foo, '()'),
+      "}",
       sep = '\n'
     )
   }

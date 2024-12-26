@@ -3,6 +3,10 @@
 #' This function installs the latest `numpy`, `whitebox-workflows`.
 #' The default uses `pip` for package installation.
 #'
+#' @param system  Use a `system()` call to `python -m pip install --user ...`
+#' instead of `reticulate::py_install()`. Default: `FALSE`.
+#' @param force Force update (uninstall/reinstall) and ignore existing
+#' installed packages? Default: `FALSE`. Applies to `system=TRUE`.
 #' @param ... Additional arguments passed to `reticulate::py_install()`
 #'
 #' @details This function provides a basic wrapper around
@@ -17,11 +21,10 @@
 #'
 #' @examples
 #' \dontrun{
-#'
 #' wbw_install()
 #' }
 wbw_install <-
-  function(...) {
+  function(system = FALSE, force = FALSE, ...) {
     args <- list(...)
 
     venv_name <- "r-wbw"
@@ -32,14 +35,14 @@ wbw_install <-
       )
 
     # Check if venv exists
-    if (venv_exists) {
+    if (venv_exists && !system) {
       # Check if `whitebox-workflows` is installed
       reticulate::use_virtualenv(venv_name)
       wbw_version <- wbw_version()
     }
 
     # Install `whitebox-workflows`
-    if (venv_exists && is.null(wbw_version)) {
+    if (venv_exists && is.null(wbw_version) && !system) {
       # venv exists but whitebox is not installed
       # install it from https://pypi.org/project/whitebox-workflows/
       reticulate::use_virtualenv(virtualenv = venv_name)
@@ -48,7 +51,7 @@ wbw_install <-
         envname = venv_name
       )
       .success_message(wbw_version())
-    } else if (!venv_exists) {
+    } else if (!venv_exists && !system) {
       # nothing is installed, create venv and install deps
       # from https://pypi.org/project/whitebox-workflows/
       reticulate::virtualenv_create(
@@ -63,10 +66,24 @@ wbw_install <-
         envname = venv_name
       )
       .success_message(wbw_version())
-    } else if (venv_exists && !is.null(wbw_version)) {
+    } else if (venv_exists && !is.null(wbw_version) && !system) {
       .success_message(wbw_version)
       # TODO:
       # - prompt to restart R console
+    }
+
+    if (system) {
+      fp <- .find_python()
+      if (nchar(fp) > 0) {
+        return(invisible(system(
+          paste(
+            shQuote(fp),
+            "-m pip install --user",
+            ifelse(force, "-U --force", ""),
+            "whitebox-workflows==1.3.3 numpy"
+          )
+        )))
+      }
     }
   }
 

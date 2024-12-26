@@ -31,9 +31,11 @@ estimate slope. Given the following clock-type grid cell numbering scheme
 (Gallant and Wilson, 2000).
 }
 \examples{
+\dontrun{
 raster_path <- system.file("extdata/dem.tif", package = "wbw")
 wbw_read_raster(raster_path) |>
   wbw_slope()
+}
 }
 \references{
 Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes,
