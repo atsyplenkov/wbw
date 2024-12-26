@@ -51,10 +51,14 @@ dem <- wbw_read_raster(raster_path)
 dem
 ```
 
-One can estimate slope in degrees based on the DEM as follows:
+The true power of the `wbw` unleashes when there's a need to run several
+operations sequentially, i.e. in a pipeline. For example, first DEM should be
+smoothed (or filtered), and then the slope should be estimated. 
 
 ```{r slope}
-slope_pct <- 
-  wbw_slope(dem, units = "d")
-summary(slope_pct)
+slope_deg <-
+  dem |>
+  wbw_adaptive_filter() |> 
+  wbw_slope(units = "d")
+summary(slope_deg)
 ```
