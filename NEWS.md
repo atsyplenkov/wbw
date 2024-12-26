@@ -1,3 +1,3 @@
-# wbw 0.0.1
+# wbw 0.0.1 (2024-12-26)
 
-* Initial CRAN submission.
+* MVP
