@@ -80,10 +80,7 @@ S7::method(wbw_slope, WbwRaster) <-
 #' with the index ranges of level to extremely rugged terrain provided in
 #' Riley et al. (1999)
 #'
-#' @usage wbw_ruggedness_index(x, ...)
-#'
-#' @eval rd_input_raster("x")
-#' @param ... Additional arguments passed to methods.
+#' @eval rd_input_raster("dem")
 #'
 #' @return [WbwRaster] object containing TRI values
 #'
@@ -95,15 +92,22 @@ S7::method(wbw_slope, WbwRaster) <-
 #' @eval rd_example_geomorph("wbw_ruggedness_index")
 #'
 #' @export
-wbw_ruggedness_index <- S7::new_generic("wbw_ruggedness_index", "x")
+wbw_ruggedness_index <-
+  S7::new_generic(
+    name = "wbw_ruggedness_index",
+    dispatch_args = "dem",
+    fun = function(dem) {
+      S7::S7_dispatch()
+    }
+  )
 
 S7::method(wbw_ruggedness_index, WbwRaster) <-
-  function(x) {
+  function(dem) {
     # Checks
     check_env(wbe)
     # Estimate slope
     out <-
-      wbe$ruggedness_index(input = x@source)
+      wbe$ruggedness_index(input = dem@source)
     # Return Raster
     WbwRaster(
       name = paste0("TRI"),

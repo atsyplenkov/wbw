@@ -4,12 +4,10 @@
 \alias{wbw_ruggedness_index}
 \title{Terrain Ruggedness Index (TRI)}
 \usage{
-wbw_ruggedness_index(x, ...)
+wbw_ruggedness_index(dem)
 }
 \arguments{
-\item{x}{Raster object of class \link{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
-
-\item{...}{Additional arguments passed to methods.}
+\item{dem}{Raster object of class \link{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 }
 \value{
 \link{WbwRaster} object containing TRI values

@@ -7,6 +7,8 @@
 wbw_slope(dem, units = "degrees", z_factor = 1)
 }
 \arguments{
+\item{dem}{Raster object of class \link{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
+
 \item{units}{\code{character},
 units of slope: "radians", "degrees", or "percent"}
 
@@ -14,8 +16,6 @@ units of slope: "radians", "degrees", or "percent"}
 when the vertical and horizontal units are not the same in the DEM.
 When this is the case, the algorithm will multiply each elevation in the
 DEM by the Z conversion factor}
-
-\item{x}{Raster object of class \link{WbwRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 }
 \value{
 \link{WbwRaster} object containing slope values
