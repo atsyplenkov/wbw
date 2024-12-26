@@ -4,3 +4,4 @@
 ^playground$
 ^playground/
 /playground/
+^README\.Rmd$
