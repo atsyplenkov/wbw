@@ -72,11 +72,12 @@ wbw_install <-
 
 .success_message <-
   function(wbw_version) {
-    cli::cli_alert_success(
-      c(
+    cat(
+      paste0(
         "You're all set! ",
-        "The Python library {.code whitebox-workflows} ",
-        "{.field {wbw_version}} has been found!"
+        "The Python library `whitebox-workflows` v",
+        wbw_version,
+        " has been found!\n"
       )
     )
   }
