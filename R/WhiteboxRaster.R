@@ -1,13 +1,18 @@
 #' WhiteboxRaster Class
 #'
-#' A class representing a raster dataset in Whitebox format. The class provides access to
-#' raster properties including name, source data, summary statistics, and min/max values.
+#' A class representing a raster dataset in Whitebox format. 
+#' The class provides access to raster properties including name, 
+#' Python pointer, summary statistics, and min/max values.
 #'
 #' @param name Character, name of the raster
 #' @param source Any, source data for the raster
-#' @param stats Character, summary statistics for the raster
-#' @param min Numeric, minimum value for the raster
-#' @param max Numeric, maximum value for the raster
+#' 
+#' @section Properties:
+#' \describe{
+#'   \item{stats}{Character, summary statistics for the raster}
+#'   \item{min}{Numeric, minimum value for the raster}
+#'   \item{max}{Numeric, maximum value for the raster}
+#' }
 #' @export
 WhiteboxRaster <-
   S7::new_class(

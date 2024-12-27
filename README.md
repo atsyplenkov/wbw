@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# wbw
+# wbw <img src="man/figures/logo.png" align="right" height="135" alt="" />
 
 <!-- badges: start -->
 
@@ -41,15 +41,17 @@ raster_path <-
   system.file("extdata/dem.tif", package = "wbw")
 dem <- wbw_read_raster(raster_path)
 dem
-#> dem.tif 
-#> class       : wbw::WhiteboxRaster 
-#> bands       : 1 
-#> dimensions  : 726, 800  (nrow, ncol)
-#> resolution  : 5.002392, 5.000243  (x, y)
-#> EPSG        : 2193 
-#> units       : Linear_Meter 
-#> min values  : 63.69819 
-#> max values  : 361.0207
+#> +------------------------------------------+ 
+#> | WhiteboxRaster                           |
+#> | dem.tif                                  |
+#> |..........................................| 
+#> | bands       : 1                          |
+#> | dimensions  : 726, 800  (nrow, ncol)     |
+#> | resolution  : 5.002392, 5.000243  (x, y) |
+#> | EPSG        : 2193  (Linear_Meter)       |
+#> | min value   : 63.698193                  |
+#> | max value   : 361.020721                 |
+#> +------------------------------------------+
 ```
 
 The true power of the `wbw` unleashes when there’s a need to run several
@@ -62,14 +64,17 @@ slope_deg <-
   dem |>
   wbw_adaptive_filter() |> 
   wbw_slope(units = "d")
-summary(slope_deg)
-#> Number of non-nodata grid cells: 580800
-#> Number of nodata grid cells: 0
-#> Image minimum: 0
-#> Image maximum: 70.13195037841797
-#> Image range: 70.13195037841797
-#> Image total: 10474131.180865668
-#> Image average: 18.033972418845845
-#> Image variance: 102.85387528448416
-#> Image standard deviation: 10.141689961958223
+
+slope_deg
+#> +------------------------------------------+ 
+#> | WhiteboxRaster                           |
+#> | Slope (degrees)                          |
+#> |..........................................| 
+#> | bands       : 1                          |
+#> | dimensions  : 726, 800  (nrow, ncol)     |
+#> | resolution  : 5.002392, 5.000243  (x, y) |
+#> | EPSG        : 2193  (Linear_Meter)       |
+#> | min value   : 0.000000                   |
+#> | max value   : 70.131950                  |
+#> +------------------------------------------+
 ```

@@ -8,8 +8,6 @@ variance(x)
 }
 \arguments{
 \item{x}{WhiteboxRaster object}
-
-\item{...}{additional arguments (not used)}
 }
 \value{
 numeric value

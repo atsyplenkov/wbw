@@ -48,7 +48,6 @@ NULL
 
 #' Get Standard Deviation value from WhiteboxRaster
 #' @param x WhiteboxRaster object
-#' @param ... additional arguments (not used)
 #' @return numeric value
 #' @export
 stdev <-
@@ -69,7 +68,6 @@ S7::method(stdev, WhiteboxRaster) <-
 
 #' Get Variance value from WhiteboxRaster
 #' @param x WhiteboxRaster object
-#' @param ... additional arguments (not used)
 #' @return numeric value
 #' @export
 variance <-
