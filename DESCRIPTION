@@ -20,7 +20,8 @@ RoxygenNote: 7.3.2
 Imports: 
     checkmate,
     reticulate,
-    S7 (>= 0.2.0)
+    S7 (>= 0.2.0),
+    stats
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

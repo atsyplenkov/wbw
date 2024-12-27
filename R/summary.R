@@ -1,10 +1,24 @@
+#' @importFrom stats median
+NULL
+
 #' @exportS3Method max wbw::WhiteboxRaster
 #' @exportS3Method min wbw::WhiteboxRaster
+#' @exportS3Method median wbw::WhiteboxRaster
 NULL
 
 #' Summary method for WhiteboxRaster
+#' @rdname summarize
+#' @docType methods
+#' 
+#' @description
+#' Compute summary statistics for cells in [WhiteboxRaster].
+#'
 #' @param object [WhiteboxRaster] object
 #' @param ... additional arguments passed to summary
+#'
+#' @eval rd_example_geomorph("summary")
+#' @eval rd_wbw_link("raster_summary_stats")
+#'
 #' @export
 `summary.wbw::WhiteboxRaster` <-
   function(object, ...) {
@@ -13,10 +27,15 @@ NULL
     )
   }
 
-#' Get maximum value from WhiteboxRaster
+#' @rdname summarize
+#' @docType methods
+#'
 #' @param object WhiteboxRaster object
 #' @param ... additional arguments (not used)
 #' @return numeric value
+#'
+#' @eval rd_example_geomorph("max")
+#'
 #' @export
 `max.wbw::WhiteboxRaster` <- function(object, ...) {
   check_env(wbe)
@@ -24,21 +43,42 @@ NULL
   extract_stat(stats, "maximum")
 }
 
-#' Get mean value from WhiteboxRaster
+#' @rdname summarize
+#' @docType methods
+#'
 #' @param x WhiteboxRaster object
 #' @param ... additional arguments (not used)
-#' @return numeric value
+#'
+#' @eval rd_example_geomorph("mean")
+#'
 #' @export
 `mean.wbw::WhiteboxRaster` <- function(x, ...) {
-  check_env(wbe)
-  stats <- wbe$raster_summary_stats(x@source)
-  extract_stat(stats, "average")
+  x@source$calculate_mean()
 }
 
-#' Get minimum value from WhiteboxRaster
+#' @rdname summarize
+#' @docType methods
+#'
+#' @param x WhiteboxRaster object
+#' @param na.rm logical indicating whether NA values should 
+#' be stripped (not used)
+#' @param ... additional arguments (not used)
+#'
+#' @eval rd_example_geomorph("median")
+#'
+#' @export
+`median.wbw::WhiteboxRaster` <- function(x, na.rm = FALSE, ...) {
+  x@source$calculate_clip_values(percent = 50)[[1]]
+}
+
+#' @rdname summarize
+#' @docType methods
+#'
 #' @param object WhiteboxRaster object
 #' @param ... additional arguments (not used)
-#' @return numeric value
+#'
+#' @eval rd_example_geomorph("min")
+#'
 #' @export
 `min.wbw::WhiteboxRaster` <- function(object, ...) {
   check_env(wbe)
@@ -46,9 +86,13 @@ NULL
   extract_stat(stats, "minimum")
 }
 
-#' Get Standard Deviation value from WhiteboxRaster
+#' @rdname summarize
+#' @docType methods
+#'
 #' @param x WhiteboxRaster object
-#' @return numeric value
+#'
+#' @eval rd_example_geomorph("stdev")
+#'
 #' @export
 stdev <-
   S7::new_generic(
@@ -66,9 +110,13 @@ S7::method(stdev, WhiteboxRaster) <-
     extract_stat(stats, "standard deviation")
   }
 
-#' Get Variance value from WhiteboxRaster
+#' @rdname summarize
+#' @docType methods
+#'
 #' @param x WhiteboxRaster object
-#' @return numeric value
+#'
+#' @eval rd_example_geomorph("variance")
+#'
 #' @export
 variance <-
   S7::new_generic(
