@@ -6,6 +6,7 @@
   function(x, ...) {
     conf <- x@source$configs
     name <- if (nchar(conf$title) == 0) x@name else conf$title
+    epsg <- if (conf$epsg_code != 0) conf$epsg_code else "<NA>"
 
     cat(name, "\n")
     cat(
@@ -31,21 +32,15 @@
       sep = ""
     )
     cat(
-      "EPSG        :",
-      conf$epsg_code,
-      "\n"
-    )
-    cat(
-      "units       :",
-      conf$xy_units,
-      "\n"
+      "EPSG        : ",
+      epsg,
+      "  (", conf$xy_units, ")\n",
+      sep = ""
     )
     # TODO:
     # - Coord Reference
-    # FIXME:
-    # - Min and Max values are always Inf after operations 
-    cat("min values  :", conf$display_min, "\n")
-    cat("max values  :", conf$display_max, "\n")
+    cat("min value   :", x@min, "\n")
+    cat("max value   :", x@max, "\n")
 
     invisible(x)
   }

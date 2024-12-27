@@ -8,7 +8,6 @@ NULL
 #' @export
 `summary.wbw::WhiteboxRaster` <-
   function(object, ...) {
-    check_env(wbe)
     cat(
       wbe$raster_summary_stats(object@source)
     )

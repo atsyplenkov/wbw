@@ -10,7 +10,14 @@ WhiteboxRaster(name = character(0), source = NULL)
 \item{name}{Character, name of the raster}
 
 \item{source}{Any, source data for the raster}
+
+\item{stats}{Character, summary statistics for the raster}
+
+\item{min}{Numeric, minimum value for the raster}
+
+\item{max}{Numeric, maximum value for the raster}
 }
 \description{
-WhiteboxRaster Class
+A class representing a raster dataset in Whitebox format. The class provides access to
+raster properties including name, source data, summary statistics, and min/max values.
 }
