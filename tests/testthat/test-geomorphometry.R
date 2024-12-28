@@ -13,6 +13,10 @@ test_that(
     expect_error(wbw_slope(x, units = "dg"))
     expect_error(wbw_slope(x, z_factor = 2L))
 
+    # wbw_aspect
+    expect_error(wbw_aspect(dem = mtcars))
+    expect_error(wbw_aspect(x, z_factor = 2L))
+
     # wbw_ruggedness_index
     expect_error(wbw_ruggedness_index(dem = mtcars))
   }
@@ -23,6 +27,10 @@ test_that(
   {
     expect_s7_class(
       wbw_slope(x),
+      WhiteboxRaster
+    )
+    expect_s7_class(
+      wbw_aspect(x),
       WhiteboxRaster
     )
     expect_s7_class(

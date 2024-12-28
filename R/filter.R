@@ -1,5 +1,6 @@
 #' Adaptive filter
 #' @rdname wbw_adaptive_filter
+#' @keywords image_processing
 #'
 #' @description
 #' This tool calculates slope gradient (i.e. slope steepness in degrees,

@@ -48,3 +48,4 @@ wbw_read_raster(raster_path) |>
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#adaptive_filter}
 }
+\keyword{image_processing}

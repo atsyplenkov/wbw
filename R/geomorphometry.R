@@ -1,3 +1,68 @@
+#' Aspect
+#' @rdname wbw_aspect
+#' @keywords geomorphometry
+#'
+#' @description
+#' This tool calculates slope aspect (i.e. slope orientation in degrees 
+#' clockwise from north) for each grid cell in an input DEM of 
+#' class [WhiteboxRaster]. 
+#'
+#' @details
+#' For DEMs in projected coordinate systems, the tool uses the 3rd-order 
+#' bivariate Taylor polynomial method described by Florinsky (2016). Based 
+#' on a polynomial fit of the elevations within the 5x5 neighbourhood 
+#' surrounding each cell, this method is considered more robust against 
+#' outlier elevations (noise) than other methods. 
+#' 
+#' For DEMs in geographic coordinate systems (i.e. angular units), the tool
+#'  uses the 3x3 polynomial fitting method for equal angle grids also described
+#'  by Florinsky (2016).
+#'
+#' @eval rd_input_raster("dem")
+#' @param z_factor \code{double}, Z conversion factor is only important
+#' when the vertical and horizontal units are not the same in the DEM.
+#' When this is the case, the algorithm will multiply each elevation in the
+#' DEM by the Z conversion factor
+#'
+#' @return [WhiteboxRaster] object containing aspect in degrees
+#'
+#' @references
+#' Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes,
+#' in Terrain Analysis: Principles and Applications, edited by J. P. Wilson
+#' and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J.
+#' 
+#' Florinsky, I. (2016). Digital terrain analysis in soil science and 
+#' geology. Academic Press.
+#'
+#' @eval rd_wbw_link("aspect")
+#' @eval rd_example_geomorph("wbw_aspect")
+#'
+#' @export
+wbw_aspect <-
+  S7::new_generic(
+    name = "wbw_aspect",
+    dispatch_args = "dem",
+    fun = function(dem, z_factor = 1.0) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_aspect, WhiteboxRaster) <-
+  function(dem,
+           z_factor = 1.0) {
+    # Checks
+    check_env(wbe)
+    checkmate::assert_double(z_factor)
+    # Estimate slope
+    out <-
+      wbe$slope(dem = dem@source, z_factor = z_factor)
+    # Return Raster
+    WhiteboxRaster(
+      name = paste0("Aspect"),
+      source = out
+    )
+  }
+
 #' Slope
 #' @rdname wbw_slope
 #' @keywords geomorphometry
