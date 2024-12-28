@@ -32,5 +32,13 @@ test_that(
       wbw_adaptive_filter(x),
       WhiteboxRaster
     )
+    expect_s7_class(
+      wbw_adaptive_filter(x, filter_size_x = 3L, filter_size_y = 3L),
+      WhiteboxRaster
+    )
+    expect_s7_class(
+      wbw_adaptive_filter(x, threshold = 5),
+      WhiteboxRaster
+    )
   }
 )

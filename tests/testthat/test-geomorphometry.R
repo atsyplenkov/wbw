@@ -25,14 +25,31 @@ test_that(
 test_that(
   "S7 object is returned",
   {
+    # Slope
     expect_s7_class(
-      wbw_slope(x),
+      wbw_slope(x, units = "degrees"),
       WhiteboxRaster
     )
+    expect_s7_class(
+      wbw_slope(x, units = "radians"),
+      WhiteboxRaster
+    )
+    expect_s7_class(
+      wbw_slope(x, units = "percent"),
+      WhiteboxRaster
+    )
+
+    # Aspect
     expect_s7_class(
       wbw_aspect(x),
       WhiteboxRaster
     )
+    expect_s7_class(
+      wbw_aspect(x, z_factor = 3.1),
+      WhiteboxRaster
+    )
+    
+    # TRI
     expect_s7_class(
       wbw_ruggedness_index(x),
       WhiteboxRaster
