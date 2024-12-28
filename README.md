@@ -65,16 +65,7 @@ slope_deg <-
   wbw_adaptive_filter() |> 
   wbw_slope(units = "d")
 
-slope_deg
-#> +------------------------------------------+ 
-#> | WhiteboxRaster                           |
-#> | Slope (degrees)                          |
-#> |..........................................| 
-#> | bands       : 1                          |
-#> | dimensions  : 726, 800  (nrow, ncol)     |
-#> | resolution  : 5.002392, 5.000243  (x, y) |
-#> | EPSG        : 2193  (Linear_Meter)       |
-#> | min value   : 0.000000                   |
-#> | max value   : 70.131950                  |
-#> +------------------------------------------+
+plot(slope_deg)
 ```
+
+<img src="man/figures/README-slope-1.png" width="100%" />
