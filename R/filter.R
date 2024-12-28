@@ -53,11 +53,21 @@ S7::method(wbw_adaptive_filter, WhiteboxRaster) <-
            threshold = 2) {
     # Checks
     check_env(wbe)
-    checkmate::assert_integer(filter_size_x, lower = 0)
-    checkmate::assert_integer(filter_size_y, lower = 0)
+    filter_size_x <-
+      checkmate::asInteger(
+        filter_size_x,
+        lower = 0L,
+        len = 1L
+      )
+    filter_size_y <-
+      checkmate::asInteger(
+        filter_size_y,
+        lower = 0L,
+        len = 1L
+      )
     checkmate::assert_true(filter_size_x %% 2 == 1)
     checkmate::assert_true(filter_size_y %% 2 == 1)
-    checkmate::assert_double(threshold)
+    checkmate::assert_double(threshold, len = 1)
     # Filter
     out <-
       wbe$adaptive_filter(

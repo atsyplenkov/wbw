@@ -9,7 +9,10 @@ test_that(
       wbw_adaptive_filter(x, filter_size_x = 10L)
     )
     expect_error(
-      wbw_adaptive_filter(x, filter_size_y = 2L)
+      wbw_adaptive_filter(x, filter_size_y = 2)
+    )
+    expect_error(
+      wbw_adaptive_filter(x, filter_size_y = c(1:2))
     )
     expect_error(
       wbw_adaptive_filter(x, filter_size_y = 1.5)
@@ -31,7 +34,7 @@ test_that(
       WhiteboxRaster
     )
     expect_s7_class(
-      wbw_adaptive_filter(x, filter_size_x = 3L, filter_size_y = 3L),
+      wbw_adaptive_filter(x, filter_size_x = 3, filter_size_y = 3),
       WhiteboxRaster
     )
     expect_s7_class(

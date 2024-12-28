@@ -54,7 +54,7 @@ S7::method(wbw_aspect, WhiteboxRaster) <-
            z_factor = 1.0) {
     # Checks
     check_env(wbe)
-    checkmate::assert_double(z_factor)
+    checkmate::assert_double(z_factor, len = 1)
     # Estimate slope
     out <-
       wbe$slope(dem = dem@source, z_factor = z_factor)
@@ -120,7 +120,7 @@ S7::method(wbw_slope, WhiteboxRaster) <-
       units,
       choices = c("radians", "degrees", "percent")
     )
-    checkmate::assert_double(z_factor)
+    checkmate::assert_double(z_factor, len = 1)
     # Estimate slope
     out <-
       wbe$slope(dem = dem@source, units = units, z_factor = z_factor)
@@ -177,8 +177,7 @@ S7::method(wbw_ruggedness_index, WhiteboxRaster) <-
     # Checks
     check_env(wbe)
     # Estimate slope
-    out <-
-      wbe$ruggedness_index(input = dem@source)
+    out <- wbe$ruggedness_index(input = dem@source)
     # Return Raster
     WhiteboxRaster(
       name = paste0("TRI"),

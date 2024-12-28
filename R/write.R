@@ -33,7 +33,7 @@ S7::method(wbw_write_raster, WhiteboxRaster) <-
   function(x, file_name, compress = TRUE) {
     # Checks
     check_env(wbe)
-    checkmate::assert_logical(compress)
+    checkmate::assert_logical(compress, len = 1)
     # Write
     wbe$write_raster(x@source, file_name = file_name, compress = compress)
   }
