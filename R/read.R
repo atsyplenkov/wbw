@@ -40,5 +40,5 @@ wbw_read_vector <- function(file_name) {
 wbw_get_name <- function(path) {
   checkmate::assertFile(path, access = "r")
   names <- strsplit(path, "/")[[1]]
-  names[length(names)]
+  enc2utf8(names[length(names)])
 }
