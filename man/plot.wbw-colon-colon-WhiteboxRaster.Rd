@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{`wbw::WhiteboxRaster`}(
   x,
-  col = terrain.colors(100),
+  col = grDevices::terrain.colors(100),
   add = FALSE,
   legend = TRUE,
   title = NULL,

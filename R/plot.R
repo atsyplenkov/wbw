@@ -1,6 +1,18 @@
+#' @importFrom grDevices xy.coords
+NULL
+
 #' @exportS3Method xy.coords wbw::WhiteboxRaster
 NULL
 
+#' Convert WhiteboxRaster to x-y coordinates
+#' 
+#' This is an internal method used by the plotting system.
+#' It returns NULL coordinates to prevent default plotting behavior.
+#' 
+#' @param x WhiteboxRaster object
+#' @param ... additional arguments (not used)
+#' @return A list with NULL x and y components
+#' @keywords internal
 #' @export
 `xy.coords.wbw::WhiteboxRaster` <- function(x, ...) {
   # Return NULL coordinates to prevent default plotting behavior
@@ -16,7 +28,7 @@ NULL
 #' @param ... Additional arguments passed to plot
 #' @export
 `plot.wbw::WhiteboxRaster` <- function(x, 
-                                      col = terrain.colors(100), 
+                                      col = grDevices::terrain.colors(100), 
                                       add = FALSE,
                                       legend = TRUE,
                                       title = NULL,
@@ -30,18 +42,18 @@ NULL
   
   # Set up plot margins if legend is to be added
   if (!add && legend) {
-    par(mar = c(5, 4, 4, 6))
+    graphics::par(mar = c(5, 4, 4, 6))
   }
   
   # Create plot
   if (!add) {
-    plot.new()
-    plot.window(ext[1:2], ext[3:4], asp = 1)
+    graphics::plot.new()
+    graphics::plot.window(ext[1:2], ext[3:4], asp = 1)
   }
   
   # Plot raster
-  rasterImage(
-    as.raster(
+  graphics::rasterImage(
+    grDevices::as.raster(
       matrix(
         col[cut(z, breaks = length(col))], 
         nrow = nrow(z),
@@ -53,10 +65,10 @@ NULL
   
   # Add axes and title if not adding to existing plot
   if (!add) {
-    box()
-    axis(1)
-    axis(2)
-    title(main = if(is.null(title)) x@name else title)
+    graphics::box()
+    graphics::axis(1)
+    graphics::axis(2)
+    graphics::title(main = if(is.null(title)) x@name else title)
     
     # Add legend
     if (legend) {
@@ -64,27 +76,28 @@ NULL
       z_range <- range(z, na.rm = TRUE)
       legend_breaks <- pretty(z_range, n = 5)
       legend_y <- seq(z_range[1], z_range[2], length.out = length(col))
-      legend_x <- par("usr")[2] + 0.1 * diff(par("usr")[1:2])
+      legend_x <- graphics::par("usr")[2] + 0.1 * diff(graphics::par("usr")[1:2])
       
       # Draw color rectangles
-      rect(legend_x,
+      graphics::rect(legend_x,
            legend_y[-length(legend_y)],
-           legend_x + 0.02 * diff(par("usr")[1:2]),
+           legend_x + 0.02 * diff(graphics::par("usr")[1:2]),
            legend_y[-1],
            col = col,
            border = NA)
       
       # Add legend axis
-      axis(4, 
+      graphics::axis(4, 
            at = legend_breaks,
-           pos = legend_x + 0.02 * diff(par("usr")[1:2]))
+           pos = legend_x + 0.02 * diff(graphics::par("usr")[1:2]))
     }
   }
   
   # Reset margins if they were changed
   if (!add && legend) {
-    par(mar = c(5, 4, 4, 2) + 0.1)
+    graphics::par(mar = c(5, 4, 4, 2) + 0.1)
   }
   
+
   invisible(x)
 }

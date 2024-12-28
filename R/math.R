@@ -20,7 +20,7 @@
 #'
 #' @eval rd_input_raster("x")
 #' @param num_samples \code{integer}, number of random samples. Should not
-#' exceed [ncell()].
+#' exceed total number of cells.
 #'
 #' @return [WhiteboxRaster] object
 #'
@@ -36,7 +36,6 @@ wbw_random_sample <-
       S7::S7_dispatch()
     }
   )
-
 
 # !NB:
 # - set.seed() shouldn't work
@@ -59,3 +58,6 @@ S7::method(wbw_random_sample, WhiteboxRaster) <-
       source = out
     )
   }
+
+# TODO:
+# Add ncell() function as a wrapper around `x@source$num_cells()`
