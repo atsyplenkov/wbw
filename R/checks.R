@@ -1,6 +1,5 @@
 #' Check is package installed
 #' @rdname checks
-#'
 #' @keywords internal
 check_package <-
   function(package) {
@@ -11,7 +10,6 @@ if (!requireNamespace(package, quietly = TRUE)) {
 
 #' Check is whitebox environment is presented
 #' @rdname checks
-#'
 #' @keywords internal
 check_env <-
   function(env = wbe) {
@@ -27,7 +25,6 @@ checkmate::assert_class(
 
 #' Check input file extension
 #' @rdname checks
-#'
 #' @keywords internal
 check_input_file <-
   function(file_name, type) {
@@ -53,7 +50,6 @@ if (type == "vector") {
 
 #' Skip tests if we don't have the 'wbw' module
 #' @rdname checks
-#'
 #' @keywords internal
 skip_if_no_wbw <- function() {
   have_wbw <- reticulate::py_module_available("whitebox_workflows")

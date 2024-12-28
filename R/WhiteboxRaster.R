@@ -1,4 +1,5 @@
 #' WhiteboxRaster Class
+#' @keywords class
 #'
 #' A class representing a raster dataset in Whitebox format. 
 #' The class provides access to raster properties including name, 

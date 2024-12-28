@@ -12,9 +12,7 @@ WhiteboxRaster(name = character(0), source = NULL)
 \item{source}{Any, source data for the raster}
 }
 \description{
-A class representing a raster dataset in Whitebox format.
-The class provides access to raster properties including name,
-Python pointer, summary statistics, and min/max values.
+WhiteboxRaster Class
 }
 \section{Properties}{
 
@@ -25,3 +23,26 @@ Python pointer, summary statistics, and min/max values.
 }
 }
 
+\keyword{A}
+\keyword{Python}
+\keyword{The}
+\keyword{Whitebox}
+\keyword{a}
+\keyword{access}
+\keyword{and}
+\keyword{class}
+\keyword{dataset}
+\keyword{format.}
+\keyword{in}
+\keyword{including}
+\keyword{min/max}
+\keyword{name,}
+\keyword{pointer,}
+\keyword{properties}
+\keyword{provides}
+\keyword{raster}
+\keyword{representing}
+\keyword{statistics,}
+\keyword{summary}
+\keyword{to}
+\keyword{values.}

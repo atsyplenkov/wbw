@@ -17,3 +17,4 @@ matrix
 \description{
 Return matrix from WhiteboxRaster
 }
+\keyword{transform}

@@ -2,9 +2,13 @@
 NULL
 
 #' Return matrix from WhiteboxRaster
+#' @keywords transform
+#' 
 #' @param x WhiteboxRaster object
 #' @param ... additional arguments (not used)
+#' 
 #' @return matrix
+#' 
 #' @export
 `as.matrix.wbw::WhiteboxRaster` <- function(x, ...) {
   checkmate::assert_environment(wbw_env)
