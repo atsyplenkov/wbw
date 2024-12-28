@@ -44,4 +44,7 @@ and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J.
 
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#slope}
 }
+\seealso{
+\code{\link[=wbw_to_degrees]{wbw_to_degrees()}}, \code{\link[=wbw_to_radians]{wbw_to_radians()}}, \code{\link[=wbw_aspect]{wbw_aspect()}}
+}
 \keyword{geomorphometry}

@@ -3,17 +3,17 @@
 #' @keywords geomorphometry
 #'
 #' @description
-#' This tool calculates slope aspect (i.e. slope orientation in degrees 
-#' clockwise from north) for each grid cell in an input DEM of 
-#' class [WhiteboxRaster]. 
+#' This tool calculates slope aspect (i.e. slope orientation in degrees
+#' clockwise from north) for each grid cell in an input DEM of
+#' class [WhiteboxRaster].
 #'
 #' @details
-#' For DEMs in projected coordinate systems, the tool uses the 3rd-order 
-#' bivariate Taylor polynomial method described by Florinsky (2016). Based 
-#' on a polynomial fit of the elevations within the 5x5 neighbourhood 
-#' surrounding each cell, this method is considered more robust against 
-#' outlier elevations (noise) than other methods. 
-#' 
+#' For DEMs in projected coordinate systems, the tool uses the 3rd-order
+#' bivariate Taylor polynomial method described by Florinsky (2016). Based
+#' on a polynomial fit of the elevations within the 5x5 neighbourhood
+#' surrounding each cell, this method is considered more robust against
+#' outlier elevations (noise) than other methods.
+#'
 #' For DEMs in geographic coordinate systems (i.e. angular units), the tool
 #'  uses the 3x3 polynomial fitting method for equal angle grids also described
 #'  by Florinsky (2016).
@@ -30,12 +30,14 @@
 #' Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes,
 #' in Terrain Analysis: Principles and Applications, edited by J. P. Wilson
 #' and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J.
-#' 
-#' Florinsky, I. (2016). Digital terrain analysis in soil science and 
+#'
+#' Florinsky, I. (2016). Digital terrain analysis in soil science and
 #' geology. Academic Press.
 #'
 #' @eval rd_wbw_link("aspect")
 #' @eval rd_example_geomorph("wbw_aspect")
+#'
+#' @seealso [wbw_to_degrees()], [wbw_to_radians()], [wbw_slope()]
 #'
 #' @export
 wbw_aspect <-
@@ -94,6 +96,8 @@ S7::method(wbw_aspect, WhiteboxRaster) <-
 #'
 #' @eval rd_wbw_link("slope")
 #' @eval rd_example_geomorph("wbw_slope", args = c('units = "radians"'))
+#'
+#' @seealso [wbw_to_degrees()], [wbw_to_radians()], [wbw_aspect()]
 #'
 #' @export
 wbw_slope <-

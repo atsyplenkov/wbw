@@ -50,4 +50,7 @@ geology. Academic Press.
 
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#aspect}
 }
+\seealso{
+\code{\link[=wbw_to_degrees]{wbw_to_degrees()}}, \code{\link[=wbw_to_radians]{wbw_to_radians()}}, \code{\link[=wbw_slope]{wbw_slope()}}
+}
 \keyword{geomorphometry}

@@ -1,5 +1,3 @@
-library(wbw)
-
 raster_path <-
   system.file("extdata/dem.tif", package = "wbw")
 x <- wbw_read_raster(raster_path)
@@ -48,7 +46,7 @@ test_that(
       wbw_aspect(x, z_factor = 3.1),
       WhiteboxRaster
     )
-    
+
     # TRI
     expect_s7_class(
       wbw_ruggedness_index(x),
