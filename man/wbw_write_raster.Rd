@@ -30,3 +30,4 @@ also be output from any tool that generates raster output files by using
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#write_raster}
 }
+\keyword{io}

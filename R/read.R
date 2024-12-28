@@ -1,5 +1,7 @@
 #' Returns a new WhiteboxRaster object, read into memory from a 
 #' path-file string.
+#' @rdname io
+#' @keywords io
 #'
 #' @param file_name \code{character}, path to raster file.
 #'
@@ -10,6 +12,7 @@
 #' raster_path <- system.file("extdata/dem.tif", package = "wbw")
 #' wbw_read_raster(raster_path)
 #' }
+#' 
 #' @export
 wbw_read_raster <- function(file_name) {
   check_env(wbe)
@@ -21,8 +24,12 @@ wbw_read_raster <- function(file_name) {
   )
 }
 
-#' Reads a vector from disc into an in-memory WbwVector object.
+#' Reads a vector from disc into an in-memory WhiteboxVector object.
+#' @rdname io
+#' @keywords io
+#' 
 #' @param file_name \code{character}, path to ESRI shapefile.
+#' 
 #' @export
 wbw_read_vector <- function(file_name) {
   check_env(wbe)

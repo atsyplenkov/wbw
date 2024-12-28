@@ -44,3 +44,4 @@ and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J.
 
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#slope}
 }
+\keyword{geomorphometry}

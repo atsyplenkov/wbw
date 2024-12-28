@@ -1,5 +1,6 @@
 #' Slope
 #' @rdname wbw_slope
+#' @keywords geomorphometry
 #'
 #' @description
 #' This tool calculates slope gradient (i.e. slope steepness in degrees,
@@ -63,6 +64,7 @@ S7::method(wbw_slope, WhiteboxRaster) <-
 
 #' Terrain Ruggedness Index (TRI)
 #' @rdname wbw_ruggedness_index
+#' @keywords geomorphometry
 #'
 #' @description
 #' The terrain ruggedness index (TRI) is a measure of local topographic relief.

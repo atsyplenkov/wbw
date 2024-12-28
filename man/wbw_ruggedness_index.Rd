@@ -41,3 +41,4 @@ topographic heterogeneity. Intermountain Journal of Sciences, 5(1-4), 23-27.
 
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#ruggedness_index}
 }
+\keyword{geomorphometry}

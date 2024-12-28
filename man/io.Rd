@@ -2,13 +2,16 @@
 % Please edit documentation in R/read.R
 \name{wbw_read_raster}
 \alias{wbw_read_raster}
+\alias{wbw_read_vector}
 \title{Returns a new WhiteboxRaster object, read into memory from a
 path-file string.}
 \usage{
 wbw_read_raster(file_name)
+
+wbw_read_vector(file_name)
 }
 \arguments{
-\item{file_name}{\code{character}, path to raster file.}
+\item{file_name}{\code{character}, path to ESRI shapefile.}
 }
 \value{
 \link{WhiteboxRaster} object
@@ -16,10 +19,14 @@ wbw_read_raster(file_name)
 \description{
 Returns a new WhiteboxRaster object, read into memory from a
 path-file string.
+
+Reads a vector from disc into an in-memory WhiteboxVector object.
 }
 \examples{
 \dontrun{
 raster_path <- system.file("extdata/dem.tif", package = "wbw")
 wbw_read_raster(raster_path)
 }
+
 }
+\keyword{io}

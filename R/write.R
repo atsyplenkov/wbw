@@ -1,5 +1,6 @@
 #' Writes an in-memory WhiteboxRaster object to file.
 #' @rdname wbw_write_raster
+#' @keywords io
 #'
 #' @eval rd_wbw_link("write_raster")
 #' @eval rd_input_raster("x")

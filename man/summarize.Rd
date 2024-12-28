@@ -32,7 +32,8 @@ variance(x)
 
 \item{x}{WhiteboxRaster object}
 
-\item{na.rm}{logical indicating whether NA values should be stripped}
+\item{na.rm}{logical indicating whether NA values should
+be stripped (not used)}
 }
 \value{
 numeric value
