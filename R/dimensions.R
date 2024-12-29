@@ -7,16 +7,16 @@
 #' @return \code{integer} 
 #'
 #' @export
-ncell <-
+num_cells <-
   S7::new_generic(
-    name = "ncell",
+    name = "num_cells",
     dispatch_args = "x",
     fun = function(x) {
       S7::S7_dispatch()
     }
   )
 
-S7::method(ncell, WhiteboxRaster) <-
+S7::method(num_cells, WhiteboxRaster) <-
   function(x) {
     # Checks
     check_env(wbe)
@@ -27,16 +27,16 @@ S7::method(ncell, WhiteboxRaster) <-
 #' @keywords utils
 #'
 #' @export
-nrow <-
+wbw_rows <-
   S7::new_generic(
-    name = "nrow",
+    name = "wbw_rows",
     dispatch_args = "x",
     fun = function(x) {
       S7::S7_dispatch()
     }
   )
 
-S7::method(nrow, WhiteboxRaster) <-
+S7::method(wbw_rows, WhiteboxRaster) <-
   function(x) {
     # Checks
     check_env(wbe)
@@ -47,16 +47,16 @@ S7::method(nrow, WhiteboxRaster) <-
 #' @keywords utils
 #'
 #' @export
-ncol <-
+wbw_cols <-
   S7::new_generic(
-    name = "ncol",
+    name = "wbw_cols",
     dispatch_args = "x",
     fun = function(x) {
       S7::S7_dispatch()
     }
   )
 
-S7::method(ncol, WhiteboxRaster) <-
+S7::method(wbw_cols, WhiteboxRaster) <-
   function(x) {
     # Checks
     check_env(wbe)
@@ -72,16 +72,16 @@ S7::method(ncol, WhiteboxRaster) <-
 #' @return \code{double}
 #' 
 #' @export
-res <-
+wbw_res <-
   S7::new_generic(
-    name = "res",
+    name = "wbw_res",
     dispatch_args = "x",
     fun = function(x) {
       S7::S7_dispatch()
     }
   )
 
-S7::method(res, WhiteboxRaster) <-
+S7::method(wbw_res, WhiteboxRaster) <-
   function(x) {
     # Checks
     check_env(wbe)
@@ -95,16 +95,16 @@ S7::method(res, WhiteboxRaster) <-
 #' @keywords utils
 #'
 #' @export
-xres <-
+wbw_xres <-
   S7::new_generic(
-    name = "xres",
+    name = "wbw_xres",
     dispatch_args = "x",
     fun = function(x) {
       S7::S7_dispatch()
     }
   )
 
-S7::method(xres, WhiteboxRaster) <-
+S7::method(wbw_xres, WhiteboxRaster) <-
   function(x) {
     # Checks
     check_env(wbe)
@@ -115,16 +115,16 @@ S7::method(xres, WhiteboxRaster) <-
 #' @keywords utils
 #'
 #' @export
-yres <-
+wbw_yres <-
   S7::new_generic(
-    name = "yres",
+    name = "wbw_yres",
     dispatch_args = "x",
     fun = function(x) {
       S7::S7_dispatch()
     }
   )
 
-S7::method(yres, WhiteboxRaster) <-
+S7::method(wbw_yres, WhiteboxRaster) <-
   function(x) {
     # Checks
     check_env(wbe)

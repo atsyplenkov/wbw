@@ -1,5 +1,20 @@
 import numpy as np
 
+def wbw_to_vector(wbw_raster):
+    """
+    Converts a Whitebox Raster object to a 1d numpy array, column-wise.
+
+    Args:
+        wbw_raster: A Whitebox Raster object
+
+    Returns:
+        A 1d numpy array with values arranged column by column.
+    """
+    # First get the data as a matrix
+    matrix = wbw_to_matrix(wbw_raster)
+    
+    # Convert to 1D array column-wise (Fortran-style ordering)
+    return matrix.flatten(order='C')
 
 def wbw_to_matrix(wbw_raster):
     """

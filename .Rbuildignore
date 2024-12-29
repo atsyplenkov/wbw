@@ -7,3 +7,4 @@
 ^README\.Rmd$
 ^\.github$
 ^codecov\.yml$
+^CONTRIBUTING\.md$

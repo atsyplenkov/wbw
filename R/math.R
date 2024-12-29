@@ -20,7 +20,7 @@
 #'
 #' @eval rd_input_raster("x")
 #' @param num_samples \code{integer}, number of random samples. Should not
-#' exceed total number of cells, i.e. [ncell()].
+#' exceed total number of cells, i.e. [num_cells()].
 #'
 #' @return [WhiteboxRaster] object
 #'

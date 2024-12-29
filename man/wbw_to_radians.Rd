@@ -19,7 +19,7 @@ Convert to radians
 \dontrun{
 raster_path <- system.file("extdata/dem.tif", package = "wbw")
 wbw_read_raster(raster_path) |>
-  wbw_slope(units = "d") |> 
+  wbw_slope(units = "d") |>
   wbw_to_radians()
 }
 }
