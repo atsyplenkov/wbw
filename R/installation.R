@@ -1,4 +1,5 @@
 #' Install Required Python Modules
+#' @keywords system
 #'
 #' This function installs the latest `numpy`, `whitebox-workflows`.
 #' The default uses `pip` for package installation.
