@@ -25,5 +25,6 @@ Imports:
     S7 (>= 0.2.0),
     stats
 Suggests: 
+    terra (>= 1.7),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

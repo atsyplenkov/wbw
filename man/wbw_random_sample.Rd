@@ -10,7 +10,7 @@ wbw_random_sample(x, num_samples = 1000L)
 \item{x}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 
 \item{num_samples}{\code{integer}, number of random samples. Should not
-exceed total number of cells.}
+exceed total number of cells, i.e. \code{\link[=ncell]{ncell()}}.}
 }
 \value{
 \link{WhiteboxRaster} object
