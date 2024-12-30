@@ -40,6 +40,13 @@ See our guide on [how to create a great issue](https://code-review.tidyverse.org
 *  We use [testthat](https://cran.r-project.org/package=testthat) for unit tests. 
    Contributions with test cases included are easier to accept.
 
+### Writing S7 documentation
+
+The `{wbw}` package uses several [S7 
+classes](https://rconsortium.github.io/S7/articles/classes-objects.html) which 
+should be documented properly. There's a function documentation [template](https://github.com/atsyplenkov/wbw/blob/main/.github/template.R) 
+available in the `.github` folder, which we advise you to use when creating or 
+editing new functions.
 
 ### Git message format
 

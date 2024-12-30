@@ -36,13 +36,13 @@ wbw_template <-
   S7::new_generic(
     name = "wbw_template",
     dispatch_args = "x",
-    fun = function(x) {
+    fun = function(x, another_arg = NULL) {
       S7::S7_dispatch()
     }
   )
 
 S7::method(wbw_template, WhiteboxRaster) <-
-  function(x) {
+  function(x, another_arg = NULL) {
     # Checks
     check_env(wbe)
     # Estimate slope
