@@ -2,12 +2,15 @@
 % Please edit documentation in R/matrix.R
 \name{as.matrix.wbw::WhiteboxRaster}
 \alias{as.matrix.wbw::WhiteboxRaster}
+\alias{as_matrix}
 \title{Return matrix from WhiteboxRaster}
 \usage{
 \method{as.matrix}{`wbw::WhiteboxRaster`}(x, ...)
+
+as_matrix(x)
 }
 \arguments{
-\item{x}{WhiteboxRaster object}
+\item{x}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 
 \item{...}{additional arguments (not used)}
 }
@@ -16,5 +19,12 @@ matrix
 }
 \description{
 Return matrix from WhiteboxRaster
+}
+\examples{
+\dontrun{
+raster_path <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(raster_path) |>
+  as_matrix()
+}
 }
 \keyword{transform}
