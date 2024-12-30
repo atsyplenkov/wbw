@@ -29,5 +29,15 @@ test_that(
       terra::crs(r),
       terra::crs(wbwr)
     )
+
+    # Conversion worked, but crs objects are not identical
+    x@source$configs$epsg_code <- 0L
+    wbwr <- as_rast(x)
+    expect_false(
+      identical(
+        terra::crs(r),
+        terra::crs(wbwr)
+      )
+    )
   }
 )
