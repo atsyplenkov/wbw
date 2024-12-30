@@ -142,3 +142,45 @@ S7::method(as_rast, WhiteboxRaster) <-
       names = x@name
     )
   }
+
+# #' Convert SpatRaster to WhiteboxRaster
+# #' @keywords conversions
+# #'
+# #' Converts SpatRaster to [WhiteboxRaster] object
+# #'
+# #' @param x SpatRaster object
+# #'
+# #' @return [WhiteboxRaster] object
+# #'
+# #' @seealso [WhiteboxRaster]
+# #'
+# #' @examples
+# #' \dontrun{
+# #' library(terra)
+# #' raster_path <- system.file("extdata/dem.tif", package = "wbw")
+# #' rast(raster_path) |>
+# #'   as_WhiteboxRaster()
+# #' }
+# #' @export
+# as_WhiteboxRaster <-
+#   S7::new_generic(
+#     name = "as_WhiteboxRaster",
+#     dispatch_args = "x",
+#     fun = function(x) {
+#       S7::S7_dispatch()
+#     }
+#   )
+
+# S7::method(as_WhiteboxRaster, SpatRaster) <-
+#   function(x) {
+#     # Checks
+#     checkmate::assert_class(
+#       wbw,
+#       classes = c(
+#         "python.builtin.module",
+#         "python.builtin.object"
+#       )
+#     )
+
+#     terra::stdev(x)
+#   }
