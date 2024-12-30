@@ -7,12 +7,17 @@ Authors@R:
     c(
       person(given = "Anatoly",
              family = "Tsyplenkov",
-             role = c("aut", "cre", "cph"),
+             role = c("aut", "cre"),
              email = "atsyplenkov@fastmail.com",
-             comment = c(ORCID = "0000-0003-4144-8402"))
-    )
+             comment = c(ORCID = "0000-0003-4144-8402")),
+      person("Whitebox Geospatial Inc.", 
+             email = "support@whiteboxgeo.com",
+             role = "cph")
+     )
 Maintainer: Anatoly Tsyplenkov <atsyplenkov@fastmail.com>
-Description: R bindings to the Whitebox Workflows for Python.
+Description: This package provides R bindings to the Whitebox Workflows Python 
+             library, which is developed by Whitebox Geospatial Inc. under the 
+             GNU General Public License v3.0.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
