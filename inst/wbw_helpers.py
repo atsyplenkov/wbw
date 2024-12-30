@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def wbw_to_vector(wbw_raster):
     """
     Converts a Whitebox Raster object to a 1d numpy array, column-wise.
@@ -12,9 +13,10 @@ def wbw_to_vector(wbw_raster):
     """
     # First get the data as a matrix
     matrix = wbw_to_matrix(wbw_raster)
-    
+
     # Convert to 1D array column-wise (Fortran-style ordering)
-    return matrix.flatten(order='C')
+    return matrix.flatten(order="C")
+
 
 def wbw_to_matrix(wbw_raster):
     """
@@ -35,6 +37,34 @@ def wbw_to_matrix(wbw_raster):
         matrix[i] = wbw_raster.get_row_data(i)
 
     return matrix
+
+
+def matrix_to_wbw(matrix, wbw_raster):
+    """
+    Writes a 2d numpy array to a Whitebox Raster object.
+
+    Args:
+        matrix: A 2d numpy array with values to write
+        wbw_raster: A Whitebox Raster object to write the data to
+
+    Returns:
+        None. The wbw_raster is modified in place.
+    """
+    if matrix.shape != (wbw_raster.configs.rows, wbw_raster.configs.columns):
+        raise ValueError(
+            f"Matrix shape {matrix.shape} does not match raster dimensions "
+            f"({wbw_raster.configs.rows}, {wbw_raster.configs.columns})"
+        )
+
+    # Ensure matrix data type matches raster
+    target_dtype = raster_dtype(wbw_raster)
+    if matrix.dtype != target_dtype:
+        matrix = matrix.astype(target_dtype)
+
+    # Write data row by row
+    for i in range(wbw_raster.configs.rows):
+        wbw_raster.set_row_data(i, matrix[i])
+
 
 def raster_dtype(wbw_raster):
     dtype_mapping = {

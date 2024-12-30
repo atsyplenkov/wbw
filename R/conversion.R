@@ -123,6 +123,8 @@ S7::method(as_rast, WhiteboxRaster) <-
     ext <-
       c(
         x@extent@west,
+        # Note the differences in east and south between reading by
+        # GDAL (i.e. terra) and WhiteboxTools
         x@extent@east + wbw_xres(x),
         x@extent@south - wbw_yres(x),
         x@extent@north
@@ -133,54 +135,168 @@ S7::method(as_rast, WhiteboxRaster) <-
       terra::crs(paste0("epsg:", x@source$configs$epsg_code))
     }
     # Convert
-    terra::rast(
-      vals = v,
-      nlyrs = 1,
-      crs = crs,
-      extent = ext,
-      resolution = wbw_res(x),
-      names = x@name
-    )
+    new_rast <-
+      terra::rast(
+        vals = v,
+        nlyrs = 1L,
+        crs = crs,
+        extent = ext,
+        resolution = wbw_res(x),
+        names = x@name
+      )
+
+    # Assign NoData values
+    terra::NAflag(new_rast) <- x@source$configs$nodata
+
+    # Return
+    new_rast
   }
 
-# #' Convert SpatRaster to WhiteboxRaster
-# #' @keywords conversions
-# #'
-# #' Converts SpatRaster to [WhiteboxRaster] object
-# #'
-# #' @param x SpatRaster object
-# #'
-# #' @return [WhiteboxRaster] object
-# #'
-# #' @seealso [WhiteboxRaster]
-# #'
-# #' @examples
-# #' \dontrun{
-# #' library(terra)
-# #' raster_path <- system.file("extdata/dem.tif", package = "wbw")
-# #' rast(raster_path) |>
-# #'   as_WhiteboxRaster()
-# #' }
-# #' @export
-# as_WhiteboxRaster <-
-#   S7::new_generic(
-#     name = "as_WhiteboxRaster",
-#     dispatch_args = "x",
-#     fun = function(x) {
-#       S7::S7_dispatch()
-#     }
-#   )
+#' Convert SpatRaster to WhiteboxRaster
+#' @keywords conversions
+#'
+#' Converts SpatRaster to [WhiteboxRaster] object
+#'
+#' @param x SpatRaster object
+#'
+#' @return [WhiteboxRaster] object
+#'
+#' @seealso [WhiteboxRaster]
+#'
+#' @examples
+#' \dontrun{
+#' library(terra)
+#' raster_path <- system.file("extdata/dem.tif", package = "wbw")
+#' rast(raster_path) |>
+#'   as_wbw_raster()
+#' }
+#' @export
+as_wbw_raster <-
+  S7::new_generic(
+    name = "as_wbw_raster",
+    dispatch_args = "x",
+    fun = function(x) {
+      S7::S7_dispatch()
+    }
+  )
 
-# S7::method(as_WhiteboxRaster, SpatRaster) <-
-#   function(x) {
-#     # Checks
-#     checkmate::assert_class(
-#       wbw,
-#       classes = c(
-#         "python.builtin.module",
-#         "python.builtin.object"
-#       )
-#     )
+if (requireNamespace("terra", quietly = TRUE)) {
+  S7::method(as_wbw_raster, methods::getClass("SpatRaster", where = asNamespace("terra"))) <-
+    function(x) {
+      # Checks
+      checkmate::assert_class(
+        wbw,
+        classes = c(
+          "python.builtin.module",
+          "python.builtin.object"
+        )
+      )
+      checkmate::assert_true(
+        terra::nlyr(x) == 1
+      )
 
-#     terra::stdev(x)
-#   }
+      # SpatRaster information
+      na_terra <- terra::NAflag(x)
+      res_terra <- terra::res(x)
+      name_terra <- names(x)
+      type_terra <- any(c(
+        terra::is.int(x),
+        terra::is.bool(x),
+        terra::is.factor(x)
+      ))
+      ext_terra <- terra::ext(x)
+      data_terra <- as.matrix(x, wide = TRUE)
+
+      # Create new RasterConfigs
+      new_config <- wbw$RasterConfigs()
+      new_config$title <- name_terra
+
+      # Dimensions
+      new_config$bands <- as.integer(terra::nlyr(x))
+      new_config$columns <- as.integer(terra::ncol(x))
+      new_config$rows <- as.integer(terra::nrow(x))
+      new_config$west <- as.double(ext_terra[1])
+      ## Note the differences in east and south between reading by
+      ## GDAL (i.e. terra) and WhiteboxTools
+      new_config$east <- as.double(ext_terra[2]) - res_terra[1]
+      new_config$south <- as.double(ext_terra[3]) + res_terra[2]
+      new_config$north <- as.double(ext_terra[4])
+
+      # CRS
+      new_config$coordinate_ref_system_wkt <- terra::crs(x)
+      new_config$resolution_x <- res_terra[1]
+      new_config$resolution_y <- res_terra[2]
+
+      # Data
+      # FIXME:
+      # Conversion between SpatRaster and WhiteboxRaster
+      # is not happening correctly
+      new_config$nodata <-
+        if (is.nan(na_terra)) {
+          -32768
+        } else {
+          na_terra
+        }
+      new_config$data_type <-
+        if (type_terra) {
+          wbw$RasterDataType$I16
+        } else {
+          wbw$RasterDataType$F32
+        }
+
+      # Create WhiteboxRaster
+      new_raster <- wbe$new_raster(new_config)
+      wbw_env$matrix_to_wbw(data_terra, new_raster)
+
+      WhiteboxRaster(
+        name = name_terra,
+        source = new_raster
+      )
+    }
+}
+
+# f <- system.file("ex/elev.tif", package = "terra")
+# r <- rast(f)
+
+# rw <- as_wbw_raster(r)
+# rwr <- as_rast(w)
+
+# plot(rwr)
+
+# m <- as.matrix(x, wide = TRUE)
+
+# ter <- wbw_read_raster(f)
+# plot(ter)
+
+# ter@source$configs$nodata
+
+# for (i in seq_len(w@source$configs$rows)) {
+#   w@source$set_row_data(as.integer(i), values = m[, i])
+# }
+
+# plot(w)
+
+# bench::mark(
+#   wopy = {
+#     w <- as_wbw_raster(r)
+#     wbw_env$matrix_to_wbw(m, w@source)
+#   },
+#   wpy = {
+#     w <- as_wbw_raster(r)
+#     wbw_env$matrix_to_wbw(reticulate::r_to_py(m), w@source)
+#   },
+#   check = FALSE
+# )
+
+# WhiteboxRaster(
+#   "NoData",
+#   x
+# ) |>
+#   as_rast() |> 
+#   as.int() |> 
+#   as_wbw_raster() -> ggg 
+#   plot()
+
+# x <- w@source$is_nodata()
+# x2 <- wbe$modify_nodata_value(raster = x, new_value = -9999)
+
