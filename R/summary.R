@@ -16,7 +16,7 @@ NULL
 #' @param object [WhiteboxRaster] object
 #' @param ... additional arguments passed to summary
 #'
-#' @eval rd_example_geomorph("summary")
+#' @eval rd_example("summary")
 #' @eval rd_wbw_link("raster_summary_stats")
 #'
 #' @export
@@ -34,7 +34,7 @@ NULL
 #' @param ... additional arguments (not used)
 #' @return numeric value
 #'
-#' @eval rd_example_geomorph("max")
+#' @eval rd_example("max")
 #'
 #' @export
 `max.wbw::WhiteboxRaster` <- function(object, ...) {
@@ -49,7 +49,7 @@ NULL
 #' @param x WhiteboxRaster object
 #' @param ... additional arguments (not used)
 #'
-#' @eval rd_example_geomorph("mean")
+#' @eval rd_example("mean")
 #'
 #' @export
 `mean.wbw::WhiteboxRaster` <- function(x, ...) {
@@ -64,7 +64,7 @@ NULL
 #' be stripped (not used)
 #' @param ... additional arguments (not used)
 #'
-#' @eval rd_example_geomorph("median")
+#' @eval rd_example("median")
 #'
 #' @export
 `median.wbw::WhiteboxRaster` <- function(x, na.rm = FALSE, ...) {
@@ -77,7 +77,7 @@ NULL
 #' @param object WhiteboxRaster object
 #' @param ... additional arguments (not used)
 #'
-#' @eval rd_example_geomorph("min")
+#' @eval rd_example("min")
 #'
 #' @export
 `min.wbw::WhiteboxRaster` <- function(object, ...) {
@@ -91,7 +91,7 @@ NULL
 #'
 #' @param x WhiteboxRaster object
 #'
-#' @eval rd_example_geomorph("stdev")
+#' @eval rd_example("stdev")
 #'
 #' @export
 stdev <-
@@ -115,7 +115,7 @@ S7::method(stdev, WhiteboxRaster) <-
 #'
 #' @param x WhiteboxRaster object
 #'
-#' @eval rd_example_geomorph("variance")
+#' @eval rd_example("variance")
 #'
 #' @export
 variance <-
