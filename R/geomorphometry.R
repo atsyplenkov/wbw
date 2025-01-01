@@ -35,7 +35,7 @@
 #' geology. Academic Press.
 #'
 #' @eval rd_wbw_link("aspect")
-#' @eval rd_example_geomorph("wbw_aspect")
+#' @eval rd_example("wbw_aspect")
 #'
 #' @seealso [wbw_to_degrees()], [wbw_to_radians()], [wbw_slope()]
 #'
@@ -95,7 +95,7 @@ S7::method(wbw_aspect, WhiteboxRaster) <-
 #' and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J.
 #'
 #' @eval rd_wbw_link("slope")
-#' @eval rd_example_geomorph("wbw_slope", args = c('units = "radians"'))
+#' @eval rd_example("wbw_slope", args = c('units = "radians"'))
 #'
 #' @seealso [wbw_to_degrees()], [wbw_to_radians()], [wbw_aspect()]
 #'
@@ -160,7 +160,7 @@ S7::method(wbw_slope, WhiteboxRaster) <-
 #' topographic heterogeneity. Intermountain Journal of Sciences, 5(1-4), 23-27.
 #'
 #' @eval rd_wbw_link("ruggedness_index")
-#' @eval rd_example_geomorph("wbw_ruggedness_index")
+#' @eval rd_example("wbw_ruggedness_index")
 #'
 #' @export
 wbw_ruggedness_index <-

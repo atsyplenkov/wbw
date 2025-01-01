@@ -30,7 +30,7 @@
 #' @return [WhiteboxRaster] object containing filtered values
 #'
 #' @eval rd_wbw_link("adaptive_filter")
-#' @eval rd_example_geomorph("wbw_adaptive_filter",
+#' @eval rd_example("wbw_adaptive_filter",
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export

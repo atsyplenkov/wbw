@@ -29,6 +29,6 @@ rast(raster_path) |>
 \keyword{Converts}
 \keyword{SpatRaster}
 \keyword{[WhiteboxRaster]}
-\keyword{conversions}
 \keyword{object}
+\keyword{terra}
 \keyword{to}

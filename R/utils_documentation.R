@@ -33,7 +33,7 @@ rd_input_raster <-
 #' Create basic example
 #'
 #' @keywords internal
-rd_example_geomorph <-
+rd_example <-
   function(foo, args = NULL) {
     paste(
       "@examples",

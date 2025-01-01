@@ -24,7 +24,7 @@ NULL
 #'
 #' @eval rd_input_raster("x")
 #'
-#' @eval rd_example_geomorph("as_matrix")
+#' @eval rd_example("as_matrix")
 as_matrix <-
   S7::new_generic(
     name = "as_matrix",
@@ -64,7 +64,7 @@ S7::method(as_matrix, WhiteboxRaster) <-
 #'
 #' @eval rd_input_raster("x")
 #'
-#' @eval rd_example_geomorph("as_vector")
+#' @eval rd_example("as_vector")
 as_vector <-
   S7::new_generic(
     name = "as_vector",
