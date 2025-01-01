@@ -23,7 +23,7 @@
 #' WhiteboxRaster
 #' - @eval rd_wbw_link("tool_name") will create a @reference tag with a web
 #' link to the original documentation website
-#' - @eval rd_example_geomorph("wbw_ruggedness_index") will generate
+#' - @eval rd_example("wbw_ruggedness_index") will generate
 #' an @examples tag with a basic workflow inside the \dontrun{} tag.
 #'
 #' @eval rd_input_raster("dem")
@@ -31,7 +31,7 @@
 #' @return [WhiteboxRaster] object
 #'
 #' @eval rd_wbw_link("ruggedness_index")
-#' @eval rd_example_geomorph("wbw_ruggedness_index")
+#' @eval rd_example("wbw_ruggedness_index")
 wbw_template <-
   S7::new_generic(
     name = "wbw_template",
