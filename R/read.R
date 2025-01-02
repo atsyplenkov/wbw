@@ -3,19 +3,19 @@
 #' @keywords io
 #'
 #' @description
-#' Creates a new [WhiteboxRaster] object by reading raster data from a file 
+#' Creates a new WhiteboxRaster object by reading raster data from a file
 #' into memory.
 #'
 #' @param file_name \code{character}, path to raster file
 #'
-#' @return [WhiteboxRaster] object
+#' @return WhiteboxRaster object
 #'
 #' @examples
 #' \dontrun{
 #' raster_path <- system.file("extdata/dem.tif", package = "wbw")
 #' wbw_read_raster(raster_path)
 #' }
-#' 
+#'
 #' @export
 wbw_read_raster <- function(file_name) {
   check_env(wbe)
@@ -30,14 +30,14 @@ wbw_read_raster <- function(file_name) {
 #' Read Vector File as WhiteboxVector
 #' @rdname io
 #' @keywords io
-#' 
+#'
 #' @description
-#' Creates a new [WhiteboxVector] object by reading vector data from an ESRI 
+#' Creates a new WhiteboxVector object by reading vector data from an ESRI
 #' shapefile into memory.
 #'
 #' @param file_name \code{character}, path to ESRI shapefile
-#' 
-#' @return [WhiteboxVector] object
+#'
+#' @return WhiteboxVector object
 #'
 #' @export
 wbw_read_vector <- function(file_name) {

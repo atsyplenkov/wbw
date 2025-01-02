@@ -13,15 +13,15 @@ wbw_read_vector(file_name)
 \item{file_name}{\code{character}, path to ESRI shapefile}
 }
 \value{
-\link{WhiteboxRaster} object
+WhiteboxRaster object
 
-\link{WhiteboxVector} object
+WhiteboxVector object
 }
 \description{
-Creates a new \link{WhiteboxRaster} object by reading raster data from a file
+Creates a new WhiteboxRaster object by reading raster data from a file
 into memory.
 
-Creates a new \link{WhiteboxVector} object by reading vector data from an ESRI
+Creates a new WhiteboxVector object by reading vector data from an ESRI
 shapefile into memory.
 }
 \examples{
