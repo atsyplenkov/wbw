@@ -98,7 +98,7 @@ S7::method(wbw_adaptive_filter, WhiteboxRaster) <-
 #' filter is related to Gaussian smoothing, in that the weights of the
 #' convolution kernel are partly determined by the 2-dimensional Gaussian
 #' (i.e. normal) curve, which gives stronger weighting to cells nearer the
-#' kernel centre. Unlike the `wbw_gaussian_filter`, however, the bilateral kernel
+#' kernel centre. Unlike the [wbw_gaussian_filter], however, the bilateral kernel
 #' weightings are also affected by their similarity to the intensity value of
 #' the central pixel. Pixels that are very different in intensity from the
 #' central pixel are weighted less, also based on a Gaussian weight
@@ -123,9 +123,9 @@ S7::method(wbw_adaptive_filter, WhiteboxRaster) <-
 #' in the same units as z-units of input raster `x` (usually, meters).
 #'
 #' @return [WhiteboxRaster] object containing filtered values
-#' 
-#' @seealso [wbw_mean_filter()]
-#' 
+#'
+#' @seealso [wbw_mean_filter()], [wbw_gaussian_filter()]
+#'
 #' @references
 #' Tomasi, C., & Manduchi, R. (1998, January). Bilateral filtering for gray
 #' and color images. In null (p. 839). IEEE.
@@ -139,9 +139,7 @@ wbw_bilateral_filter <-
   S7::new_generic(
     name = "wbw_bilateral_filter",
     dispatch_args = "x",
-    fun = function(x,
-                   sigma_dist = 0.75,
-                   sigma_int = 1) {
+    fun = function(x, sigma_dist = 0.75, sigma_int = 1) {
       S7::S7_dispatch()
     }
   )
@@ -199,7 +197,7 @@ S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
 #' image, compared to other smoothing filters such as the edge-preserving
 #' smoothing filters including the [wbw_bilateral_filter],
 #' `median_filter`, `olympic_filter`, `edge_preserving_mean_filter` and even
-#' `gaussian_filter`.
+#' [gaussian_filter].
 #'
 #' @eval rd_input_raster("x")
 #' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
@@ -251,6 +249,71 @@ S7::method(wbw_mean_filter, WhiteboxRaster) <-
         raster = x@source,
         filter_size_x = filter_size_x,
         filter_size_y = filter_size_y
+      )
+    # Return Raster
+    WhiteboxRaster(
+      name = x@name,
+      source = out
+    )
+  }
+
+#' Gaussian filter
+#' @keywords image_processing
+#'
+#' @description
+#' This tool can be used to perform a Gaussian filter on a raster image.
+#' A Gaussian filter can be used to emphasize the longer-range variability in
+#' an image, effectively acting to smooth the image. This can be useful for
+#' reducing the noise in an image.
+#'
+#' @details
+#' The algorithm operates by convolving a kernel of weights with each grid cell
+#' and its neighbours in an image. The weights of the convolution kernel are
+#' determined by the 2-dimensional Gaussian (i.e. normal) curve, which gives
+#' stronger weighting to cells nearer the kernel centre. It is this
+#' characteristic that makes the Gaussian filter an attractive alternative for
+#' image smoothing and noise reduction than the [wbw_mean_filter].
+#' The size of the filter is determined by setting the
+#' standard deviation parameter (`sigma`), which is in units of grid cells;
+#' the larger the standard deviation the larger the resulting filter kernel.
+#' The standard deviation can be any number in the range 0.5-20.
+#'
+#' @eval rd_input_raster("x")
+#' @param sigma \code{double}, standard deviation distance parameter in
+#' **units of grid cells**. Should be in the range 0.5-20.
+#'
+#' @return [WhiteboxRaster] object containing filtered values
+#'
+#' @seealso [wbw_mean_filter()]
+#'
+#' @eval rd_wbw_link("gaussian_filter")
+#' @eval rd_example("wbw_gaussian_filter", c("sigma = 1.5"))
+#'
+#' @export
+wbw_gaussian_filter <-
+  S7::new_generic(
+    name = "wbw_gaussian_filter",
+    dispatch_args = "x",
+    fun = function(x, sigma = 0.75) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_gaussian_filter, WhiteboxRaster) <-
+  function(x, sigma = 0.75) {
+    # Checks
+    check_env(wbe)
+    checkmate::assert_double(
+      sigma,
+      lower = 0.5,
+      upper = 20,
+      len = 1L
+    )
+    # Filter
+    out <-
+      wbe$gaussian_filter(
+        raster = x@source,
+        sigma = sigma
       )
     # Return Raster
     WhiteboxRaster(

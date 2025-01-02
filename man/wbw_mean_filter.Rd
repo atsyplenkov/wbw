@@ -37,7 +37,7 @@ generally considered to be quite harsh, with respect to their impact on the
 image, compared to other smoothing filters such as the edge-preserving
 smoothing filters including the \link{wbw_bilateral_filter},
 \code{median_filter}, \code{olympic_filter}, \code{edge_preserving_mean_filter} and even
-\code{gaussian_filter}.
+\link{gaussian_filter}.
 }
 \examples{
 \dontrun{

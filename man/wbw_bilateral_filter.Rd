@@ -33,7 +33,7 @@ weights with each grid cell and its neighbours in an image. The bilateral
 filter is related to Gaussian smoothing, in that the weights of the
 convolution kernel are partly determined by the 2-dimensional Gaussian
 (i.e. normal) curve, which gives stronger weighting to cells nearer the
-kernel centre. Unlike the \code{wbw_gaussian_filter}, however, the bilateral kernel
+kernel centre. Unlike the \link{wbw_gaussian_filter}, however, the bilateral kernel
 weightings are also affected by their similarity to the intensity value of
 the central pixel. Pixels that are very different in intensity from the
 central pixel are weighted less, also based on a Gaussian weight
@@ -65,6 +65,6 @@ and color images. In null (p. 839). IEEE.
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#bilateral_filter}
 }
 \seealso{
-\code{\link[=wbw_mean_filter]{wbw_mean_filter()}}
+\code{\link[=wbw_mean_filter]{wbw_mean_filter()}}, \code{\link[=wbw_gaussian_filter]{wbw_gaussian_filter()}}
 }
 \keyword{image_processing}

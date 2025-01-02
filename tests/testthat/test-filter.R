@@ -64,6 +64,20 @@ test_that(
     expect_error(
       wbw_mean_filter("x", filter_size_y = "a")
     )
+
+    # Gaussian filter
+    expect_error(
+      wbw_gaussian_filter(x, sigma = 0.2)
+    )
+    expect_error(
+      wbw_gaussian_filter(x, sigma = 1L)
+    )
+    expect_error(
+      wbw_gaussian_filter("x", sigma = 1)
+    )
+    expect_error(
+      wbw_gaussian_filter(x, sigma = 21)
+    )
   }
 )
 
@@ -107,6 +121,12 @@ test_that(
       wbw_mean_filter(x, filter_size_x = 3, filter_size_y = 3),
       WhiteboxRaster
     )
+
+    # Gaussian filter
+    expect_s7_class(
+      wbw_gaussian_filter(x),
+      WhiteboxRaster
+    )
   }
 )
 
@@ -141,6 +161,15 @@ test_that(
     expect_type(
       all.equal(
         median(wbw_mean_filter(x, filter_size_x = 51, filter_size_y = 51)),
+        true_median
+      ),
+      "character"
+    )
+
+    # Gaussian filter
+    expect_type(
+      all.equal(
+        median(wbw_gaussian_filter(x, sigma = 5)),
         true_median
       ),
       "character"
