@@ -1,29 +1,26 @@
 #' Install Required Python Modules
 #' @keywords system
 #'
-#' This function installs the latest `numpy`, `whitebox-workflows`.
-#' The default uses `pip` for package installation.
+#' This function installs the latest \code{numpy}, \code{whitebox-workflows}.
+#' The default uses \code{pip} for package installation.
 #'
-#' @param system  Use a `system()` call to `python -m pip install --user ...`
-#' instead of `reticulate::py_install()`. Default: `FALSE`.
-#' @param force Force update (uninstall/reinstall) and ignore existing
-#' installed packages? Default: `FALSE`. Applies to `system=TRUE`.
+#' @param system \code{boolean}, Use a \code{system()} call to
+#' \code{python -m pip install --user ...}
+#' instead of \code{reticulate::py_install()}. Default: \code{FALSE}.
+#' @param force \code{boolean}, Force update (uninstall/reinstall) and ignore
+#' existing installed packages? Default: \code{FALSE}.
+#' Applies to \code{system=TRUE}.
 #' @param ... Additional arguments passed to `reticulate::py_install()`
 #'
 #' @details This function provides a basic wrapper around
 #'  `reticulate::py_install()`, except it defaults to using the Python package
-#' manager `pip` and virtual environment. It creates the `r-wbw` virtual
+#' manager \code{pip} and virtual environment. It creates the \code{r-wbw} virtual
 #' environment in the default location (run `reticulate::virtualenv_root()` to
 #' find it) and installs the required python packages.
 #'
 #' @return `NULL`, or `try-error` (invisibly) on R code execution error.
 #'
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' wbw_install()
-#' }
 wbw_install <-
   function(system = FALSE, force = FALSE, ...) {
     args <- list(...)
@@ -67,10 +64,13 @@ wbw_install <-
         envname = venv_name
       )
       .success_message(wbw_version())
+      cli::cli_alert_info(
+        c(
+          "Please, restart you R session"
+        )
+      )
     } else if (venv_exists && !is.null(wbw_version) && !system) {
-      .success_message(wbw_version)
-      # TODO:
-      # - prompt to restart R console
+      .success_message(wbw_version())
     }
 
     if (system) {
@@ -88,14 +88,11 @@ wbw_install <-
     }
   }
 
-.success_message <-
-  function(wbw_version) {
-    cat(
-      paste0(
-        "You're all set! ",
-        "The Python library `whitebox-workflows` v",
-        wbw_version,
-        " has been found!\n"
-      )
+.success_message <- function(wbw_version) {
+  cli::cli_alert_success(
+    c(
+      "You're all set! The Python library {.code whitebox-workflows} ",
+      "v{wbw_version} has been found!"
     )
-  }
+  )
+}

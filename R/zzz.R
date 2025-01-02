@@ -79,10 +79,85 @@ wbw_version <-
   FALSE
 }
 
+.has_wbw <- function() {
+  if (reticulate::virtualenv_exists("r-wbw")) {
+    reticulate::use_virtualenv("r-wbw")
+    have_wbw <- reticulate::py_module_available("whitebox_workflows")
+    have_numpy <- reticulate::py_module_available("numpy")
+  } else {
+    have_wbw <- reticulate::py_module_available("whitebox_workflows")
+    have_numpy <- reticulate::py_module_available("numpy")
+  }
+
+  all(have_wbw, have_numpy)
+}
+
 #' @importFrom reticulate configure_environment
+#' @importFrom cli cli_alert_info cli_alert_success cli_alert_warning
+#' @importFrom utils menu
 .onLoad <- function(libname, pkgname) {
   S7::methods_register()
-  if (.has_python3()) {
+
+  if (.has_python3() && !.has_wbw()) {
+    if (interactive()) {
+      cli::cli_alert_warning(
+        "Library {.code whitebox-workflows} is required but not found."
+      )
+      choice <- utils::menu(c(
+        "Install dependencies in a virtual environment (recommended)",
+        "Install dependencies system-wide",
+        "Do nothing"
+      ))
+
+      if (choice == 1) {
+        cli::cli_alert_info(
+          "Installing dependencies in virtual environment..."
+        )
+        i <- try(wbw_install(), silent = TRUE)
+        if (!inherits(i, "try-error")) {
+          cli::cli_alert_success(
+            c(
+              "All done! Please, restart you R session"
+            )
+          )
+        } else {
+          cli::cli_alert_danger(
+            c(
+              "Oups, something went wrong :-(\n",
+              "Please try to install dependencies manually by running ",
+              "{.run wbw::wbw_install()}"
+            )
+          )
+        }
+      } else if (choice == 2) {
+        cli::cli_alert_info(
+          "Installing dependencies system-wide..."
+        )
+        i <- try(wbw_install(system = TRUE), silent = TRUE)
+        if (!inherits(i, "try-error")) {
+          cli::cli_alert_success(
+            c(
+              "All done!"
+            )
+          )
+        } else {
+          cli::cli_alert_danger(
+            c(
+              "Oups, something went wrong :-(\n",
+              "Please try to install dependencies manually by running ",
+              "{.run wbw::wbw_install()}"
+            )
+          )
+        }
+      }
+    } else {
+      # Non-interactive: install system-wide
+      wbw_install(system = TRUE)
+    }
+  }
+
+  # Try loading modules after potential installation
+  if (.has_python3() && .has_wbw()) {
     if (!.loadModules()) {
       x <- try(reticulate::configure_environment(pkgname), silent = TRUE)
       if (!inherits(x, "try-error")) {
@@ -96,26 +171,18 @@ wbw_version <-
 #' @importFrom utils packageVersion
 .onAttach <- function(libname, pkgname) {
   wbwv <- wbw_version()
-  supress <- !grepl("suppress", Sys.getenv("wbw.message"), ignore.case = TRUE)
-  if (is.null(wbwv) && supress) {
-    packageStartupMessage(
-      paste0(
-        "Python package `whitebox-workflows` cannot be found. ",
-        "Run `wbw::wbw_install()` and reload R session.\n",
-        "To suppress this message, add `wbw.message = suppressed`",
-        "to your .Renviron file."
-      )
-    )
-  } else if (!is.null(wbwv) && supress) {
-    packageStartupMessage(
-      paste0(
-        "wbw v",
-        utils::packageVersion("wbw"),
-        " -- using whitebox-workflows v", wbwv, "\n",
-        "To suppress this message, add `wbw.message = suppressed`",
-        "to your .Renviron file."
-      )
-    )
+  suppress <-
+    !grepl("suppress", Sys.getenv("wbw.message"), ignore.case = TRUE)
+
+  if (is.null(wbwv) && suppress && interactive()) {
+    cli::cli_alert_warning(c(
+      "Python package `whitebox-workflows` cannot be found.",
+      "Run {.code wbw::wbw_install()} and reload R session."
+    ))
+  } else if (!is.null(wbwv) && suppress) {
+    cli::cli_alert_success(c(
+      "wbw v{wbwv} -- using whitebox-workflows v{wbwv}"
+    ))
   }
 }
 

@@ -7,11 +7,13 @@
 wbw_install(system = FALSE, force = FALSE, ...)
 }
 \arguments{
-\item{system}{Use a \code{system()} call to \verb{python -m pip install --user ...}
+\item{system}{\code{boolean}, Use a \code{system()} call to
+\code{python -m pip install --user ...}
 instead of \code{reticulate::py_install()}. Default: \code{FALSE}.}
 
-\item{force}{Force update (uninstall/reinstall) and ignore existing
-installed packages? Default: \code{FALSE}. Applies to \code{system=TRUE}.}
+\item{force}{\code{boolean}, Force update (uninstall/reinstall) and ignore
+existing installed packages? Default: \code{FALSE}.
+Applies to \code{system=TRUE}.}
 
 \item{...}{Additional arguments passed to \code{reticulate::py_install()}}
 }
@@ -28,16 +30,11 @@ manager \code{pip} and virtual environment. It creates the \code{r-wbw} virtual
 environment in the default location (run \code{reticulate::virtualenv_root()} to
 find it) and installs the required python packages.
 }
-\examples{
-\dontrun{
-wbw_install()
-}
-}
 \keyword{The}
 \keyword{This}
-\keyword{`numpy`,}
-\keyword{`pip`}
-\keyword{`whitebox-workflows`.}
+\keyword{\code{numpy},}
+\keyword{\code{pip}}
+\keyword{\code{whitebox-workflows}.}
 \keyword{default}
 \keyword{for}
 \keyword{function}

@@ -15,9 +15,10 @@ Authors@R:
              role = "cph")
      )
 Maintainer: Anatoly Tsyplenkov <atsyplenkov@fastmail.com>
-Description: This package provides R bindings to the Whitebox Workflows Python 
-             library, which is developed by Whitebox Geospatial Inc. under the 
-             GNU General Public License v3.0.
+Description: Provides R bindings to the Whitebox Workflows Python library, 
+             offering extensive geoprocessing capabilities 
+             for Geographic Information Systems (GIS), remote sensing analysis, 
+             and manipulation of raster, vector, and LiDAR geospatial data.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -28,10 +29,10 @@ Imports:
     grDevices,
     reticulate,
     S7 (>= 0.2.0),
-    stats
+    stats,
+    cli
 Suggests: 
     terra (>= 1.7),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-SystemRequirements: Python (>= 3.8.0), numpy (>= 1.24.0), 
-                    whitebox-workflows (>= v1.3.3)
+SystemRequirements: Python (>= 3.8.0), numpy, whitebox-workflows (>= v1.3.3)
