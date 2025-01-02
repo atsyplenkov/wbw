@@ -8,8 +8,8 @@
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-![WBW
-Functions](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/atsyplenkov/0c46250def94614c4a3ef8b4de7460e6/raw/wbw-progress.json)
+[![WBW
+Functions](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/atsyplenkov/0c46250def94614c4a3ef8b4de7460e6/raw/wbw-progress.json)](https://github.com/atsyplenkov/wbw/issues/1)
 [![R-CMD-check](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/atsyplenkov/wbw/graph/badge.svg)](https://app.codecov.io/gh/atsyplenkov/wbw)
@@ -76,6 +76,6 @@ You can install the development version of wbw from
 pak::pak("atsyplenkov/wbw")
 ```
 
-> \[!TIP\] While the `{wbw}` requires the `whitebox-workflows` Python
-> library v1.3.3+. It is designed to install all the dependencies
-> automatically.
+> \[!TIP\]
+> While the `{wbw}` requires the `whitebox-workflows` Python library
+> v1.3.3+. It is designed to install all the dependencies automatically.
