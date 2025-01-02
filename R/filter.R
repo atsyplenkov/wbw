@@ -107,7 +107,7 @@ S7::method(wbw_adaptive_filter, WhiteboxRaster) <-
 #'
 #' The heavier weighting given to nearer and similar-valued pixels makes the
 #'  bilateral filter an attractive alternative for image smoothing and noise
-#' reduction compared to the much-used `wbw_mean_filter`.
+#' reduction compared to the much-used [wbw_mean_filter].
 #' The size of the filter is determined by setting the standard deviation
 #' distance parameter (`sigma_dist`); the larger the standard deviation the
 #' larger the resulting filter kernel.
@@ -123,7 +123,9 @@ S7::method(wbw_adaptive_filter, WhiteboxRaster) <-
 #' in the same units as z-units of input raster `x` (usually, meters).
 #'
 #' @return [WhiteboxRaster] object containing filtered values
-#'
+#' 
+#' @seealso [wbw_mean_filter()]
+#' 
 #' @references
 #' Tomasi, C., & Manduchi, R. (1998, January). Bilateral filtering for gray
 #' and color images. In null (p. 839). IEEE.
@@ -165,6 +167,90 @@ S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
         raster = x@source,
         sigma_dist = sigma_dist,
         sigma_int = sigma_int
+      )
+    # Return Raster
+    WhiteboxRaster(
+      name = x@name,
+      source = out
+    )
+  }
+
+#' Mean filter
+#' @keywords image_processing
+#'
+#' @description
+#' This tool performs a mean filter operation on a raster image. A mean filter,
+#' a type of low-pass filter, can be used to emphasize the longer-range
+#'  variability in an image, effectively acting to smooth the image.
+#' This can be useful for reducing the noise in an image.
+#'
+#' @details
+#' This tool utilizes an integral image approach (Crow, 1984) to ensure highly
+#' efficient filtering that is invariant to filter size. The algorithm
+#' operates by calculating the average value in a moving window centred on
+#' each grid cell.
+#'
+#' Neighbourhood size, or filter size, is specified in the x and y dimensions
+#' using `filter_size_x` and `filter_size_y` These dimensions should be odd,
+#' positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+#'
+#' Although commonly applied in digital image processing, mean filters are
+#' generally considered to be quite harsh, with respect to their impact on the
+#' image, compared to other smoothing filters such as the edge-preserving
+#' smoothing filters including the [wbw_bilateral_filter],
+#' `median_filter`, `olympic_filter`, `edge_preserving_mean_filter` and even
+#' `gaussian_filter`.
+#'
+#' @eval rd_input_raster("x")
+#' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
+#' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
+#'
+#' @return [WhiteboxRaster] object containing filtered values
+#'
+#' @seealso [wbw_bilateral_filter()]
+#'
+#' @eval rd_wbw_link("mean_filter")
+#' @eval rd_example("wbw_mean_filter",
+#' c("filter_size_x = 3L", "filter_size_y = 3L"))
+#'
+#' @export
+wbw_mean_filter <-
+  S7::new_generic(
+    name = "wbw_mean_filter",
+    dispatch_args = "x",
+    fun = function(x,
+                   filter_size_x = 11L,
+                   filter_size_y = 11L) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_mean_filter, WhiteboxRaster) <-
+  function(x,
+           filter_size_x = 11L,
+           filter_size_y = 11L) {
+    # Checks
+    check_env(wbe)
+    filter_size_x <-
+      checkmate::asInteger(
+        filter_size_x,
+        lower = 0L,
+        len = 1L
+      )
+    filter_size_y <-
+      checkmate::asInteger(
+        filter_size_y,
+        lower = 0L,
+        len = 1L
+      )
+    checkmate::assert_true(filter_size_x %% 2 == 1)
+    checkmate::assert_true(filter_size_y %% 2 == 1)
+    # Filter
+    out <-
+      wbe$mean_filter(
+        raster = x@source,
+        filter_size_x = filter_size_x,
+        filter_size_y = filter_size_y
       )
     # Return Raster
     WhiteboxRaster(

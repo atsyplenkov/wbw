@@ -42,7 +42,7 @@ by the spatial and intensity domains of a localized pixel neighborhood.
 
 The heavier weighting given to nearer and similar-valued pixels makes the
 bilateral filter an attractive alternative for image smoothing and noise
-reduction compared to the much-used \code{wbw_mean_filter}.
+reduction compared to the much-used \link{wbw_mean_filter}.
 The size of the filter is determined by setting the standard deviation
 distance parameter (\code{sigma_dist}); the larger the standard deviation the
 larger the resulting filter kernel.
@@ -63,5 +63,8 @@ Tomasi, C., & Manduchi, R. (1998, January). Bilateral filtering for gray
 and color images. In null (p. 839). IEEE.
 
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#bilateral_filter}
+}
+\seealso{
+\code{\link[=wbw_mean_filter]{wbw_mean_filter()}}
 }
 \keyword{image_processing}
