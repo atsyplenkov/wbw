@@ -3,9 +3,9 @@ raster_path <-
 x <- wbw_read_raster(raster_path)
 
 test_that(
-  "as.matrix converts WhiteboxRaster to matrix",
+  "as_matrix converts WhiteboxRaster to matrix",
   {
-    m <- as.matrix(x)
+    m <- as_matrix(x)
 
     expect_true(is.matrix(m))
     expect_equal(dim(m), c(726, 800))
@@ -13,9 +13,9 @@ test_that(
 )
 
 test_that(
-  "as.vector converts WhiteboxRaster to vector",
+  "as_vector converts WhiteboxRaster to vector",
   {
-    v <- as.vector(x)
+    v <- as_vector(x)
 
     expect_true(is.vector(v))
     expect_equal(length(v), num_cells(x))
@@ -23,7 +23,7 @@ test_that(
 )
 
 test_that(
-  "as.vector and as.matrix can convert NoData value to NA",
+  "as_vector and as_matrix can convert NoData value to NA",
   {
     skip_if_not_installed("terra")
     f <- system.file("ex/elev.tif", package="terra")
@@ -51,7 +51,7 @@ test_that(
 test_that(
   "summary stats are true",
   {
-    m <- as.matrix(x)
+    m <- as_matrix(x)
 
     expect_equal(max(x), max(m))
     expect_equal(min(x), min(m))

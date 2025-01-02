@@ -29,7 +29,7 @@ NULL
                                       add = FALSE,
                                       ...) {
   # Get raster data as matrix
-  z <- as.matrix(x)
+  z <- as_matrix(x, raw = FALSE)
   
   # Get extent
   conf <- x@source$configs
