@@ -1,7 +1,7 @@
 #' Convert to radians
 #' @keywords conversions
 #'
-#' Converts [WhiteboxRaster] in degrees to radians
+#' Converts a [WhiteboxRaster] from degrees to radians
 #'
 #' @eval rd_input_raster("x")
 #'
@@ -44,7 +44,7 @@ S7::method(wbw_to_radians, WhiteboxRaster) <-
 #' Convert to degrees
 #' @keywords conversions
 #'
-#' Converts [WhiteboxRaster] in radians to degrees
+#' Converts a [WhiteboxRaster] from radians to degrees
 #'
 #' @eval rd_input_raster("x")
 #'
@@ -88,7 +88,7 @@ S7::method(wbw_to_degrees, WhiteboxRaster) <-
 #' Convert WhiteboxRaster to SpatRaster
 #' @keywords terra
 #'
-#' Converts [WhiteboxRaster] to SpatRaster object
+#' Converts a [WhiteboxRaster] to a SpatRaster object
 #'
 #' @eval rd_input_raster("x")
 #'
@@ -165,7 +165,7 @@ S7::method(as_rast, WhiteboxRaster) <-
 #' Convert SpatRaster to WhiteboxRaster
 #' @keywords terra
 #'
-#' Converts SpatRaster to [WhiteboxRaster] object
+#' Converts a SpatRaster to a [WhiteboxRaster] object
 #'
 #' @param x SpatRaster object
 #'

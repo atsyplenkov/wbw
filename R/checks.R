@@ -1,4 +1,4 @@
-#' Check is package installed
+#' Check if package is installed
 #' @rdname checks
 #' @keywords internal
 check_package <-
@@ -8,7 +8,7 @@ check_package <-
     }
   }
 
-#' Check is whitebox environment is presented
+#' Check if whitebox environment is present
 #' @rdname checks
 #' @keywords internal
 check_env <-
