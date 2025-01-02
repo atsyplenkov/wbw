@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# wbw <img src="man/figures/logo.png" align="right" height="135" alt="" />
+# Whitebox Workflows for R `{wbw}` <img src="man/figures/logo.png" align="right" height="135" alt="" />
 
 <!-- badges: start -->
 [![Project Status: WIP – Initial development is in progress, but there has not
@@ -24,40 +24,74 @@ public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostat
 [![Codecov test coverage](https://codecov.io/gh/atsyplenkov/wbw/graph/badge.svg)](https://app.codecov.io/gh/atsyplenkov/wbw)
 <!-- badges: end -->
 
-The `{wbw}` R package provides R bindings to the [Whitebox Workflows for Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html) — a
-powerful and fast library for advanced geoprocessing, with focus on
-hydrological, geomorphometric and remote sensing analysis of raster, vector and
-LiDAR data.
-
-## Do we need Yet Another RSpatial Package?
-
-Well …
+The `{wbw}` R package provides R bindings to the [Whitebox Workflows for Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html) — a powerful and fast library for advanced geoprocessing, with focus on hydrological, geomorphometric and remote sensing analysis of raster, vector and LiDAR data.
 
 ## Basic workflow
 
-The `wbw` R package introduces several new S7 classes, `WhiteboxRaster` and
-`WhiteboxVector` which serves as a bridge between Python and R. 
+The `{wbw}` R package introduces several new S7 classes, including `WhiteboxRaster` and `WhiteboxVector` which serves as a bridge between Python and R. 
 
 ```{r example}
 library(wbw)
 
-raster_path <- 
-  system.file("extdata/dem.tif", package = "wbw")
+raster_path <- system.file("extdata/dem.tif", package = "wbw")
 dem <- wbw_read_raster(raster_path)
 dem
 ```
 
-The true power of the `wbw` unleashes when there's a need to run several operations sequentially, i.e. in a pipeline. For example, first DEM should be smoothed (or filtered), and then the slope should be estimated. 
+The true power of `wbw` unleashes when there's a need to run several operations sequentially, i.e., in a pipeline. Unlike the original Whitebox Tools, WbW [stores files in memory](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/introduction.html#how-does-wbw-compare-with-related-whitebox-products), reducing the amount of intermediate I/O operations. 
+
+For example, a DEM can be smoothed (or filtered), and then the slope can be estimated as follows:
 
 ```{r slope}
-slope_deg <-
-  dem |>
-  wbw_adaptive_filter() |> 
+dem |>
+  wbw_mean_filter() |> 
   wbw_slope(units = "d")
-
-plot(slope_deg)
 ```
 
+## Yet Another RSpatial Package? Why?
+
+The above example may remind you of the `{terra}` package, and it is not a coincidence. The `{wbw}` package is designed to be fully compatible with `{terra}`, and the conversion between `WhiteboxRaster` and `SpatRaster` objects happens in milliseconds (well, depending on the raster size, of course).
+
+
+```{r terra}
+library(terra)
+
+wbw_read_raster(raster_path) |> 
+  wbw_gaussian_filter(sigma = 1.5) |> 
+  wbw_aspect() |> 
+  as_rast() |> # Conversion to SpatRaster
+  plot(main = "Aspect")
+```
+
+Even though `{wbw}` can be faster than `{terra}` in some cases, it is by no means intended to replace it. 
+
+``` {r benchmark}
+
+bench::mark(
+  terra = {
+    s <- 
+      raster_path |> 
+        rast() |> 
+        terrain("slope", unit = "radians") |> 
+        focal(w = 15, "mean") |> 
+        global(\(x) median(x, na.rm = TRUE))
+
+  round(s$global, 2)
+
+  },
+  wbw = {
+    raster_path |>
+      wbw_read_raster() |> 
+      wbw_slope("radians") |> 
+      wbw_mean_filter(15, 15) |> 
+      median() |> 
+      round(2)
+  },
+  check = TRUE,
+  iterations = 11L
+)
+
+```
 
 ## Installation
 
@@ -69,9 +103,10 @@ pak::pak("atsyplenkov/wbw")
 ```
 
 > [!TIP]
+> The `{wbw}` package requires the `whitebox-workflows` Python library v1.3.3+. However, you should not worry about it, as the package designed to install all dependencies automatically on the first run.
 
-> While the `{wbw}` requires the `whitebox-workflows` Python library v1.3.3+. It is designed to install all the dependencies automatically.
+## Contributing
 
-
+Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING.md) for details. There is an open issue for the `{wbw}` package [here](https://github.com/atsyplenkov/wbw/issues/1) that contains a list of functions yet to be implemented. This is a good place to start.
 
 

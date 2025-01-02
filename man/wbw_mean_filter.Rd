@@ -23,8 +23,8 @@ longer-range variability and reducing noise.
 \details{
 Uses an efficient integral image approach (Crow, 1984) that is independent
 of filter size. While commonly used, mean filters can be more aggressive in
-their smoothing compared to edge-preserving alternatives like the bilateral
-filter or Gaussian filter.
+their smoothing compared to edge-preserving alternatives like the
+\link{wbw_bilateral_filter} or \link{wbw_gaussian_filter}.
 
 Neighbourhood size, or filter size, is specified in the x and y dimensions
 using \code{filter_size_x} and \code{filter_size_y} These dimensions should be odd,
@@ -38,6 +38,9 @@ wbw_read_raster(raster_path) |>
 }
 }
 \references{
+Crow, F. C. (1984, January). Summed-area tables for texture mapping.
+In ACM SIGGRAPH computer graphics (Vol. 18, No. 3, pp. 207-212). ACM.
+
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#mean_filter}
 }
 \seealso{

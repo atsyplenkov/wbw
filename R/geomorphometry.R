@@ -54,9 +54,9 @@ S7::method(wbw_aspect, WhiteboxRaster) <-
     # Checks
     check_env(wbe)
     checkmate::assert_double(z_factor, len = 1)
-    # Estimate slope
+    # Estimate aspect
     out <-
-      wbe$slope(dem = dem@source, z_factor = z_factor)
+      wbe$aspect(dem = dem@source, z_factor = z_factor)
     # Return Raster
     WhiteboxRaster(
       name = paste0("Aspect"),

@@ -164,8 +164,8 @@ S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
 #' @details
 #' Uses an efficient integral image approach (Crow, 1984) that is independent
 #' of filter size. While commonly used, mean filters can be more aggressive in
-#' their smoothing compared to edge-preserving alternatives like the bilateral
-#' filter or Gaussian filter.
+#' their smoothing compared to edge-preserving alternatives like the 
+#' [wbw_bilateral_filter] or [wbw_gaussian_filter].
 #'
 #' Neighbourhood size, or filter size, is specified in the x and y dimensions
 #' using `filter_size_x` and `filter_size_y` These dimensions should be odd,
@@ -177,6 +177,10 @@ S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
 #'
 #' @return [WhiteboxRaster] object containing filtered values
 #'
+#' @references 
+#' Crow, F. C. (1984, January). Summed-area tables for texture mapping. 
+#' In ACM SIGGRAPH computer graphics (Vol. 18, No. 3, pp. 207-212). ACM.
+#' 
 #' @seealso [wbw_bilateral_filter()], [wbw_gaussian_filter()]
 #'
 #' @eval rd_wbw_link("mean_filter")
