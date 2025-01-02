@@ -33,3 +33,5 @@ Suggests:
     terra (>= 1.7),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+SystemRequirements: Python (>= 3.8.0), numpy (>= 1.24.0), 
+                    whitebox-workflows (>= v1.3.3)
