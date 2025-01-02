@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  issues: read  # Add permission to read issues
+  issues: read
 
 jobs:
   calculate-progress:
