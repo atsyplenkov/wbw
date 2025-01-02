@@ -8,6 +8,8 @@
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+![WBW
+Functions](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/atsyplenkov/0c46250def94614c4a3ef8b4de7460e6/raw/wbw-progress.json)
 [![R-CMD-check](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/atsyplenkov/wbw/graph/badge.svg)](https://app.codecov.io/gh/atsyplenkov/wbw)
@@ -18,20 +20,6 @@ Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html)
 — a powerful and fast library for advanced geoprocessing, with focus on
 hydrological, geomorphometric and remote sensing analysis of raster,
 vector and LiDAR data.
-
-## Installation
-
-You can install the development version of wbw from
-[GitHub](https://github.com/) with:
-
-``` r
-# install.packages("pak")
-pak::pak("atsyplenkov/wbw")
-```
-
-> \[!TIP\] While the `{wbw}` requires the `whitebox-workflows` Python
-> library v1.3.3+. It is designed to install all the dependencies
-> automatically.
 
 ## Do we need Yet Another RSpatial Package?
 
@@ -77,3 +65,17 @@ plot(slope_deg)
 ```
 
 <img src="man/figures/README-slope-1.png" width="100%" />
+
+## Installation
+
+You can install the development version of wbw from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("atsyplenkov/wbw")
+```
+
+> \[!TIP\] While the `{wbw}` requires the `whitebox-workflows` Python
+> library v1.3.3+. It is designed to install all the dependencies
+> automatically.
