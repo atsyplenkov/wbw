@@ -5,6 +5,9 @@ on:
     types: [opened, edited]
   workflow_dispatch:
 
+permissions:
+  issues: read  # Add permission to read issues
+
 jobs:
   calculate-progress:
     runs-on: ubuntu-latest
@@ -14,28 +17,26 @@ jobs:
         id: issue
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const issue = await github.rest.issues.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: 1  // Your specific issue number
+              issue_number: 1
             });
-            return issue.data.body;
-          result-encoding: string
+            core.setOutput('content', issue.data.body);
 
       - name: Calculate progress
         id: progress
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const content = ${{ steps.issue.outputs.result }};
-            const completed = (content.match(/- \[x\]/g) || []).length;
-            const total = (content.match(/- \[ \]/g) || []).length + completed;
-            const percentage = (completed / total * 100).toFixed(1);
-            
-            core.setOutput('completed', completed);
-            core.setOutput('total', total);
-            core.setOutput('percentage', percentage);
+        run: |
+          content="${{ steps.issue.outputs.content }}"
+          completed=$(echo "$content" | grep -o "\- \[x\]" | wc -l)
+          total=$(( completed + $(echo "$content" | grep -o "\- \[ \]" | wc -l) ))
+          percentage=$(awk "BEGIN {printf \"%.1f\", ($completed / $total) * 100}")
+          
+          echo "completed=$completed" >> $GITHUB_OUTPUT
+          echo "total=$total" >> $GITHUB_OUTPUT
+          echo "percentage=$percentage" >> $GITHUB_OUTPUT
 
       - name: Update progress badge
         uses: schneegans/dynamic-badges-action@v1.6.0
