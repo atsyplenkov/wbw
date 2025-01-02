@@ -53,7 +53,7 @@ jobs:
               schemaVersion: 1,
               label: "WbW Tools ported",
               message: "${{ steps.progress.outputs.percentage }}% (${{ steps.progress.outputs.completed }}/${{ steps.progress.outputs.total }})",
-              color: "warning"
+              color: "d5ad18"
             };
             
             try {
@@ -77,4 +77,4 @@ jobs:
           filename: wbw-progress.json
           label: WbW Tools ported
           message: "${{ steps.progress.outputs.percentage }}% (${{ steps.progress.outputs.completed }}/${{ steps.progress.outputs.total }})"
-          color: warning
+          color: d5ad18
