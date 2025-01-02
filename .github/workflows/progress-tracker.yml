@@ -28,15 +28,17 @@ jobs:
 
       - name: Calculate progress
         id: progress
-        run: |
-          content="${{ steps.issue.outputs.content }}"
-          completed=$(echo "$content" | grep -o "\- \[x\]" | wc -l)
-          total=$(( completed + $(echo "$content" | grep -o "\- \[ \]" | wc -l) ))
-          percentage=$(awk "BEGIN {printf \"%.1f\", ($completed / $total) * 100}")
-          
-          echo "completed=$completed" >> $GITHUB_OUTPUT
-          echo "total=$total" >> $GITHUB_OUTPUT
-          echo "percentage=$percentage" >> $GITHUB_OUTPUT
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const content = ${{ steps.issue.outputs.result }};
+            const completed = (content.match(/- \[x\]/g) || []).length;
+            const total = (content.match(/- \[ \]/g) || []).length + completed;
+            const percentage = (completed / total * 100).toFixed(1);
+            
+            core.setOutput('completed', completed);
+            core.setOutput('total', total);
+            core.setOutput('percentage', percentage);
 
       - name: Update progress badge
         uses: schneegans/dynamic-badges-action@v1.6.0
