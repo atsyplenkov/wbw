@@ -2,21 +2,19 @@
 % Please edit documentation in R/print.R
 \name{print_geotiff_tags}
 \alias{print_geotiff_tags}
-\title{Print GeoTIFFs tags}
+\title{Print GeoTIFF Tags}
 \usage{
 print_geotiff_tags(file_name)
 }
 \arguments{
-\item{file_name}{\code{character}, path to raster file.}
+\item{file_name}{\code{character}, path to raster file}
 }
 \description{
-This tool can be used to view the tags contained within a GeoTiff file.
-Viewing the tags of a GeoTiff file can be useful when trying to import
-the GeoTiff to different software environments. The user must specify the
-name of a GeoTiff file and the tag information will be printed in the
-console. Note that tags that contain greater than 100
-values will be truncated in the output. GeoKeys will also be interpreted
-as per the GeoTIFF specification.
+Displays the tags contained within a GeoTIFF file. This is useful when
+importing GeoTIFF files into different software environments. The tool prints
+tag information to the console. Tags containing more than 100 values are
+truncated in the output. GeoKeys are interpreted according to the GeoTIFF
+specification.
 }
 \examples{
 \dontrun{

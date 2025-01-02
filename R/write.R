@@ -2,22 +2,30 @@
 #' @rdname wbw_write_raster
 #' @keywords io
 #'
+#' @description
+#' Writes an in-memory WhiteboxRaster object to a file in a supported raster 
+#' format.
+#'
 #' @eval rd_wbw_link("write_raster")
 #' @eval rd_input_raster("x")
 #'
-#' @param file_name \code{character}, path to output file
-#' @param compress \code{logical}, whether to compress the output file
+#' @param file_name \code{character} Path to output file
+#' @param compress \code{logical} Whether to compress the output file
 #'
 #' @details
-#' Supported raster formats are GeoTIFF (`*.tif`, `*.tiff`), Big GeoTIFF
-#' (`*.tif`, `*.tiff`), SAGA Binary (`*.sdat` and `*.sgrd`),
-#' Idrisi (`*.rst` and `*.rdc`), Surfer (`*.grd`),
-#' Esri Binary (`*.flt`), Esri BIL (`*.bil`).
-#' 
-#' `wbw` is able to read GeoTIFFs compressed using the PackBits, DEFLATE, and
-#' LZW methods. Compressed GeoTIFFs, created using the DEFLATE algorithm, can
-#'  also be output from any tool that generates raster output files by using 
-#' `compress=True`.
+#' Supported raster formats:
+#' - GeoTIFF (*.tif, *.tiff)
+#' - Big GeoTIFF (*.tif, *.tiff)
+#' - SAGA Binary (*.sdat, *.sgrd)
+#' - Idrisi (*.rst, *.rdc)
+#' - Surfer (*.grd)
+#' - ESRI Binary (*.flt)
+#' - ESRI BIL (*.bil)
+#'
+#' The tool can read GeoTIFFs compressed using PackBits, DEFLATE, or LZW 
+#' methods.
+#'
+#' When writing GeoTIFFs, use `compress=TRUE` to enable DEFLATE compression.
 #'
 #' @export
 wbw_write_raster <-

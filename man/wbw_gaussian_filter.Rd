@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter.R
 \name{wbw_gaussian_filter}
 \alias{wbw_gaussian_filter}
-\title{Gaussian filter}
+\title{Gaussian Filter}
 \usage{
 wbw_gaussian_filter(x, sigma = 0.75)
 }
@@ -16,22 +16,14 @@ wbw_gaussian_filter(x, sigma = 0.75)
 \link{WhiteboxRaster} object containing filtered values
 }
 \description{
-This tool can be used to perform a Gaussian filter on a raster image.
-A Gaussian filter can be used to emphasize the longer-range variability in
-an image, effectively acting to smooth the image. This can be useful for
-reducing the noise in an image.
+Applies a Gaussian smoothing filter to reduce noise while better preserving
+image features compared to a simple mean filter.
 }
 \details{
-The algorithm operates by convolving a kernel of weights with each grid cell
-and its neighbours in an image. The weights of the convolution kernel are
-determined by the 2-dimensional Gaussian (i.e. normal) curve, which gives
-stronger weighting to cells nearer the kernel centre. It is this
-characteristic that makes the Gaussian filter an attractive alternative for
-image smoothing and noise reduction than the \link{wbw_mean_filter}.
-The size of the filter is determined by setting the
-standard deviation parameter (\code{sigma}), which is in units of grid cells;
-the larger the standard deviation the larger the resulting filter kernel.
-The standard deviation can be any number in the range 0.5-20.
+The filter applies a 2D Gaussian kernel that weights pixels based on their
+distance from the center. This gradual weighting makes it more effective for
+noise reduction than the mean filter. The filter size is controlled by the
+sigma parameter (0.5-20 grid cells).
 }
 \examples{
 \dontrun{

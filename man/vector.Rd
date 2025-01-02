@@ -2,21 +2,22 @@
 % Please edit documentation in R/matrix.R
 \name{as_vector}
 \alias{as_vector}
-\title{Return vector from WhiteboxRaster}
+\title{Convert WhiteboxRaster to Vector}
 \usage{
 as_vector(x, raw = FALSE)
 }
 \arguments{
 \item{x}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 
-\item{raw}{logical. Should the raw data be returned (\code{raw = TRUE}) or
-should \code{NoData} values be transformed to \code{NA} (\code{raw = FALSE})?}
+\item{raw}{logical. Should the raw data be returned (\code{raw = TRUE}) or should
+NoData values be transformed to \code{NA} (\code{raw = FALSE})?}
 }
 \value{
-vector
+vector containing raster values
 }
 \description{
-Return vector from WhiteboxRaster
+Converts a WhiteboxRaster object to a vector. The output contains all raster
+values in row-major order.
 }
 \examples{
 \dontrun{

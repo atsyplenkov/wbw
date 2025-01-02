@@ -21,14 +21,13 @@ DEM by the Z conversion factor}
 \link{WhiteboxRaster} object containing slope values
 }
 \description{
-This tool calculates slope gradient (i.e. slope steepness in degrees,
-radians, or percent) for each grid cell in an input digital elevation
-model (DEM).
+Calculates slope gradient (i.e., slope steepness in degrees, radians, or
+percent) for each grid cell in an input digital elevation model (DEM).
 }
 \details{
-The tool uses Horn's (1981) 3rd-order finite difference method to
-estimate slope. Given the following clock-type grid cell numbering scheme
-(Gallant and Wilson, 2000).
+The tool uses Horn's (1981) 3rd-order finite difference method to estimate
+slope. Given the following clock-type grid cell numbering scheme (Gallant and
+Wilson, 2000).
 }
 \examples{
 \dontrun{

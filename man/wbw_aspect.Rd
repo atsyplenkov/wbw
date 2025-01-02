@@ -18,18 +18,17 @@ DEM by the Z conversion factor}
 \link{WhiteboxRaster} object containing aspect in degrees
 }
 \description{
-This tool calculates slope aspect (i.e. slope orientation in degrees
-clockwise from north) for each grid cell in an input DEM of
-class \link{WhiteboxRaster}.
+Calculates slope aspect (i.e., slope orientation in degrees clockwise from
+north) for each grid cell in an input DEM.
 }
 \details{
 For DEMs in projected coordinate systems, the tool uses the 3rd-order
-bivariate Taylor polynomial method described by Florinsky (2016). Based
-on a polynomial fit of the elevations within the 5x5 neighbourhood
-surrounding each cell, this method is considered more robust against
-outlier elevations (noise) than other methods.
+bivariate Taylor polynomial method described by Florinsky (2016). Based on a
+polynomial fit of elevations within the 5x5 neighborhood surrounding each
+cell, this method is more robust against outlier elevations (noise) than
+other methods.
 
-For DEMs in geographic coordinate systems (i.e. angular units), the tool
+For DEMs in geographic coordinate systems (i.e., angular units), the tool
 uses the 3x3 polynomial fitting method for equal angle grids also described
 by Florinsky (2016).
 }

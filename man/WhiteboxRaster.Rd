@@ -7,43 +7,23 @@
 WhiteboxRaster(name = character(0), source = NULL)
 }
 \arguments{
-\item{name}{Character, name of the raster}
+\item{name}{\code{character} Name of the raster}
 
-\item{source}{Any, source data for the raster}
+\item{source}{\code{any} Source data for the raster}
 }
 \description{
-WhiteboxRaster Class
+Represents a raster dataset in Whitebox Workflows for Python (WbW) format.
+Provides access to raster properties including name, Python pointer, summary
+statistics, and min/max values.
 }
 \section{Properties}{
 
 \describe{
-\item{stats}{Character, summary statistics for the raster}
-\item{min}{Numeric, minimum value for the raster}
-\item{max}{Numeric, maximum value for the raster}
-\item{extent}{WhiteboxExtent, spatial extent of the raster}
+\item{stats}{\code{character} Summary statistics for the raster}
+\item{min}{\code{numeric} Minimum value for the raster}
+\item{max}{\code{numeric} Maximum value for the raster}
+\item{extent}{\code{WhiteboxExtent} Spatial extent of the raster}
 }
 }
 
-\keyword{A}
-\keyword{Python}
-\keyword{The}
-\keyword{Whitebox}
-\keyword{a}
-\keyword{access}
-\keyword{and}
 \keyword{class}
-\keyword{dataset}
-\keyword{format.}
-\keyword{in}
-\keyword{including}
-\keyword{min/max}
-\keyword{name,}
-\keyword{pointer,}
-\keyword{properties}
-\keyword{provides}
-\keyword{raster}
-\keyword{representing}
-\keyword{statistics,}
-\keyword{summary}
-\keyword{to}
-\keyword{values.}

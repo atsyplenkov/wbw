@@ -3,24 +3,26 @@
 \name{wbw_read_raster}
 \alias{wbw_read_raster}
 \alias{wbw_read_vector}
-\title{Returns a new WhiteboxRaster object, read into memory from a
-path-file string.}
+\title{Read Raster File as WhiteboxRaster}
 \usage{
 wbw_read_raster(file_name)
 
 wbw_read_vector(file_name)
 }
 \arguments{
-\item{file_name}{\code{character}, path to ESRI shapefile.}
+\item{file_name}{\code{character}, path to ESRI shapefile}
 }
 \value{
 \link{WhiteboxRaster} object
+
+\link{WhiteboxVector} object
 }
 \description{
-Returns a new WhiteboxRaster object, read into memory from a
-path-file string.
+Creates a new \link{WhiteboxRaster} object by reading raster data from a file
+into memory.
 
-Reads a vector from disc into an in-memory WhiteboxVector object.
+Creates a new \link{WhiteboxVector} object by reading vector data from an ESRI
+shapefile into memory.
 }
 \examples{
 \dontrun{

@@ -1,26 +1,23 @@
-#' Random sample
+#' Random Sample
 #' @keywords math
 #'
 #' @description
-#' This tool can be used to create a random sample of grid cells. The user
-#' specifies the [WhiteboxRaster], which is used to determine the grid
-#' dimensions and georeference information for the output [WhiteboxRaster], and
-#' the number of sample random samples (`num_samples`).
+#' Creates a random sample of grid cells from a raster. Uses the input 
+#' WhiteboxRaster to determine grid dimensions and georeference information for 
+#' the output.
 #'
-#' The output grid will contain `num_samples` non-zero grid cells,
-#' randomly distributed throughout the raster grid, and a background
-#' value of **zero**. Every grid cell will have a value from `1`
-#' to `num_samples`.
+#' The output grid will contain the specified number of non-zero grid cells,
+#' randomly distributed throughout the raster. Each sampled cell will have a 
+#' unique value from 1 to num_samples, with background cells set to zero.
 #'
 #' @details
-#' This tool is useful when performing statistical analyses on raster images
-#' when you wish to obtain a random sample of data.
-#'
-#' Only valid, non-nodata, cells in the base raster will be sampled.
+#' This tool is useful for statistical analyses of raster data where a random
+#' sampling approach is needed. The sampling process only considers valid,
+#' non-NoData cells from the input raster.
 #'
 #' @eval rd_input_raster("x")
-#' @param num_samples \code{integer}, number of random samples. Should not
-#' exceed total number of cells, i.e. [num_cells()].
+#' @param num_samples \code{integer}, number of random samples. Must not exceed
+#'   the total number of valid cells in the input raster (see [num_cells()]).
 #'
 #' @return [WhiteboxRaster] object
 #'

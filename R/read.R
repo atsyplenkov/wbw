@@ -1,9 +1,12 @@
-#' Returns a new WhiteboxRaster object, read into memory from a 
-#' path-file string.
+#' Read Raster File as WhiteboxRaster
 #' @rdname io
 #' @keywords io
 #'
-#' @param file_name \code{character}, path to raster file.
+#' @description
+#' Creates a new [WhiteboxRaster] object by reading raster data from a file 
+#' into memory.
+#'
+#' @param file_name \code{character}, path to raster file
 #'
 #' @return [WhiteboxRaster] object
 #'
@@ -24,12 +27,18 @@ wbw_read_raster <- function(file_name) {
   )
 }
 
-#' Reads a vector from disc into an in-memory WhiteboxVector object.
+#' Read Vector File as WhiteboxVector
 #' @rdname io
 #' @keywords io
 #' 
-#' @param file_name \code{character}, path to ESRI shapefile.
+#' @description
+#' Creates a new [WhiteboxVector] object by reading vector data from an ESRI 
+#' shapefile into memory.
+#'
+#' @param file_name \code{character}, path to ESRI shapefile
 #' 
+#' @return [WhiteboxVector] object
+#'
 #' @export
 wbw_read_vector <- function(file_name) {
   check_env(wbe)
@@ -37,6 +46,15 @@ wbw_read_vector <- function(file_name) {
   wbe$read_vector(file_name = file_name)
 }
 
+#' Get File Name from Path
+#'
+#' @description
+#' Extracts the file name from a full path string.
+#'
+#' @param path \code{character}, file path
+#' @return \code{character}, file name
+#'
+#' @keywords internal
 wbw_get_name <- function(path) {
   checkmate::assertFile(path, access = "r")
   names <- strsplit(path, "/")[[1]]

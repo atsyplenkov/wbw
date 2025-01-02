@@ -6,12 +6,12 @@ NULL
 #' @exportS3Method median wbw::WhiteboxRaster
 NULL
 
-#' Summary method for WhiteboxRaster
+#' Summary Statistics for WhiteboxRaster
 #' @rdname summarize
 #' @docType methods
 #' 
 #' @description
-#' Compute summary statistics for cells in [WhiteboxRaster].
+#' Computes summary statistics for cells in a [WhiteboxRaster] object.
 #'
 #' @param object [WhiteboxRaster] object
 #' @param ... additional arguments passed to summary

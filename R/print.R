@@ -1,6 +1,6 @@
-#' Print method for WhiteboxRaster
+#' Print Method for WhiteboxRaster
 #' @param x [WhiteboxRaster] object to print
-#' @param ... additional arguments passed to print
+#' @param ... additional arguments passed to print method
 #' @export
 `print.wbw::WhiteboxRaster` <- function(x, ...) {
   conf <- x@source$configs
@@ -53,18 +53,16 @@
   invisible(x)
 }
 
-#' Print GeoTIFFs tags
+#' Print GeoTIFF Tags
 #'
 #' @description
-#' This tool can be used to view the tags contained within a GeoTiff file.
-#' Viewing the tags of a GeoTiff file can be useful when trying to import
-#' the GeoTiff to different software environments. The user must specify the
-#' name of a GeoTiff file and the tag information will be printed in the
-#' console. Note that tags that contain greater than 100
-#' values will be truncated in the output. GeoKeys will also be interpreted
-#'  as per the GeoTIFF specification.
+#' Displays the tags contained within a GeoTIFF file. This is useful when 
+#' importing GeoTIFF files into different software environments. The tool prints
+#' tag information to the console. Tags containing more than 100 values are 
+#' truncated in the output. GeoKeys are interpreted according to the GeoTIFF 
+#' specification.
 #'
-#' @param file_name \code{character}, path to raster file.
+#' @param file_name \code{character}, path to raster file
 #'
 #' @eval rd_wbw_link("print_geotiff_tags")
 #'
@@ -75,9 +73,8 @@
 #' }
 #'
 #' @export
-print_geotiff_tags <-
-  function(file_name) {
-    check_env(wbe)
-    check_input_file(file_name, "r")
-    wbe$print_geotiff_tags(file_name)
-  }
+print_geotiff_tags <- function(file_name) {
+  check_env(wbe)
+  check_input_file(file_name, "r")
+  wbe$print_geotiff_tags(file_name)
+}

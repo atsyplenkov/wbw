@@ -1,10 +1,14 @@
 #' WhiteboxExtent Class
 #' @keywords class
 #'
-#' @param west \code{double}
-#' @param east \code{double}
-#' @param south \code{double}
-#' @param north \code{double}
+#' @description
+#' Defines the spatial extent of a raster dataset using coordinates for 
+#' the west, east, south, and north boundaries.
+#'
+#' @param west \code{double} Western boundary coordinate
+#' @param east \code{double} Eastern boundary coordinate
+#' @param south \code{double} Southern boundary coordinate
+#' @param north \code{double} Northern boundary coordinate
 #'
 #' @export
 WhiteboxExtent <-
@@ -51,19 +55,20 @@ WhiteboxExtent <-
 #' WhiteboxRaster Class
 #' @keywords class
 #'
-#' A class representing a raster dataset in Whitebox format.
-#' The class provides access to raster properties including name,
-#' Python pointer, summary statistics, and min/max values.
+#' @description
+#' Represents a raster dataset in Whitebox Workflows for Python (WbW) format.
+#' Provides access to raster properties including name, Python pointer, summary
+#' statistics, and min/max values.
 #'
-#' @param name Character, name of the raster
-#' @param source Any, source data for the raster
+#' @param name \code{character} Name of the raster
+#' @param source \code{any} Source data for the raster
 #'
 #' @section Properties:
 #' \describe{
-#'   \item{stats}{Character, summary statistics for the raster}
-#'   \item{min}{Numeric, minimum value for the raster}
-#'   \item{max}{Numeric, maximum value for the raster}
-#'   \item{extent}{WhiteboxExtent, spatial extent of the raster}
+#'   \item{stats}{\code{character} Summary statistics for the raster}
+#'   \item{min}{\code{numeric} Minimum value for the raster}
+#'   \item{max}{\code{numeric} Maximum value for the raster}
+#'   \item{extent}{\code{WhiteboxExtent} Spatial extent of the raster}
 #' }
 #' @export
 WhiteboxRaster <-

@@ -9,7 +9,7 @@
 \alias{min.wbw::WhiteboxRaster}
 \alias{stdev}
 \alias{variance}
-\title{Summary method for WhiteboxRaster}
+\title{Summary Statistics for WhiteboxRaster}
 \usage{
 \method{summary}{`wbw::WhiteboxRaster`}(object, ...)
 
@@ -39,7 +39,7 @@ be stripped (not used)}
 numeric value
 }
 \description{
-Compute summary statistics for cells in \link{WhiteboxRaster}.
+Computes summary statistics for cells in a \link{WhiteboxRaster} object.
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter.R
 \name{wbw_adaptive_filter}
 \alias{wbw_adaptive_filter}
-\title{Adaptive filter}
+\title{Adaptive Filter}
 \usage{
 wbw_adaptive_filter(x, filter_size_x = 11L, filter_size_y = 11L, threshold = 2)
 }
@@ -19,20 +19,15 @@ wbw_adaptive_filter(x, filter_size_x = 11L, filter_size_y = 11L, threshold = 2)
 \link{WhiteboxRaster} object containing filtered values
 }
 \description{
-This tool calculates slope gradient (i.e. slope steepness in degrees,
-radians, or percent) for each grid cell in an input digital elevation
-model (DEM).
+Applies an adaptive filter to reduce random noise (shot noise) in a raster
+image. The filter modifies pixel values only where they differ substantially
+from their neighbors.
 }
 \details{
-This tool performs a type of adaptive filter on a raster image. An adaptive
-filter can be used to reduce the level of random noise (shot noise) in an
-image. The algorithm operates by calculating the average value in a moving
-window centred on each grid cell. If the absolute difference between the
-window mean value and the centre grid cell value is beyond a user-defined
-threshold (\code{threshold}), the grid cell in the output image is assigned the
-mean value, otherwise it is equivalent to the original value. Therefore,
-the algorithm only modifies the image where grid cell values are
-substantially different than their neighbouring values.
+The algorithm calculates the average value in a moving window centered on
+each grid cell. If the absolute difference between the window mean and the
+center cell value exceeds the user-defined threshold, the output cell is
+assigned the mean value. Otherwise, it retains its original value.
 
 Neighbourhood size, or filter size, is specified in the x and y dimensions
 using \code{filter_size_x} and \code{filter_size_y} These dimensions should be odd,

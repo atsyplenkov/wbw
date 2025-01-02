@@ -5,7 +5,7 @@
 \alias{check_env}
 \alias{check_input_file}
 \alias{skip_if_no_wbw}
-\title{Check is package installed}
+\title{Check if package is installed}
 \usage{
 check_package(package)
 
@@ -16,9 +16,9 @@ check_input_file(file_name, type)
 skip_if_no_wbw()
 }
 \description{
-Check is package installed
+Check if package is installed
 
-Check is whitebox environment is presented
+Check if whitebox environment is present
 
 Check input file extension
 

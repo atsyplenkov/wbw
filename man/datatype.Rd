@@ -19,8 +19,7 @@ wbw_is_rgb(x)
 \item{x}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 }
 \value{
-\code{character} for \link{wbw_data_type} and \code{boolean} for
-others
+\code{character} String representing the raster data type
 }
 \description{
 Get WhiteboxRaster data type

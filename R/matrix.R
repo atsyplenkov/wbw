@@ -1,12 +1,16 @@
-#' Return matrix from WhiteboxRaster
+#' Convert WhiteboxRaster to Matrix
 #' @rdname matrix
 #' @keywords transform
 #'
-#' @param raw logical. Should the raw data be returned (`raw = TRUE`) or
-#' should `NoData` values be transformed to `NA` (`raw = FALSE`)?
+#' @description
+#' Converts a WhiteboxRaster object to a matrix. The output maintains the same
+#' dimensions and cell values as the input raster.
+#'
+#' @param raw logical. Should the raw data be returned (`raw = TRUE`) or should
+#'   NoData values be transformed to `NA` (`raw = FALSE`)?
 #' @eval rd_input_raster("x")
 #'
-#' @return matrix
+#' @return matrix containing raster values
 #'
 #' @eval rd_example("as_matrix", args = c("raw = TRUE"))
 #'
@@ -35,15 +39,19 @@ S7::method(as_matrix, WhiteboxRaster) <-
   }
 
 
-#' Return vector from WhiteboxRaster
+#' Convert WhiteboxRaster to Vector
 #' @rdname vector
 #' @keywords transform
 #'
-#' @param raw logical. Should the raw data be returned (`raw = TRUE`) or
-#' should `NoData` values be transformed to `NA` (`raw = FALSE`)?
+#' @description
+#' Converts a WhiteboxRaster object to a vector. The output contains all raster
+#' values in row-major order.
+#'
+#' @param raw logical. Should the raw data be returned (`raw = TRUE`) or should
+#'   NoData values be transformed to `NA` (`raw = FALSE`)?
 #' @eval rd_input_raster("x")
 #'
-#' @return vector
+#' @return vector containing raster values
 #'
 #' @eval rd_example("as_vector")
 #'

@@ -9,23 +9,30 @@ wbw_write_raster(x, file_name, compress = TRUE)
 \arguments{
 \item{x}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 
-\item{file_name}{\code{character}, path to output file}
+\item{file_name}{\code{character} Path to output file}
 
-\item{compress}{\code{logical}, whether to compress the output file}
+\item{compress}{\code{logical} Whether to compress the output file}
 }
 \description{
-Writes an in-memory WhiteboxRaster object to file.
+Writes an in-memory WhiteboxRaster object to a file in a supported raster
+format.
 }
 \details{
-Supported raster formats are GeoTIFF (\verb{*.tif}, \verb{*.tiff}), Big GeoTIFF
-(\verb{*.tif}, \verb{*.tiff}), SAGA Binary (\verb{*.sdat} and \verb{*.sgrd}),
-Idrisi (\verb{*.rst} and \verb{*.rdc}), Surfer (\verb{*.grd}),
-Esri Binary (\verb{*.flt}), Esri BIL (\verb{*.bil}).
+Supported raster formats:
+\itemize{
+\item GeoTIFF (*.tif, *.tiff)
+\item Big GeoTIFF (*.tif, *.tiff)
+\item SAGA Binary (*.sdat, *.sgrd)
+\item Idrisi (*.rst, *.rdc)
+\item Surfer (*.grd)
+\item ESRI Binary (*.flt)
+\item ESRI BIL (*.bil)
+}
 
-\code{wbw} is able to read GeoTIFFs compressed using the PackBits, DEFLATE, and
-LZW methods. Compressed GeoTIFFs, created using the DEFLATE algorithm, can
-also be output from any tool that generates raster output files by using
-\code{compress=True}.
+The tool can read GeoTIFFs compressed using PackBits, DEFLATE, or LZW
+methods.
+
+When writing GeoTIFFs, use \code{compress=TRUE} to enable DEFLATE compression.
 }
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#write_raster}

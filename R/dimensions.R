@@ -1,10 +1,10 @@
-#' Dimensions of a WhiteboxRaster or WhiteboxVector objects
+#' Get dimensions of a WhiteboxRaster or WhiteboxVector object
 #' @rdname dimensions
 #' @keywords utils
 #'
 #' @eval rd_input_raster("x")
 #'
-#' @return \code{integer}
+#' @return \code{integer} Number of cells in the raster
 #'
 #' @export
 num_cells <-
@@ -63,13 +63,13 @@ S7::method(wbw_cols, WhiteboxRaster) <-
     x@source$configs$columns
   }
 
-#' Get WhiteboxRaster resolution
+#' Get WhiteboxRaster resolution (x and y)
 #' @rdname resolution
 #' @keywords utils
 #'
 #' @eval rd_input_raster("x")
 #'
-#' @return \code{double}
+#' @return \code{double} Vector containing x and y resolution
 #'
 #' @export
 wbw_res <-
@@ -139,8 +139,7 @@ S7::method(wbw_yres, WhiteboxRaster) <-
 #' @eval rd_input_raster("x")
 #' @eval rd_example("wbw_data_type")
 #'
-#' @return \code{character} for [wbw_data_type] and \code{boolean} for
-#' others 
+#' @return \code{character} String representing the raster data type
 #'
 #' @export
 wbw_data_type <-

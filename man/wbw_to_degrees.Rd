@@ -28,8 +28,9 @@ wbw_read_raster(raster_path) |>
 }
 \keyword{Converts}
 \keyword{[WhiteboxRaster]}
+\keyword{a}
 \keyword{conversions}
 \keyword{degrees}
-\keyword{in}
+\keyword{from}
 \keyword{radians}
 \keyword{to}

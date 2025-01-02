@@ -2,18 +2,19 @@
 % Please edit documentation in R/system.R
 \name{wbw_max_procs}
 \alias{wbw_max_procs}
-\title{Set maximum parallel processors}
+\title{Set Maximum Parallel Processors}
 \usage{
 wbw_max_procs(max_procs = -1)
 }
 \arguments{
-\item{max_procs}{\code{integer}}
+\item{max_procs}{\code{integer} Number of processors to use. Use -1 for all
+available processors, or a positive integer to limit processor usage.}
 }
 \description{
 Determines the number of processors used by functions that are parallelized.
-If set to -1 (\code{max_procs=-1}), the default, all available processors will
-be used. To throttle tools, set \code{max_procs} to a positive whole number
-less than the number of system processors.
+If set to -1 (\code{max_procs=-1}), the default, all available processors will be
+used. To limit processing, set \code{max_procs} to a positive whole number less
+than the number of system processors.
 }
 \examples{
 \dontrun{
@@ -24,7 +25,7 @@ x <- wbw_read_raster(raster_path)
 wbw_max_procs(1)
 system.time(wbw_slope(x))
 
-# Use all available, i.e. run in parallel
+# Use all available processors
 wbw_max_procs(-1)
 system.time(wbw_slope(x))
 }

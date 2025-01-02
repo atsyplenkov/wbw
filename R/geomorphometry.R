@@ -3,20 +3,19 @@
 #' @keywords geomorphometry
 #'
 #' @description
-#' This tool calculates slope aspect (i.e. slope orientation in degrees
-#' clockwise from north) for each grid cell in an input DEM of
-#' class [WhiteboxRaster].
+#' Calculates slope aspect (i.e., slope orientation in degrees clockwise from 
+#' north) for each grid cell in an input DEM.
 #'
 #' @details
 #' For DEMs in projected coordinate systems, the tool uses the 3rd-order
-#' bivariate Taylor polynomial method described by Florinsky (2016). Based
-#' on a polynomial fit of the elevations within the 5x5 neighbourhood
-#' surrounding each cell, this method is considered more robust against
-#' outlier elevations (noise) than other methods.
+#' bivariate Taylor polynomial method described by Florinsky (2016). Based on a
+#' polynomial fit of elevations within the 5x5 neighborhood surrounding each 
+#' cell, this method is more robust against outlier elevations (noise) than 
+#' other methods.
 #'
-#' For DEMs in geographic coordinate systems (i.e. angular units), the tool
-#'  uses the 3x3 polynomial fitting method for equal angle grids also described
-#'  by Florinsky (2016).
+#' For DEMs in geographic coordinate systems (i.e., angular units), the tool
+#' uses the 3x3 polynomial fitting method for equal angle grids also described
+#' by Florinsky (2016).
 #'
 #' @eval rd_input_raster("dem")
 #' @param z_factor \code{double}, Z conversion factor is only important
@@ -70,14 +69,13 @@ S7::method(wbw_aspect, WhiteboxRaster) <-
 #' @keywords geomorphometry
 #'
 #' @description
-#' This tool calculates slope gradient (i.e. slope steepness in degrees,
-#' radians, or percent) for each grid cell in an input digital elevation
-#' model (DEM).
+#' Calculates slope gradient (i.e., slope steepness in degrees, radians, or 
+#' percent) for each grid cell in an input digital elevation model (DEM).
 #'
 #' @details
-#' The tool uses Horn's (1981) 3rd-order finite difference method to
-#' estimate slope. Given the following clock-type grid cell numbering scheme
-#' (Gallant and Wilson, 2000).
+#' The tool uses Horn's (1981) 3rd-order finite difference method to estimate
+#' slope. Given the following clock-type grid cell numbering scheme (Gallant and
+#' Wilson, 2000).
 #'
 #' @eval rd_input_raster("dem")
 #' @param units \code{character},
@@ -136,20 +134,17 @@ S7::method(wbw_slope, WhiteboxRaster) <-
 #' @keywords geomorphometry
 #'
 #' @description
-#' The terrain ruggedness index (TRI) is a measure of local topographic relief.
-#' The TRI calculates the root-mean-square-deviation (RMSD) for each grid cell
-#' in a digital elevation model (DEM), calculating the residuals (i.e.
-#' elevation differences) between a grid cell and its eight neighbours.
+#' Calculates a measure of local topographic relief. The TRI computes the 
+#' root-mean-square-deviation (RMSD) for each grid cell in a DEM by calculating
+#' the residuals between a cell and its eight neighbors.
 #'
 #' @details
-#' Notice that, unlike the output of this tool, the original Riley et al.
-#' (1999) TRI did not normalize for the number of cells in the local window
-#'  (i.e. it is a root-square-deviation only). However, using the mean has
-#' the advantage of allowing for the varying number of neighbouring cells
-#' along the grid edges and in areas bordering NoData cells. This modification
-#' does however imply that the output of this tool cannot be directly compared
-#' with the index ranges of level to extremely rugged terrain provided in
-#' Riley et al. (1999)
+#' Unlike the original Riley et al. (1999) TRI, this implementation normalizes
+#' for the number of cells in the local window. This modification allows for
+#' varying numbers of neighboring cells along grid edges and areas bordering
+#' NoData cells. Note that this means output values cannot be directly compared
+#' with the index ranges (level to extremely rugged terrain) provided in Riley
+#' et al. (1999).
 #'
 #' @eval rd_input_raster("dem")
 #'

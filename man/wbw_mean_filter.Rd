@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter.R
 \name{wbw_mean_filter}
 \alias{wbw_mean_filter}
-\title{Mean filter}
+\title{Mean Filter}
 \usage{
 wbw_mean_filter(x, filter_size_x = 11L, filter_size_y = 11L)
 }
@@ -17,27 +17,18 @@ wbw_mean_filter(x, filter_size_x = 11L, filter_size_y = 11L)
 \link{WhiteboxRaster} object containing filtered values
 }
 \description{
-This tool performs a mean filter operation on a raster image. A mean filter,
-a type of low-pass filter, can be used to emphasize the longer-range
-variability in an image, effectively acting to smooth the image.
-This can be useful for reducing the noise in an image.
+Applies a mean filter (low-pass filter) to smooth an image by emphasizing
+longer-range variability and reducing noise.
 }
 \details{
-This tool utilizes an integral image approach (Crow, 1984) to ensure highly
-efficient filtering that is invariant to filter size. The algorithm
-operates by calculating the average value in a moving window centred on
-each grid cell.
+Uses an efficient integral image approach (Crow, 1984) that is independent
+of filter size. While commonly used, mean filters can be more aggressive in
+their smoothing compared to edge-preserving alternatives like the bilateral
+filter or Gaussian filter.
 
 Neighbourhood size, or filter size, is specified in the x and y dimensions
 using \code{filter_size_x} and \code{filter_size_y} These dimensions should be odd,
 positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
-
-Although commonly applied in digital image processing, mean filters are
-generally considered to be quite harsh, with respect to their impact on the
-image, compared to other smoothing filters such as the edge-preserving
-smoothing filters including the \link{wbw_bilateral_filter},
-\code{median_filter}, \code{olympic_filter}, \code{edge_preserving_mean_filter} and even
-\link{wbw_gaussian_filter}.
 }
 \examples{
 \dontrun{

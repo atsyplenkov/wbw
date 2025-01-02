@@ -2,15 +2,15 @@
 % Please edit documentation in R/print.R
 \name{print.wbw::WhiteboxRaster}
 \alias{print.wbw::WhiteboxRaster}
-\title{Print method for WhiteboxRaster}
+\title{Print Method for WhiteboxRaster}
 \usage{
 \method{print}{`wbw::WhiteboxRaster`}(x, ...)
 }
 \arguments{
 \item{x}{\link{WhiteboxRaster} object to print}
 
-\item{...}{additional arguments passed to print}
+\item{...}{additional arguments passed to print method}
 }
 \description{
-Print method for WhiteboxRaster
+Print Method for WhiteboxRaster
 }

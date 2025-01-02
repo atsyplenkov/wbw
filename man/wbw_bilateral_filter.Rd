@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter.R
 \name{wbw_bilateral_filter}
 \alias{wbw_bilateral_filter}
-\title{Bilateral filter}
+\title{Bilateral Filter}
 \usage{
 wbw_bilateral_filter(x, sigma_dist = 0.75, sigma_int = 1)
 }
@@ -19,31 +19,16 @@ in the same units as z-units of input raster \code{x} (usually, meters).}
 \link{WhiteboxRaster} object containing filtered values
 }
 \description{
-This tool can be used to perform an edge-preserving smoothing filter, or
-bilateral filter, on an image. A bilateral filter can be used to emphasize
-the longer-range variability in an image, effectively acting to smooth the
-image, while reducing the edge blurring effect common with other types of
-smoothing filters. As such, this filter is very useful for reducing the
-noise in an image.
+Applies an edge-preserving smoothing filter that reduces noise while
+preserving important edges in the image.
 }
 \details{
-Bilateral filtering is a non-linear filtering technique introduced by Tomasi
-and Manduchi (1998). The algorithm operates by convolving a kernel of
-weights with each grid cell and its neighbours in an image. The bilateral
-filter is related to Gaussian smoothing, in that the weights of the
-convolution kernel are partly determined by the 2-dimensional Gaussian
-(i.e. normal) curve, which gives stronger weighting to cells nearer the
-kernel centre. Unlike the \link{wbw_gaussian_filter}, however, the bilateral
-kernel weightings are also affected by their similarity to the
-intensity value of the central pixel.
-Pixels that are very different in intensity from the
-central pixel are weighted less, also based on a Gaussian weight
-distribution. Therefore, this non-linear convolution filter is determined
-by the spatial and intensity domains of a localized pixel neighborhood.
+Bilateral filtering is a non-linear technique introduced by Tomasi and
+Manduchi (1998). The filter combines spatial and intensity domains to
+preserve edges while smoothing. Unlike the Gaussian filter, the bilateral
+filter weights pixels based on both their spatial distance and intensity
+similarity to the center pixel.
 
-The heavier weighting given to nearer and similar-valued pixels makes the
-bilateral filter an attractive alternative for image smoothing and noise
-reduction compared to the much-used \link{wbw_mean_filter}.
 The size of the filter is determined by setting the standard deviation
 distance parameter (\code{sigma_dist}); the larger the standard deviation the
 larger the resulting filter kernel.

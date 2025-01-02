@@ -1,13 +1,14 @@
-#' Set maximum parallel processors
+#' Set Maximum Parallel Processors
 #' @keywords system
 #'
 #' @description
 #' Determines the number of processors used by functions that are parallelized.
-#' If set to -1 (`max_procs=-1`), the default, all available processors will
-#'  be used. To throttle tools, set `max_procs` to a positive whole number
-#' less than the number of system processors.
+#' If set to -1 (`max_procs=-1`), the default, all available processors will be
+#' used. To limit processing, set `max_procs` to a positive whole number less 
+#' than the number of system processors.
 #'
-#' @param max_procs \code{integer}
+#' @param max_procs \code{integer} Number of processors to use. Use -1 for all
+#'   available processors, or a positive integer to limit processor usage.
 #'
 #' @eval rd_wbw_link("max_procs")
 #'
@@ -20,7 +21,7 @@
 #' wbw_max_procs(1)
 #' system.time(wbw_slope(x))
 #'
-#' # Use all available, i.e. run in parallel
+#' # Use all available processors
 #' wbw_max_procs(-1)
 #' system.time(wbw_slope(x))
 #' }

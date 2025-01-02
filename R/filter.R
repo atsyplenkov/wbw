@@ -1,21 +1,16 @@
-#' Adaptive filter
+#' Adaptive Filter
 #' @keywords image_processing
 #'
 #' @description
-#' This tool calculates slope gradient (i.e. slope steepness in degrees,
-#' radians, or percent) for each grid cell in an input digital elevation
-#' model (DEM).
+#' Applies an adaptive filter to reduce random noise (shot noise) in a raster 
+#' image. The filter modifies pixel values only where they differ substantially 
+#' from their neighbors.
 #'
 #' @details
-#' This tool performs a type of adaptive filter on a raster image. An adaptive
-#'  filter can be used to reduce the level of random noise (shot noise) in an
-#' image. The algorithm operates by calculating the average value in a moving
-#' window centred on each grid cell. If the absolute difference between the
-#' window mean value and the centre grid cell value is beyond a user-defined
-#' threshold (`threshold`), the grid cell in the output image is assigned the
-#' mean value, otherwise it is equivalent to the original value. Therefore,
-#' the algorithm only modifies the image where grid cell values are
-#' substantially different than their neighbouring values.
+#' The algorithm calculates the average value in a moving window centered on 
+#' each grid cell. If the absolute difference between the window mean and the 
+#' center cell value exceeds the user-defined threshold, the output cell is 
+#' assigned the mean value. Otherwise, it retains its original value.
 #'
 #' Neighbourhood size, or filter size, is specified in the x and y dimensions
 #' using `filter_size_x` and `filter_size_y` These dimensions should be odd,
@@ -80,35 +75,20 @@ S7::method(wbw_adaptive_filter, WhiteboxRaster) <-
     )
   }
 
-#' Bilateral filter
+#' Bilateral Filter
 #' @keywords image_processing
 #'
 #' @description
-#' This tool can be used to perform an edge-preserving smoothing filter, or
-#' bilateral filter, on an image. A bilateral filter can be used to emphasize
-#' the longer-range variability in an image, effectively acting to smooth the
-#'  image, while reducing the edge blurring effect common with other types of
-#'  smoothing filters. As such, this filter is very useful for reducing the
-#' noise in an image.
+#' Applies an edge-preserving smoothing filter that reduces noise while
+#' preserving important edges in the image.
 #'
 #' @details
-#' Bilateral filtering is a non-linear filtering technique introduced by Tomasi
-#' and Manduchi (1998). The algorithm operates by convolving a kernel of
-#' weights with each grid cell and its neighbours in an image. The bilateral
-#' filter is related to Gaussian smoothing, in that the weights of the
-#' convolution kernel are partly determined by the 2-dimensional Gaussian
-#' (i.e. normal) curve, which gives stronger weighting to cells nearer the
-#' kernel centre. Unlike the [wbw_gaussian_filter], however, the bilateral 
-#' kernel weightings are also affected by their similarity to the 
-#' intensity value of the central pixel. 
-#' Pixels that are very different in intensity from the
-#' central pixel are weighted less, also based on a Gaussian weight
-#' distribution. Therefore, this non-linear convolution filter is determined
-#' by the spatial and intensity domains of a localized pixel neighborhood.
+#' Bilateral filtering is a non-linear technique introduced by Tomasi and
+#' Manduchi (1998). The filter combines spatial and intensity domains to
+#' preserve edges while smoothing. Unlike the Gaussian filter, the bilateral
+#' filter weights pixels based on both their spatial distance and intensity
+#' similarity to the center pixel.
 #'
-#' The heavier weighting given to nearer and similar-valued pixels makes the
-#'  bilateral filter an attractive alternative for image smoothing and noise
-#' reduction compared to the much-used [wbw_mean_filter].
 #' The size of the filter is determined by setting the standard deviation
 #' distance parameter (`sigma_dist`); the larger the standard deviation the
 #' larger the resulting filter kernel.
@@ -174,31 +154,22 @@ S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
     )
   }
 
-#' Mean filter
+#' Mean Filter
 #' @keywords image_processing
 #'
 #' @description
-#' This tool performs a mean filter operation on a raster image. A mean filter,
-#' a type of low-pass filter, can be used to emphasize the longer-range
-#'  variability in an image, effectively acting to smooth the image.
-#' This can be useful for reducing the noise in an image.
+#' Applies a mean filter (low-pass filter) to smooth an image by emphasizing
+#' longer-range variability and reducing noise.
 #'
 #' @details
-#' This tool utilizes an integral image approach (Crow, 1984) to ensure highly
-#' efficient filtering that is invariant to filter size. The algorithm
-#' operates by calculating the average value in a moving window centred on
-#' each grid cell.
+#' Uses an efficient integral image approach (Crow, 1984) that is independent
+#' of filter size. While commonly used, mean filters can be more aggressive in
+#' their smoothing compared to edge-preserving alternatives like the bilateral
+#' filter or Gaussian filter.
 #'
 #' Neighbourhood size, or filter size, is specified in the x and y dimensions
 #' using `filter_size_x` and `filter_size_y` These dimensions should be odd,
 #' positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
-#'
-#' Although commonly applied in digital image processing, mean filters are
-#' generally considered to be quite harsh, with respect to their impact on the
-#' image, compared to other smoothing filters such as the edge-preserving
-#' smoothing filters including the [wbw_bilateral_filter],
-#' `median_filter`, `olympic_filter`, `edge_preserving_mean_filter` and even
-#' [wbw_gaussian_filter].
 #'
 #' @eval rd_input_raster("x")
 #' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
@@ -258,26 +229,18 @@ S7::method(wbw_mean_filter, WhiteboxRaster) <-
     )
   }
 
-#' Gaussian filter
+#' Gaussian Filter
 #' @keywords image_processing
 #'
 #' @description
-#' This tool can be used to perform a Gaussian filter on a raster image.
-#' A Gaussian filter can be used to emphasize the longer-range variability in
-#' an image, effectively acting to smooth the image. This can be useful for
-#' reducing the noise in an image.
+#' Applies a Gaussian smoothing filter to reduce noise while better preserving
+#' image features compared to a simple mean filter.
 #'
 #' @details
-#' The algorithm operates by convolving a kernel of weights with each grid cell
-#' and its neighbours in an image. The weights of the convolution kernel are
-#' determined by the 2-dimensional Gaussian (i.e. normal) curve, which gives
-#' stronger weighting to cells nearer the kernel centre. It is this
-#' characteristic that makes the Gaussian filter an attractive alternative for
-#' image smoothing and noise reduction than the [wbw_mean_filter].
-#' The size of the filter is determined by setting the
-#' standard deviation parameter (`sigma`), which is in units of grid cells;
-#' the larger the standard deviation the larger the resulting filter kernel.
-#' The standard deviation can be any number in the range 0.5-20.
+#' The filter applies a 2D Gaussian kernel that weights pixels based on their
+#' distance from the center. This gradual weighting makes it more effective for
+#' noise reduction than the mean filter. The filter size is controlled by the
+#' sigma parameter (0.5-20 grid cells).
 #'
 #' @eval rd_input_raster("x")
 #' @param sigma \code{double}, standard deviation distance parameter in

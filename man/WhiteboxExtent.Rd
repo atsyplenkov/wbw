@@ -12,15 +12,16 @@ WhiteboxExtent(
 )
 }
 \arguments{
-\item{west}{\code{double}}
+\item{west}{\code{double} Western boundary coordinate}
 
-\item{east}{\code{double}}
+\item{east}{\code{double} Eastern boundary coordinate}
 
-\item{south}{\code{double}}
+\item{south}{\code{double} Southern boundary coordinate}
 
-\item{north}{\code{double}}
+\item{north}{\code{double} Northern boundary coordinate}
 }
 \description{
-WhiteboxExtent Class
+Defines the spatial extent of a raster dataset using coordinates for
+the west, east, south, and north boundaries.
 }
 \keyword{class}

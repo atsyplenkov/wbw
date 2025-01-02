@@ -4,7 +4,7 @@
 \alias{num_cells}
 \alias{wbw_rows}
 \alias{wbw_cols}
-\title{Dimensions of a WhiteboxRaster or WhiteboxVector objects}
+\title{Get dimensions of a WhiteboxRaster or WhiteboxVector object}
 \usage{
 num_cells(x)
 
@@ -16,9 +16,9 @@ wbw_cols(x)
 \item{x}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
 }
 \value{
-\code{integer}
+\code{integer} Number of cells in the raster
 }
 \description{
-Dimensions of a WhiteboxRaster or WhiteboxVector objects
+Get dimensions of a WhiteboxRaster or WhiteboxVector object
 }
 \keyword{utils}

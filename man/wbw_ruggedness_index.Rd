@@ -13,20 +13,17 @@ wbw_ruggedness_index(dem)
 \link{WhiteboxRaster} object containing TRI values
 }
 \description{
-The terrain ruggedness index (TRI) is a measure of local topographic relief.
-The TRI calculates the root-mean-square-deviation (RMSD) for each grid cell
-in a digital elevation model (DEM), calculating the residuals (i.e.
-elevation differences) between a grid cell and its eight neighbours.
+Calculates a measure of local topographic relief. The TRI computes the
+root-mean-square-deviation (RMSD) for each grid cell in a DEM by calculating
+the residuals between a cell and its eight neighbors.
 }
 \details{
-Notice that, unlike the output of this tool, the original Riley et al.
-(1999) TRI did not normalize for the number of cells in the local window
-(i.e. it is a root-square-deviation only). However, using the mean has
-the advantage of allowing for the varying number of neighbouring cells
-along the grid edges and in areas bordering NoData cells. This modification
-does however imply that the output of this tool cannot be directly compared
-with the index ranges of level to extremely rugged terrain provided in
-Riley et al. (1999)
+Unlike the original Riley et al. (1999) TRI, this implementation normalizes
+for the number of cells in the local window. This modification allows for
+varying numbers of neighboring cells along grid edges and areas bordering
+NoData cells. Note that this means output values cannot be directly compared
+with the index ranges (level to extremely rugged terrain) provided in Riley
+et al. (1999).
 }
 \examples{
 \dontrun{
