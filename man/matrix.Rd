@@ -5,12 +5,15 @@
 \alias{as_matrix}
 \title{Return matrix from WhiteboxRaster}
 \usage{
-\method{as.matrix}{`wbw::WhiteboxRaster`}(x, ...)
+\method{as.matrix}{`wbw::WhiteboxRaster`}(x, raw = FALSE, ...)
 
-as_matrix(x)
+as_matrix(x, raw = FALSE)
 }
 \arguments{
 \item{x}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
+
+\item{raw}{logical. Should the raw data be returned (\code{raw = TRUE}) or
+the \code{NoData} values should be transformed to \code{NA} (\code{raw = FALSE}).}
 
 \item{...}{additional arguments (not used)}
 }

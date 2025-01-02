@@ -4,14 +4,7 @@
 \alias{plot.wbw::WhiteboxRaster}
 \title{Plot WhiteboxRaster}
 \usage{
-\method{plot}{`wbw::WhiteboxRaster`}(
-  x,
-  col = grDevices::terrain.colors(100),
-  add = FALSE,
-  legend = TRUE,
-  title = NULL,
-  ...
-)
+\method{plot}{`wbw::WhiteboxRaster`}(x, col = grDevices::terrain.colors(100), add = FALSE, ...)
 }
 \arguments{
 \item{x}{WhiteboxRaster object}
@@ -19,10 +12,6 @@
 \item{col}{Colors to use for plotting}
 
 \item{add}{Logical, whether to add to existing plot}
-
-\item{legend}{Logical, whether to add legend}
-
-\item{title}{Character, optional title (defaults to raster name if NULL)}
 
 \item{...}{Additional arguments passed to plot}
 }

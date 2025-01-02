@@ -5,12 +5,17 @@
 \alias{as_vector}
 \title{Return vector from WhiteboxRaster}
 \usage{
-\method{as.vector}{`wbw::WhiteboxRaster`}(x, ...)
+\method{as.vector}{`wbw::WhiteboxRaster`}(x, mode = "any", raw = FALSE, ...)
 
-as_vector(x)
+as_vector(x, raw = FALSE)
 }
 \arguments{
 \item{x}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
+
+\item{mode}{the type of vector to create (ignored)}
+
+\item{raw}{logical. Should the raw data be returned (\code{raw = TRUE}) or
+the \code{NoData} values should be transformed to \code{NA} (\code{raw = FALSE}).}
 
 \item{...}{additional arguments (not used)}
 }
