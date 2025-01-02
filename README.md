@@ -91,7 +91,7 @@ wbw_read_raster(raster_path) |>
   plot(main = "Aspect")
 ```
 
-<img src="man/figures/README-terra-1.png" width="100%" />
+<img src="man/figures/README-terra-1.png" width="75%" />
 
 Even though `{wbw}` can be faster than `{terra}` in some cases, it is by
 no means intended to replace it.
@@ -123,8 +123,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 terra       295.5ms  304.6ms      3.28   28.58MB     16.4
-#> 2 wbw          36.9ms   38.7ms     26.0     3.72KB      0
+#> 1 terra       300.1ms  304.3ms      3.29   28.58MB     16.4
+#> 2 wbw          35.5ms   36.4ms     27.2     3.72KB      0
 ```
 
 ## Installation
@@ -137,8 +137,7 @@ You can install the development version of wbw from
 pak::pak("atsyplenkov/wbw")
 ```
 
-> \[!TIP\]
-
+> [!TIP]
 > The `{wbw}` package requires the `whitebox-workflows` Python library
 > v1.3.3+. However, you should not worry about it, as the package
 > designed to install all dependencies automatically on the first run.
