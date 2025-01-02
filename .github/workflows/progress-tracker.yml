@@ -1,0 +1,48 @@
+name: Progress Tracker
+
+on:
+  issues:
+    types: [opened, edited]
+  workflow_dispatch:
+
+jobs:
+  calculate-progress:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Get issue content
+        id: issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: 1  // Your specific issue number
+            });
+            return issue.data.body;
+          result-encoding: string
+
+      - name: Calculate progress
+        id: progress
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const content = ${{ steps.issue.outputs.result }};
+            const completed = (content.match(/- \[x\]/g) || []).length;
+            const total = (content.match(/- \[ \]/g) || []).length + completed;
+            const percentage = (completed / total * 100).toFixed(1);
+            
+            core.setOutput('completed', completed);
+            core.setOutput('total', total);
+            core.setOutput('percentage', percentage);
+
+      - name: Update progress badge
+        uses: schneegans/dynamic-badges-action@v1.6.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 0c46250def94614c4a3ef8b4de7460e6
+          filename: wbw-progress.json
+          label: WBW Functions
+          message: "${{ steps.progress.outputs.percentage }}% (${{ steps.progress.outputs.completed }}/${{ steps.progress.outputs.total }})"
+          color: success
