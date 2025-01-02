@@ -94,7 +94,7 @@ S7::method(wbw_to_degrees, WhiteboxRaster) <-
 #'
 #' @return SpatRaster object
 #'
-#' @seealso [WhiteboxRaster]
+#' @seealso [WhiteboxRaster()]
 #'
 #' @examples
 #' \dontrun{
@@ -171,7 +171,7 @@ S7::method(as_rast, WhiteboxRaster) <-
 #'
 #' @return [WhiteboxRaster] object
 #'
-#' @seealso [WhiteboxRaster]
+#' @seealso [WhiteboxRaster()]
 #'
 #' @examples
 #' \dontrun{
@@ -191,7 +191,10 @@ as_wbw_raster <-
   )
 
 if (requireNamespace("terra", quietly = TRUE)) {
-  S7::method(as_wbw_raster, methods::getClass("SpatRaster", where = asNamespace("terra"))) <-
+  S7::method(
+    as_wbw_raster,
+    methods::getClass("SpatRaster", where = asNamespace("terra"))
+  ) <-
     function(x) {
       # Checks
       checkmate::assert_class(

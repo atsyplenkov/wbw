@@ -98,9 +98,10 @@ S7::method(wbw_adaptive_filter, WhiteboxRaster) <-
 #' filter is related to Gaussian smoothing, in that the weights of the
 #' convolution kernel are partly determined by the 2-dimensional Gaussian
 #' (i.e. normal) curve, which gives stronger weighting to cells nearer the
-#' kernel centre. Unlike the [wbw_gaussian_filter], however, the bilateral kernel
-#' weightings are also affected by their similarity to the intensity value of
-#' the central pixel. Pixels that are very different in intensity from the
+#' kernel centre. Unlike the [wbw_gaussian_filter], however, the bilateral 
+#' kernel weightings are also affected by their similarity to the 
+#' intensity value of the central pixel. 
+#' Pixels that are very different in intensity from the
 #' central pixel are weighted less, also based on a Gaussian weight
 #' distribution. Therefore, this non-linear convolution filter is determined
 #' by the spatial and intensity domains of a localized pixel neighborhood.
@@ -197,7 +198,7 @@ S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
 #' image, compared to other smoothing filters such as the edge-preserving
 #' smoothing filters including the [wbw_bilateral_filter],
 #' `median_filter`, `olympic_filter`, `edge_preserving_mean_filter` and even
-#' [gaussian_filter].
+#' [wbw_gaussian_filter].
 #'
 #' @eval rd_input_raster("x")
 #' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
@@ -205,7 +206,7 @@ S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
 #'
 #' @return [WhiteboxRaster] object containing filtered values
 #'
-#' @seealso [wbw_bilateral_filter()]
+#' @seealso [wbw_bilateral_filter()], [wbw_gaussian_filter()]
 #'
 #' @eval rd_wbw_link("mean_filter")
 #' @eval rd_example("wbw_mean_filter",

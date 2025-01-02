@@ -24,7 +24,7 @@ wbw_read_raster(raster_path) |>
 }
 }
 \seealso{
-\link{WhiteboxRaster}
+\code{\link[=WhiteboxRaster]{WhiteboxRaster()}}
 }
 \keyword{Converts}
 \keyword{SpatRaster}

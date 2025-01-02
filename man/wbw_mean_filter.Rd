@@ -37,7 +37,7 @@ generally considered to be quite harsh, with respect to their impact on the
 image, compared to other smoothing filters such as the edge-preserving
 smoothing filters including the \link{wbw_bilateral_filter},
 \code{median_filter}, \code{olympic_filter}, \code{edge_preserving_mean_filter} and even
-\link{gaussian_filter}.
+\link{wbw_gaussian_filter}.
 }
 \examples{
 \dontrun{
@@ -50,6 +50,6 @@ wbw_read_raster(raster_path) |>
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#mean_filter}
 }
 \seealso{
-\code{\link[=wbw_bilateral_filter]{wbw_bilateral_filter()}}
+\code{\link[=wbw_bilateral_filter]{wbw_bilateral_filter()}}, \code{\link[=wbw_gaussian_filter]{wbw_gaussian_filter()}}
 }
 \keyword{image_processing}
