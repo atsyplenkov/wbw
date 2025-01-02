@@ -5,12 +5,15 @@
 
 <!-- badges: start -->
 
+[![Project Status: WIP – Initial development is in progress, but there
+has not yet been a stable, usable release suitable for the
+public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![R-CMD-check](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/atsyplenkov/wbw/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/atsyplenkov/wbw/graph/badge.svg)](https://app.codecov.io/gh/atsyplenkov/wbw)
 <!-- badges: end -->
 
-The `wbw` R package provides R bindings to the [Whitebox Workflows for
+The `{wbw}` R package provides R bindings to the [Whitebox Workflows for
 Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html)
 — a powerful and fast library for advanced geoprocessing, with focus on
 hydrological, geomorphometric and remote sensing analysis of raster,
@@ -24,15 +27,20 @@ You can install the development version of wbw from
 ``` r
 # install.packages("pak")
 pak::pak("atsyplenkov/wbw")
-
-# To install Python dependencies run
-wbw::wbw_install()
 ```
+
+> \[!TIP\] While the `{wbw}` requires the `whitebox-workflows` Python
+> library v1.3.3+. It is designed to install all the dependencies
+> automatically.
+
+## Do we need Yet Another RSpatial Package?
+
+Well …
 
 ## Basic workflow
 
-The `wbw` R package introduces two new S7 classes, `WhiteboxRaster` and
-`WhiteboxVector` which serves as a bridge between Python and R.
+The `wbw` R package introduces several new S7 classes, `WhiteboxRaster`
+and `WhiteboxVector` which serves as a bridge between Python and R.
 
 ``` r
 library(wbw)
