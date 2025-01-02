@@ -42,18 +42,39 @@ jobs:
               print(f'percentage={percentage:.1f}', file=f)
           "
 
-      - name: Create the badge
-        uses: emibcn/badge-action@v2.0.2
+      - name: Initialize/Update Gist
+        uses: actions/github-script@v6
         with:
-          label: 'WBW Functions'
-          status: '${{ steps.progress.outputs.percentage }}% (${{ steps.progress.outputs.completed }}/${{ steps.progress.outputs.total }})'
-          color: 'green'
-          path: badge.svg
+          github-token: ${{ secrets.GIST_SECRET }}
+          script: |
+            const gist_id = '0c46250def94614c4a3ef8b4de7460e6';
+            const filename = 'wbw-progress.json';
+            const content = {
+              schemaVersion: 1,
+              label: "WBW Functions",
+              message: "${{ steps.progress.outputs.percentage }}% (${{ steps.progress.outputs.completed }}/${{ steps.progress.outputs.total }})",
+              color: "success"
+            };
+            
+            try {
+              await github.rest.gists.update({
+                gist_id: gist_id,
+                files: {
+                  [filename]: {
+                    content: JSON.stringify(content)
+                  }
+                }
+              });
+            } catch (error) {
+              console.log('Error updating gist:', error);
+            }
 
-      - name: Upload badge to Gist
-        uses: andymckay/append-gist-action@0.3
+      - name: Update progress badge
+        uses: schneegans/dynamic-badges-action@v1.6.0
         with:
-          token: ${{ secrets.GIST_SECRET }}
-          gist_id: 0c46250def94614c4a3ef8b4de7460e6
-          file_name: wbw-progress.svg
-          content: ${{ steps.badge.outputs.badge }}
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 0c46250def94614c4a3ef8b4de7460e6
+          filename: wbw-progress.json
+          label: WBW Functions
+          message: "${{ steps.progress.outputs.percentage }}% (${{ steps.progress.outputs.completed }}/${{ steps.progress.outputs.total }})"
+          color: success
