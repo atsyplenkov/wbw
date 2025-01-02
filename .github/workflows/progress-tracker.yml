@@ -51,7 +51,7 @@ jobs:
           path: badge.svg
 
       - name: Upload badge to Gist
-        uses: andymckay/append-gist-action@1.0.1
+        uses: andymckay/append-gist-action@0.3
         with:
           token: ${{ secrets.GIST_SECRET }}
           gist_id: 0c46250def94614c4a3ef8b4de7460e6
