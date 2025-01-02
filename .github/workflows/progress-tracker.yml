@@ -51,9 +51,9 @@ jobs:
             const filename = 'wbw-progress.json';
             const content = {
               schemaVersion: 1,
-              label: "WBW Functions",
+              label: "WbW Tools ported",
               message: "${{ steps.progress.outputs.percentage }}% (${{ steps.progress.outputs.completed }}/${{ steps.progress.outputs.total }})",
-              color: "success"
+              color: "warning"
             };
             
             try {
@@ -75,6 +75,6 @@ jobs:
           auth: ${{ secrets.GIST_SECRET }}
           gistID: 0c46250def94614c4a3ef8b4de7460e6
           filename: wbw-progress.json
-          label: WBW Functions
+          label: WbW Tools ported
           message: "${{ steps.progress.outputs.percentage }}% (${{ steps.progress.outputs.completed }}/${{ steps.progress.outputs.total }})"
-          color: success
+          color: warning
