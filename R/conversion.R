@@ -86,7 +86,7 @@ S7::method(wbw_to_degrees, WhiteboxRaster) <-
 
 
 #' Convert WhiteboxRaster to SpatRaster
-#' @keywords conversions
+#' @keywords terra
 #'
 #' Converts [WhiteboxRaster] to SpatRaster object
 #'
@@ -118,8 +118,15 @@ S7::method(as_rast, WhiteboxRaster) <-
     # Checks
     check_env(wbe)
 
-    # Prep
-    v <- as.vector(x)
+    # Prepare data
+    v <- as_vector(x)
+    wbw_nodata <- x@source$configs$nodata
+    # TODO:
+    # Depending on the x@source$configs$data_type,
+    # Use either NA_integer_ or NA_real_
+    v[v == wbw_nodata] <- NA
+
+    # Prepare CRS and Extent
     ext <-
       c(
         x@extent@west,
@@ -134,6 +141,7 @@ S7::method(as_rast, WhiteboxRaster) <-
     } else {
       terra::crs(paste0("epsg:", x@source$configs$epsg_code))
     }
+
     # Convert
     new_rast <-
       terra::rast(
@@ -145,15 +153,17 @@ S7::method(as_rast, WhiteboxRaster) <-
         names = x@name
       )
 
-    # Assign NoData values
-    terra::NAflag(new_rast) <- x@source$configs$nodata
+    # Convert to integer if necessary
+    if (wbw_is_int(x)) {
+      new_rast <- terra::as.int(new_rast)
+    }
 
     # Return
     new_rast
   }
 
 #' Convert SpatRaster to WhiteboxRaster
-#' @keywords conversions
+#' @keywords terra
 #'
 #' Converts SpatRaster to [WhiteboxRaster] object
 #'
@@ -197,6 +207,11 @@ if (requireNamespace("terra", quietly = TRUE)) {
 
       # SpatRaster information
       na_terra <- terra::NAflag(x)
+      nodata_value <- if (is.nan(na_terra)) {
+        -9999
+      } else {
+        na_terra
+      }
       res_terra <- terra::res(x)
       name_terra <- names(x)
       type_terra <- any(c(
@@ -206,6 +221,7 @@ if (requireNamespace("terra", quietly = TRUE)) {
       ))
       ext_terra <- terra::ext(x)
       data_terra <- as.matrix(x, wide = TRUE)
+      data_terra[is.na(data_terra)] <- nodata_value
 
       # Create new RasterConfigs
       new_config <- wbw$RasterConfigs()
@@ -227,16 +243,8 @@ if (requireNamespace("terra", quietly = TRUE)) {
       new_config$resolution_x <- res_terra[1]
       new_config$resolution_y <- res_terra[2]
 
-      # Data
-      # FIXME:
-      # Conversion between SpatRaster and WhiteboxRaster
-      # is not happening correctly
-      new_config$nodata <-
-        if (is.nan(na_terra)) {
-          -32768
-        } else {
-          na_terra
-        }
+      # Data type
+      new_config$nodata <- nodata_value
       new_config$data_type <-
         if (type_terra) {
           wbw$RasterDataType$I16
@@ -254,49 +262,3 @@ if (requireNamespace("terra", quietly = TRUE)) {
       )
     }
 }
-
-# f <- system.file("ex/elev.tif", package = "terra")
-# r <- rast(f)
-
-# rw <- as_wbw_raster(r)
-# rwr <- as_rast(w)
-
-# plot(rwr)
-
-# m <- as.matrix(x, wide = TRUE)
-
-# ter <- wbw_read_raster(f)
-# plot(ter)
-
-# ter@source$configs$nodata
-
-# for (i in seq_len(w@source$configs$rows)) {
-#   w@source$set_row_data(as.integer(i), values = m[, i])
-# }
-
-# plot(w)
-
-# bench::mark(
-#   wopy = {
-#     w <- as_wbw_raster(r)
-#     wbw_env$matrix_to_wbw(m, w@source)
-#   },
-#   wpy = {
-#     w <- as_wbw_raster(r)
-#     wbw_env$matrix_to_wbw(reticulate::r_to_py(m), w@source)
-#   },
-#   check = FALSE
-# )
-
-# WhiteboxRaster(
-#   "NoData",
-#   x
-# ) |>
-#   as_rast() |> 
-#   as.int() |> 
-#   as_wbw_raster() -> ggg 
-#   plot()
-
-# x <- w@source$is_nodata()
-# x2 <- wbe$modify_nodata_value(raster = x, new_value = -9999)
-
