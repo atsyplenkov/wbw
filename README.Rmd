@@ -9,7 +9,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  dpi = 300,
+  retina = 2
 )
 ```
 
@@ -38,7 +40,7 @@ dem <- wbw_read_raster(raster_path)
 dem
 ```
 
-The true power of `wbw` unleashes when there's a need to run several operations sequentially, i.e., in a pipeline. Unlike the original Whitebox Tools, WbW [stores files in memory](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/introduction.html#how-does-wbw-compare-with-related-whitebox-products), reducing the amount of intermediate I/O operations. 
+The true power of `{wbw}` unleashes when there's a need to run several operations sequentially, i.e., in a pipeline. Unlike the original Whitebox Tools, WbW [stores files in memory](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/introduction.html#how-does-wbw-compare-with-related-whitebox-products), reducing the amount of intermediate I/O operations. 
 
 For example, a DEM can be smoothed (or filtered), and then the slope can be estimated as follows:
 
@@ -103,6 +105,7 @@ pak::pak("atsyplenkov/wbw")
 ```
 
 > [!TIP]
+
 > The `{wbw}` package requires the `whitebox-workflows` Python library v1.3.3+. However, you should not worry about it, as the package designed to install all dependencies automatically on the first run.
 
 ## Contributing

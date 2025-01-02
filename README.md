@@ -46,7 +46,7 @@ dem
 #> +------------------------------------------+
 ```
 
-The true power of `wbw` unleashes when there’s a need to run several
+The true power of `{wbw}` unleashes when there’s a need to run several
 operations sequentially, i.e., in a pipeline. Unlike the original
 Whitebox Tools, WbW [stores files in
 memory](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/introduction.html#how-does-wbw-compare-with-related-whitebox-products),
@@ -123,8 +123,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 terra         286ms    286ms      3.50   28.58MB     17.5
-#> 2 wbw            33ms     35ms     28.6     3.72KB      0
+#> 1 terra       295.5ms  304.6ms      3.28   28.58MB     16.4
+#> 2 wbw          36.9ms   38.7ms     26.0     3.72KB      0
 ```
 
 ## Installation
@@ -137,10 +137,11 @@ You can install the development version of wbw from
 pak::pak("atsyplenkov/wbw")
 ```
 
-> \[!TIP\] The `{wbw}` package requires the `whitebox-workflows` Python
-> library v1.3.3+. However, you should not worry about it, as the
-> package designed to install all dependencies automatically on the
-> first run.
+> \[!TIP\]
+
+> The `{wbw}` package requires the `whitebox-workflows` Python library
+> v1.3.3+. However, you should not worry about it, as the package
+> designed to install all dependencies automatically on the first run.
 
 ## Contributing
 
