@@ -1,0 +1,56 @@
+url: https://wbw.anatolii.nz
+
+repo:
+  url:
+    home: https://github.com/atsyplenkov/wbw
+    source: https://github.com/atsyplenkov/wbw/tree/master
+    issues: https://github.com/atsyplenkov/wbw/issues
+
+authors:
+  Anatolii Tsyplenkov:
+    href: https://anatolii.nz
+
+template:
+  bootstrap: 5
+  light-switch: true
+  bslib:
+    base_font: {google: "Inter"}
+    heading_font: {google: "Recursive"}
+    code_font: {google: "Fira Code"}
+
+navbar:
+  structure:
+    left:  [reference, articles, tutorials, news]
+    right: [search, github, lightswitch]
+
+reference:
+- title: "Input/Output"
+  desc: "Functions for reading and writing data"
+  contents:
+  - has_keyword("io")
+  - wbw_read_raster
+  - wbw_write_raster
+  - print_geotiff_tags
+
+- title: "Raster Operations"
+  desc: "Functions for raster manipulation"
+  contents:
+  - has_keyword("raster")
+  - as_rast
+  - as_wbw_raster
+  - wbw_ext
+
+- title: "Methods"
+  desc: "S3 methods for WhiteboxRaster objects"
+  contents:
+  - has_keyword("methods")
+
+- title: "System"
+  desc: "System utilities"
+  contents:
+  - has_keyword("system")
+
+- title: "Other Functions"
+  desc: "Miscellaneous functions"
+  contents:
+  - lacks_concepts(c("io", "raster", "system"))

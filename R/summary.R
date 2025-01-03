@@ -9,6 +9,7 @@ NULL
 #' Summary Statistics for WhiteboxRaster
 #' @rdname summarize
 #' @docType methods
+#' @keywords methods
 #' 
 #' @description
 #' Computes summary statistics for cells in a [WhiteboxRaster] object.

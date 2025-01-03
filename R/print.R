@@ -1,4 +1,6 @@
 #' Print Method for WhiteboxRaster
+#' @keywords methods
+#' 
 #' @param x [WhiteboxRaster] object to print
 #' @param ... additional arguments passed to print method
 #' @export

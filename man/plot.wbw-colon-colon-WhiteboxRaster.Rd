@@ -18,3 +18,4 @@
 \description{
 Plot WhiteboxRaster
 }
+\keyword{methods}

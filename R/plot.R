@@ -19,6 +19,8 @@ NULL
 }
 
 #' Plot WhiteboxRaster
+#' @keywords methods
+#'
 #' @param x WhiteboxRaster object
 #' @param col Colors to use for plotting
 #' @param add Logical, whether to add to existing plot

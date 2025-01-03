@@ -14,3 +14,4 @@
 \description{
 Print Method for WhiteboxRaster
 }
+\keyword{methods}
