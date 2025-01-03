@@ -3,14 +3,14 @@
 #' @keywords geomorphometry
 #'
 #' @description
-#' Calculates slope aspect (i.e., slope orientation in degrees clockwise from 
+#' Calculates slope aspect (i.e., slope orientation in degrees clockwise from
 #' north) for each grid cell in an input DEM.
 #'
 #' @details
 #' For DEMs in projected coordinate systems, the tool uses the 3rd-order
 #' bivariate Taylor polynomial method described by Florinsky (2016). Based on a
-#' polynomial fit of elevations within the 5x5 neighborhood surrounding each 
-#' cell, this method is more robust against outlier elevations (noise) than 
+#' polynomial fit of elevations within the 5x5 neighborhood surrounding each
+#' cell, this method is more robust against outlier elevations (noise) than
 #' other methods.
 #'
 #' For DEMs in geographic coordinate systems (i.e., angular units), the tool
@@ -69,7 +69,7 @@ S7::method(wbw_aspect, WhiteboxRaster) <-
 #' @keywords geomorphometry
 #'
 #' @description
-#' Calculates slope gradient (i.e., slope steepness in degrees, radians, or 
+#' Calculates slope gradient (i.e., slope steepness in degrees, radians, or
 #' percent) for each grid cell in an input digital elevation model (DEM).
 #'
 #' @details
@@ -134,7 +134,7 @@ S7::method(wbw_slope, WhiteboxRaster) <-
 #' @keywords geomorphometry
 #'
 #' @description
-#' Calculates a measure of local topographic relief. The TRI computes the 
+#' Calculates a measure of local topographic relief. The TRI computes the
 #' root-mean-square-deviation (RMSD) for each grid cell in a DEM by calculating
 #' the residuals between a cell and its eight neighbors.
 #'
@@ -171,11 +171,90 @@ S7::method(wbw_ruggedness_index, WhiteboxRaster) <-
   function(dem) {
     # Checks
     check_env(wbe)
-    # Estimate slope
     out <- wbe$ruggedness_index(input = dem@source)
-    # Return Raster
     WhiteboxRaster(
       name = paste0("TRI"),
+      source = out
+    )
+  }
+
+#' Fill Missing Data
+#' @keywords geomorphometry
+#'
+#' @description
+#' This tool can be used to fill in small gaps in a raster or digital elevation
+#' model (DEM). The gaps, or holes, must have recognized NoData values.
+#' If gaps do not currently have this characteristic, use the
+#' \code{set_nodata_value} tool and ensure that the data are stored using
+#' a raster format that supports NoData values.
+#' All valid, non-NoData values in the input raster will be assigned the same
+#' value in the output image.
+#'
+#' @details
+#' The algorithm uses an inverse-distance weighted (IDW) scheme based on the
+#'  valid values on the edge of NoData gaps to estimate gap values.
+#' The user must specify the filter size (\code{filter_size}), which
+#' determines the size of gap that is filled, and the IDW weight
+#' (\code{weight}).
+#'
+#' @eval rd_input_raster("x")
+#' @param filter_size \code{integer} in **grid cells** is used to determine
+#' how far the algorithm will search for valid, non-NoData values. Therefore,
+#' setting a larger filter size allows for the filling of larger gaps in
+#' the input raster.
+#' @param weight \code{double}, the IDW weight.
+#' @param exclude_edge_nodata \code{boolean}, default \code{FALSE}. It can be
+#' used to exclude NoData values that are connected to the edges of the raster.
+#' It is usually the case that irregularly shaped DEMs have large regions
+#' of NoData values along the containing raster edges. This flag can be used
+#' to exclude these regions from the gap-filling operation, leaving only
+#' interior gaps for filling.
+#'
+#' @return [WhiteboxRaster] object
+#'
+#' @eval rd_wbw_link("fill_missing_data")
+#' @eval rd_example("fill_missing_data")
+#'
+#' @export
+wbw_fill_missing_data <-
+  S7::new_generic(
+    name = "wbw_fill_missing_data",
+    dispatch_args = "x",
+    fun = function(x,
+                   filter_size = 11L,
+                   weight = 2,
+                   exclude_edge_nodata = FALSE) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_fill_missing_data, WhiteboxRaster) <-
+  function(x,
+           filter_size = 11L,
+           weight = 2,
+           exclude_edge_nodata = FALSE) {
+    # Checks
+    check_env(wbe)
+    filter_size <-
+      checkmate::asInteger(
+        filter_size,
+        lower = 0L,
+        len = 1L
+      )
+    checkmate::assert_double(weight, len = 1)
+    checkmate::assert_logical(exclude_edge_nodata, len = 1)
+
+    # WBT
+    out <- wbe$fill_missing_data(
+      dem = x@source,
+      filter_size = filter_size,
+      weight = weight,
+      exclude_edge_nodata = exclude_edge_nodata
+    )
+
+    # Return
+    WhiteboxRaster(
+      name = x@name,
       source = out
     )
   }
