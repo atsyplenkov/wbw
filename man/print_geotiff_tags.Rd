@@ -26,3 +26,4 @@ print_geotiff_tags(raster_path)
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#print_geotiff_tags}
 }
+\keyword{utils}

@@ -12,3 +12,4 @@ wbw_ext(x)
 \description{
 Get WhiteboxExtent
 }
+\keyword{crs}

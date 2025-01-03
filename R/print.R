@@ -56,6 +56,7 @@
 }
 
 #' Print GeoTIFF Tags
+#' @keywords utils
 #'
 #' @description
 #' Displays the tags contained within a GeoTIFF file. This is useful when 

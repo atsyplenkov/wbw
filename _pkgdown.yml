@@ -32,25 +32,47 @@ reference:
   - wbw_write_raster
   - print_geotiff_tags
 
+- title: "{terra}"
+  desc: "Functions for conversion between wbw and terra"
+  contents:
+  - has_keyword("terra")
+
 - title: "Raster Operations"
   desc: "Functions for raster manipulation"
   contents:
+  - has_keyword("conversions")
   - has_keyword("raster")
-  - as_rast
-  - as_wbw_raster
-  - wbw_ext
+  - has_keyword("crs")
+  - has_keyword("utils")
+  - has_keyword("math")
+  - has_keyword("transform")
 
-- title: "Methods"
-  desc: "S3 methods for WhiteboxRaster objects"
+- title: "Stats"
+  desc: "Summary and zonal statistics for raster and vector data"
   contents:
-  - has_keyword("methods")
+  - has_keyword("stats")
 
 - title: "System"
   desc: "System utilities"
   contents:
   - has_keyword("system")
+  - wbw_version
 
-- title: "Other Functions"
-  desc: "Miscellaneous functions"
+- title: "Geomorphometry"
+  desc: "Tools for geomorphometric analysis of digital elevation models"
   contents:
-  - lacks_concepts(c("io", "raster", "system"))
+  - has_keyword("geomorphometry")
+
+- title: "Image Processing"
+  contents:
+  - has_keyword("image_processing")
+
+- title: "Classes"
+  desc: "Introduced S7 classes"
+  contents:
+  - has_keyword("class")
+
+- title: "Methods"
+  desc: "S3 methods for WhiteboxRaster and WhiteboxVector objects"
+  contents:
+  - has_keyword("methods")

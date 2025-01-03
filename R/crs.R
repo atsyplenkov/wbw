@@ -1,4 +1,5 @@
 #' Get WhiteboxExtent
+#' @keywords crs
 #'
 #' @eval rd_input_raster("x")
 #'
