@@ -38,9 +38,4 @@ Available datasets:\tabular{lll}{
 wbw_download_sample_data(data_set = "Guelph_landsat", path = tempdir())
 }
 }
-\references{
-For more information, see
-\url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/
-sample-datasets.html?}
-}
 \keyword{system}

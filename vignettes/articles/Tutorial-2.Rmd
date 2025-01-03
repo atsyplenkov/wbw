@@ -1,0 +1,65 @@
+---
+title: "Tutorial 2: Geomorphometric Analysis"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Tutorial 02}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{terra}
+---
+
+```{r knitr_setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warn = FALSE,
+  message = FALSE,
+  dpi = 300,
+  retina = 2
+)
+
+requireNamespace("terra", quietly = TRUE)
+```
+
+> NB! This is R representation of the of the [Whitebox Workflows for Python (WbW) Tutorial 2: Geomorphometric Analysis](https://github.com/jblindsay/jblindsay.github.io/blob/master/WhiteboxTutorials/WbW_tutorials/WbW_tutorial2.ipynb)
+
+# 1. Download sample data
+
+```{r load_layers}
+library(wbw)
+
+# Download sample dataset
+sample <- 
+  wbw_download_sample_data(
+    data_set = "Grand_Junction", 
+    path = tempdir()
+  )
+
+# Load as WhiteboxRaster
+dem <- wbw_read_raster(file.path(sample, "DEM.tif"))
+dem
+```
+
+# 2. Fill missing data
+
+However, there are some missing values presented in the DEM.
+```{r plot_one}
+library(terra)
+
+dem |> 
+  as_rast() |> 
+  plot()
+
+```
+
+To fill them, one can use `wbw_fill_missing_data` function:
+```{r fill_nodata}
+dem_filled <- 
+  wbw_fill_missing_data(dem, filter_size = 35, exclude_edge_nodata = TRUE)
+
+dem_filled |> 
+  as_rast() |> 
+  plot()
+```

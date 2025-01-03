@@ -68,16 +68,13 @@ wbw_max_procs <-
 #' | Southern_Ontario_roads | Vector roads layer | 7.1 MB |
 #' | StElisAk | Airborne lidar point cloud (LAZ) | 54.5 MB |
 #'
-#' @references For more information, see 
-#' \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/
-#' sample-datasets.html?}
-#' 
 #' @examples
 #' \dontrun{
 #' # Download sample data
 #' wbw_download_sample_data(data_set = "Guelph_landsat", path = tempdir())
 #' }
 #' @export
+#' @importFrom utils download.file unzip
 wbw_download_sample_data <-
   function(data_set = NULL, path = NULL) {
     # Set Download Path if NULL
