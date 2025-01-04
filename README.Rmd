@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "75%",
-  dpi = 300,
+  dpi = 150,
   retina = 2
 )
 ```
@@ -55,7 +55,7 @@ dem |>
 The above example may remind you of the `{terra}` package, and it is not a coincidence. The `{wbw}` package is designed to be fully compatible with `{terra}`, and the conversion between `WhiteboxRaster` and `SpatRaster` objects happens in milliseconds (well, depending on the raster size, of course).
 
 
-```{r terra}
+```{r terra, message=FALSE, warning=FALSE}
 library(terra)
 
 wbw_read_raster(raster_path) |> 
@@ -67,7 +67,8 @@ wbw_read_raster(raster_path) |>
 
 Even though `{wbw}` can be faster than `{terra}` in some cases, it is by no means intended to replace it. 
 
-``` {r benchmark}
+``` {r benchmark, message=FALSE, warning=FALSE}
+requireNamespace("bench", quietly = TRUE)
 
 bench::mark(
   terra = {

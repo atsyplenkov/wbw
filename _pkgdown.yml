@@ -31,8 +31,8 @@ navbar:
       - text: Tutorial 2
         href: articles/Tutorial-2.html
   structure:
-    left:  [reference, tutorials, news]
-    right: [faq, search, github, lightswitch]
+    left:  [faq, reference, tutorials, news]
+    right: [search, github, lightswitch]
 
 reference:
 - title: "Input/Output"

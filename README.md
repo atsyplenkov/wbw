@@ -82,7 +82,6 @@ raster size, of course).
 
 ``` r
 library(terra)
-#> terra 1.8.5
 
 wbw_read_raster(raster_path) |> 
   wbw_gaussian_filter(sigma = 1.5) |> 
@@ -97,6 +96,8 @@ Even though `{wbw}` can be faster than `{terra}` in some cases, it is by
 no means intended to replace it.
 
 ``` r
+requireNamespace("bench", quietly = TRUE)
+
 bench::mark(
   terra = {
     s <- 
@@ -123,8 +124,8 @@ bench::mark(
 #> # A tibble: 2 × 6
 #>   expression      min   median `itr/sec` mem_alloc `gc/sec`
 #>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 terra       300.1ms  304.3ms      3.29   28.58MB     16.4
-#> 2 wbw          35.5ms   36.4ms     27.2     3.72KB      0
+#> 1 terra       290.7ms  291.5ms      3.43   28.58MB     17.2
+#> 2 wbw          37.5ms   39.1ms     25.5     3.72KB      0
 ```
 
 ## Installation
@@ -137,7 +138,8 @@ You can install the development version of wbw from
 pak::pak("atsyplenkov/wbw")
 ```
 
-> [!TIP]
+> \[!TIP\]
+
 > The `{wbw}` package requires the `whitebox-workflows` Python library
 > v1.3.3+. However, you should not worry about it, as the package
 > designed to install all dependencies automatically on the first run.

@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   warning = FALSE,
   message = FALSE,
-  dpi = 300,
+  dpi = 150,
   retina = 2
 )
 
@@ -73,7 +73,7 @@ dem_hillshade <- wbw_multidirectional_hillshade(dem_filled)
 
 dem_hillshade |> 
   as_rast() |> 
-  plot(col = grDevices::gray.colors(10))
+  plot(col = grDevices::gray.colors(10), legend = FALSE)
 ```
 
 # 4. Raster summary stats

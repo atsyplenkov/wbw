@@ -8,6 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{terra}
+  %\VignetteDepends{waldo}
 ---
 
 ```{r knitr_setup, include = FALSE}
@@ -16,11 +17,12 @@ knitr::opts_chunk$set(
   comment = "#>",
   warning = FALSE,
   message = FALSE,
-  dpi = 300,
+  dpi = 150,
   retina = 2
 )
 
 requireNamespace("terra", quietly = TRUE)
+requireNamespace("waldo", quietly = TRUE)
 ```
 
 # How can I plot `WhiteboxRaster` objects?
@@ -31,11 +33,39 @@ While there exists a built-in `plot()` method for all `WhiteboxRaster` and `Whit
 library(wbw)
 library(terra)
 
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
+f <- system.file("extdata/dem.tif", package = "wbw")
 
-wbw_read_raster(raster_path) |>
+wbw_read_raster(f) |>
   wbw_multidirectional_hillshade() |> 
   as_rast() |> 
-  plot()
-
+  plot(legend = FALSE)
 ```
+
+# I've noticed that raster extent differs between WhiteboxRaster and terra/GDAL
+
+Yes, that's true! Since the original Python library Whitebox Workflows for Python is [closed-source](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/introduction.html#how-does-wbw-compare-with-related-whitebox-products), the reason for this behavior is unknown. One possible explanation (i.e., my guess) is that GDAL typically defines the extent based on the outer edges of the corner pixels, while WbW may define the extent based on the centers of the corner pixels.
+
+```{r extent_difference, warning = FALSE, message = FALSE}
+library(wbw)
+library(terra)
+
+f <- system.file("extdata/dem.tif", package = "wbw")
+
+wbw_raster <- wbw_read_raster(f)
+terra_raster <- rast(f)
+
+# Compare extents
+# Mind the difference in xmax (east) and ymin (south)
+wbw_ext(wbw_raster) 
+ext(terra_raster)
+```
+However, this issue is fixed when transitioning from `WhiteboxRaster` to `SpatRaster` via the [`as_rast()`](https://wbw.anatolii.nz/reference/as_rast) command:
+
+```{r extent_difference2, warning = FALSE, message = FALSE}
+converted_raster <- as_rast(wbw_raster)
+waldo::compare(
+  as.vector(ext(terra_raster)), 
+  as.vector(ext(converted_raster))
+  )
+```
+
