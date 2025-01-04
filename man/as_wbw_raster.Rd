@@ -16,12 +16,12 @@ as_wbw_raster(x)
 Convert SpatRaster to WhiteboxRaster
 }
 \examples{
-\dontshow{if (requireNamespace("terra", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 library(terra)
 f <- system.file("extdata/dem.tif", package = "wbw")
 rast(f) |>
   as_wbw_raster()
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 \code{\link[=WhiteboxRaster]{WhiteboxRaster()}}

@@ -25,10 +25,8 @@ Creates a new WhiteboxVector object by reading vector data from an ESRI
 shapefile into memory.
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path)
-}
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f)
 
 }
 \keyword{io}

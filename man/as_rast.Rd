@@ -16,12 +16,12 @@ SpatRaster object
 Convert WhiteboxRaster to SpatRaster
 }
 \examples{
-\dontshow{if (requireNamespace("terra", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 f <- system.file("extdata/dem.tif", package = "wbw")
 wbw_read_raster(f) |>
   wbw_slope(units = "r") |>
   as_rast()
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 \code{\link[=WhiteboxRaster]{WhiteboxRaster()}}

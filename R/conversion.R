@@ -92,12 +92,13 @@ S7::method(wbw_to_degrees, WhiteboxRaster) <-
 #'
 #' @seealso [WhiteboxRaster()]
 #'
-#' @examplesIf requireNamespace("terra", quietly = TRUE)
+#' @examples
+#' \dontrun{
 #' f <- system.file("extdata/dem.tif", package = "wbw")
 #' wbw_read_raster(f) |>
 #'   wbw_slope(units = "r") |>
 #'   as_rast()
-#'
+#' }
 #' @export
 as_rast <-
   S7::new_generic(
@@ -168,12 +169,13 @@ S7::method(as_rast, WhiteboxRaster) <-
 #'
 #' @seealso [WhiteboxRaster()]
 #'
-#' @examplesIf requireNamespace("terra", quietly = TRUE)
+#' @examples
+#' \dontrun{
 #' library(terra)
 #' f <- system.file("extdata/dem.tif", package = "wbw")
 #' rast(f) |>
 #'   as_wbw_raster()
-#'
+#' }
 #' @export
 as_wbw_raster <-
   S7::new_generic(

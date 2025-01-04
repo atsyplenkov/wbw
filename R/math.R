@@ -22,7 +22,7 @@
 #' @return [WhiteboxRaster] object
 #'
 #' @eval rd_wbw_link("random_sample")
-#' @eval rd_example("random_sample", c("num_samples = 100"))
+#' @eval rd_example("wbw_random_sample", c("num_samples = 100"))
 #'
 #' @export
 wbw_random_sample <-
