@@ -42,41 +42,27 @@ numeric value
 Computes summary statistics for cells in a \link{WhiteboxRaster} object.
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   summary()
-}
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   max()
-}
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   mean()
-}
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   median()
-}
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   min()
-}
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   stdev()
-}
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   variance()
-}
 }
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#raster_summary_stats}

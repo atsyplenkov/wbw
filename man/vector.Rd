@@ -34,7 +34,7 @@ Converts various Whitebox objects to vectors:
 }
 }
 \examples{
-f <-  system.file("extdata/dem.tif", package = "wbw")
+f <- system.file("extdata/dem.tif", package = "wbw")
 x <- wbw_read_raster(f)
 
 # Return WhiteboxRaster's data:

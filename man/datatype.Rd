@@ -25,25 +25,17 @@ wbw_is_rgb(x)
 Get WhiteboxRaster data type
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_data_type()
-}
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_is_int()
-}
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_is_float()
-}
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_is_rgb()
-}
 }
 \keyword{utils}

@@ -38,11 +38,9 @@ intensity parameter (\code{sigma_int}), specified in the same units as the
 z-values, determines the intensity domain contribution to kernel weightings.
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_bilateral_filter(sigma_dist = 1.5, sigma_int = 1.1)
-}
 }
 \references{
 Tomasi, C., & Manduchi, R. (1998, January). Bilateral filtering for gray

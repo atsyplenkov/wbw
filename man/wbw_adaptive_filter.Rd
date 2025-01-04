@@ -34,11 +34,9 @@ using \code{filter_size_x} and \code{filter_size_y} These dimensions should be o
 positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_adaptive_filter(filter_size_x = 3L, filter_size_y = 3L)
-}
 }
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#adaptive_filter}

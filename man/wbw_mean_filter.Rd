@@ -31,11 +31,9 @@ using \code{filter_size_x} and \code{filter_size_y} These dimensions should be o
 positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_mean_filter(filter_size_x = 3L, filter_size_y = 3L)
-}
 }
 \references{
 Crow, F. C. (1984, January). Summed-area tables for texture mapping.

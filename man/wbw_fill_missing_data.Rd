@@ -48,11 +48,9 @@ determines the size of gap that is filled, and the IDW weight
 (\code{weight}).
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_fill_missing_data()
-}
 }
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#fill_missing_data}

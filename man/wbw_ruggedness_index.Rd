@@ -26,11 +26,9 @@ with the index ranges (level to extremely rugged terrain) provided in Riley
 et al. (1999).
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_ruggedness_index()
-}
 }
 \references{
 Riley, S. J., DeGloria, S. D., and Elliot, R. (1999). Index that quantifies

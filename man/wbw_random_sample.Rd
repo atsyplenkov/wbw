@@ -30,11 +30,9 @@ sampling approach is needed. The sampling process only considers valid,
 non-NoData cells from the input raster.
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   random_sample(num_samples = 100)
-}
 }
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#random_sample}

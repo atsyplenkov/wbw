@@ -37,9 +37,9 @@ rd_example <-
   function(foo, args = NULL) {
     paste(
       "@examples",
-      "\\dontrun{",
-      'raster_path <- system.file("extdata/dem.tif", package = "wbw")',
-      "wbw_read_raster(raster_path) |>",
+      # "\\dontrun{",
+      'f <- system.file("extdata/dem.tif", package = "wbw")',
+      "wbw_read_raster(f) |>",
       ifelse(
         is.null(args),
         paste0("  ", foo, "()"),
@@ -48,7 +48,7 @@ rd_example <-
           paste(args, collapse = ", "), ")"
         )
       ),
-      "}",
+      # "}",
       sep = "\n"
     )
   }

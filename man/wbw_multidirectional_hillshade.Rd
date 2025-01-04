@@ -51,11 +51,9 @@ respectively. Slope and aspect are calculated using Horn's (1981) 3rd-order
 finate difference method.
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_multidirectional_hillshade()
-}
 }
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#multidirectional_hillshade}

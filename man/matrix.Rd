@@ -20,10 +20,8 @@ Converts a WhiteboxRaster object to a matrix. The output maintains the same
 dimensions and cell values as the input raster.
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   as_matrix(raw = TRUE)
-}
 }
 \keyword{transform}

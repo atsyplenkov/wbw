@@ -10,12 +10,10 @@
 #' @seealso [wbw_to_degrees()], [wbw_slope()]
 #'
 #' @examples
-#' \dontrun{
-#' raster_path <- system.file("extdata/dem.tif", package = "wbw")
-#' wbw_read_raster(raster_path) |>
+#' f <- system.file("extdata/dem.tif", package = "wbw")
+#' wbw_read_raster(f) |>
 #'   wbw_slope(units = "d") |>
 #'   wbw_to_radians()
-#' }
 #' @export
 wbw_to_radians <-
   S7::new_generic(
@@ -53,12 +51,10 @@ S7::method(wbw_to_radians, WhiteboxRaster) <-
 #' @seealso [wbw_to_radians()], [wbw_slope()]
 #'
 #' @examples
-#' \dontrun{
-#' raster_path <- system.file("extdata/dem.tif", package = "wbw")
-#' wbw_read_raster(raster_path) |>
+#' f <- system.file("extdata/dem.tif", package = "wbw")
+#' wbw_read_raster(f) |>
 #'   wbw_slope(units = "r") |>
 #'   wbw_to_degrees()
-#' }
 #' @export
 wbw_to_degrees <-
   S7::new_generic(
@@ -96,13 +92,12 @@ S7::method(wbw_to_degrees, WhiteboxRaster) <-
 #'
 #' @seealso [WhiteboxRaster()]
 #'
-#' @examples
-#' \dontrun{
-#' raster_path <- system.file("extdata/dem.tif", package = "wbw")
-#' wbw_read_raster(raster_path) |>
+#' @examplesIf requireNamespace("terra", quietly = TRUE)
+#' f <- system.file("extdata/dem.tif", package = "wbw")
+#' wbw_read_raster(f) |>
 #'   wbw_slope(units = "r") |>
 #'   as_rast()
-#' }
+#'
 #' @export
 as_rast <-
   S7::new_generic(
@@ -173,13 +168,12 @@ S7::method(as_rast, WhiteboxRaster) <-
 #'
 #' @seealso [WhiteboxRaster()]
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf requireNamespace("terra", quietly = TRUE)
 #' library(terra)
-#' raster_path <- system.file("extdata/dem.tif", package = "wbw")
-#' rast(raster_path) |>
+#' f <- system.file("extdata/dem.tif", package = "wbw")
+#' rast(f) |>
 #'   as_wbw_raster()
-#' }
+#'
 #' @export
 as_wbw_raster <-
   S7::new_generic(

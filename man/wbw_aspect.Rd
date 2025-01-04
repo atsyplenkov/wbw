@@ -33,11 +33,9 @@ uses the 3x3 polynomial fitting method for equal angle grids also described
 by Florinsky (2016).
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_aspect()
-}
 }
 \references{
 Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes,

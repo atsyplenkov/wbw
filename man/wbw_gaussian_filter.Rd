@@ -26,11 +26,9 @@ noise reduction than the mean filter. The filter size is controlled by the
 sigma parameter (0.5-20 grid cells).
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_gaussian_filter(sigma = 1.5)
-}
 }
 \references{
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#gaussian_filter}

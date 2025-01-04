@@ -16,12 +16,10 @@ wbw_to_radians(x)
 Convert to radians
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
   wbw_slope(units = "d") |>
   wbw_to_radians()
-}
 }
 \seealso{
 \code{\link[=wbw_to_degrees]{wbw_to_degrees()}}, \code{\link[=wbw_slope]{wbw_slope()}}
