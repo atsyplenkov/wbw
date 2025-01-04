@@ -56,9 +56,12 @@ terra_raster <- rast(f)
 
 # Compare extents
 # Mind the difference in xmax (east) and ymin (south)
-wbw_ext(wbw_raster) 
-ext(terra_raster)
+waldo::compare(
+  as_vector(wbw_ext(wbw_raster)),
+  as.vector(ext(terra_raster))
+)
 ```
+
 However, this issue is fixed when transitioning from `WhiteboxRaster` to `SpatRaster` via the [`as_rast()`](https://wbw.anatolii.nz/reference/as_rast) command:
 
 ```{r extent_difference2, warning = FALSE, message = FALSE}

@@ -73,7 +73,7 @@ dem_hillshade <- wbw_multidirectional_hillshade(dem_filled)
 
 dem_hillshade |> 
   as_rast() |> 
-  plot(col = grDevices::gray.colors(10), legend = FALSE)
+  plot(col = gray.colors(10), legend = FALSE)
 ```
 
 # 4. Raster summary stats
