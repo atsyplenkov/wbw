@@ -2,28 +2,46 @@
 % Please edit documentation in R/matrix.R
 \name{as_vector}
 \alias{as_vector}
-\title{Convert WhiteboxRaster to Vector}
+\alias{as_vector,WhiteboxRaster-method}
+\alias{as_vector,WhiteboxExtent-method}
+\title{Convert objects to vectors}
 \usage{
-as_vector(x, raw = FALSE)
+\S4method{as_vector}{WhiteboxRaster}(x, raw = FALSE)
+\S4method{as_vector}{WhiteboxExtent}(x)
 }
 \arguments{
-\item{x}{Raster object of class \link{WhiteboxRaster}. See \code{\link[=wbw_read_raster]{wbw_read_raster()}} for more details.}
+\item{x}{Object to convert to vector. Can be:
+\itemize{
+\item A \link{WhiteboxRaster} object
+\item A \link{WhiteboxExtent} object
+}}
 
-\item{raw}{logical. Should the raw data be returned (\code{raw = TRUE}) or should
-NoData values be transformed to \code{NA} (\code{raw = FALSE})?}
+\item{raw}{logical. For \link{WhiteboxRaster} only: Should the raw data be returned
+(\code{raw = TRUE}) or should NoData values be transformed to \code{NA} (\code{raw = FALSE})?}
 }
 \value{
-vector containing raster values
+A vector, with type depending on the input:
+\itemize{
+\item For \link{WhiteboxRaster}: vector containing raster values
+\item For \link{WhiteboxExtent}: named vector containing extent values
+}
 }
 \description{
-Converts a WhiteboxRaster object to a vector. The output contains all raster
-values in row-major order.
+Converts various Whitebox objects to vectors:
+\itemize{
+\item For \link{WhiteboxRaster}: converts raster values to a vector in row-major order
+\item For \link{WhiteboxExtent}: converts extent boundaries to a named vector
+}
 }
 \examples{
-\dontrun{
-raster_path <- system.file("extdata/dem.tif", package = "wbw")
-wbw_read_raster(raster_path) |>
-  as_vector()
-}
+f <-  system.file("extdata/dem.tif", package = "wbw")
+x <- wbw_read_raster(f)
+
+# Return WhiteboxRaster's data:
+head(as_vector(x))
+
+# Return WhiteboxExtent's data:
+as_vector(wbw_ext(x))
+
 }
 \keyword{transform}
