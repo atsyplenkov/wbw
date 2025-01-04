@@ -1,0 +1,41 @@
+---
+title: "Frequently Asked Questions"
+output: 
+  rmarkdown::html_vignette:
+    toc: false
+vignette: >
+  %\VignetteIndexEntry{FAQ}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{terra}
+---
+
+```{r knitr_setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  dpi = 300,
+  retina = 2
+)
+
+requireNamespace("terra", quietly = TRUE)
+```
+
+# How can I plot `WhiteboxRaster` objects?
+
+While there exists a built-in `plot()` method for all `WhiteboxRaster` and `WhiteboxVector` objects, it is highly advisable to use `{terra}`'s plotting functionality by converting the `Whitebox...` objects to `SpatRaster` or `SpatVector` accordingly as follows:
+
+```{r terra_plot, message=FALSE, warning=FALSE}
+library(wbw)
+library(terra)
+
+raster_path <- system.file("extdata/dem.tif", package = "wbw")
+
+wbw_read_raster(raster_path) |>
+  wbw_multidirectional_hillshade() |> 
+  as_rast() |> 
+  plot()
+
+```

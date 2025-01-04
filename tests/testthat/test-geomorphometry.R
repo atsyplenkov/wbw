@@ -28,6 +28,13 @@ test_that(
     expect_error(wbw_fill_missing_data(x, weight = "2.5"))
     expect_error(wbw_fill_missing_data(x, exclude_edge_nodata = "YES"))
     expect_error(wbw_fill_missing_data(NULL))
+
+    # wbw_multidirectional_hillshade
+    expect_error(wbw_multidirectional_hillshade(mtcars))
+    expect_error(wbw_multidirectional_hillshade(x, altitude = 100))
+    expect_error(wbw_multidirectional_hillshade(x, z_factor = "2.5"))
+    expect_error(wbw_multidirectional_hillshade(x, full_360_mode = "YES"))
+    expect_error(wbw_multidirectional_hillshade(NULL))
   }
 )
 
@@ -63,10 +70,16 @@ test_that(
       wbw_ruggedness_index(x),
       WhiteboxRaster
     )
-    
+
     # wbw_fill_missing_data
     expect_s7_class(
       wbw_fill_missing_data(x),
+      WhiteboxRaster
+    )
+    
+    # wbw_multidirectional_hillshade
+    expect_s7_class(
+      wbw_multidirectional_hillshade(x),
       WhiteboxRaster
     )
   }

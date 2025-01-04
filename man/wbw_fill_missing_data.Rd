@@ -51,7 +51,7 @@ determines the size of gap that is filled, and the IDW weight
 \dontrun{
 raster_path <- system.file("extdata/dem.tif", package = "wbw")
 wbw_read_raster(raster_path) |>
-  fill_missing_data()
+  wbw_fill_missing_data()
 }
 }
 \references{

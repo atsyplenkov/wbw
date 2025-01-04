@@ -14,7 +14,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  warn = FALSE,
+  warning = FALSE,
   message = FALSE,
   dpi = 300,
   retina = 2
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 requireNamespace("terra", quietly = TRUE)
 ```
 
-> NB! This is R representation of the of the [Whitebox Workflows for Python (WbW) Tutorial 2: Geomorphometric Analysis](https://github.com/jblindsay/jblindsay.github.io/blob/master/WhiteboxTutorials/WbW_tutorials/WbW_tutorial2.ipynb)
+> NB! This tutorial is based on the [Whitebox Workflows for Python (WbW) Tutorial 2: Geomorphometric Analysis](https://github.com/jblindsay/jblindsay.github.io/blob/master/WhiteboxTutorials/WbW_tutorials/WbW_tutorial2.ipynb)
 
 # 1. Download sample data
 
@@ -64,4 +64,62 @@ dem_filled |>
   plot()
 ```
 
-To be continued ...
+# 3. Vizualization
+
+To properly vizualize the DEM, let's create a hillshade map of the relief:
+
+```{r hillshade}
+dem_hillshade <- wbw_multidirectional_hillshade(dem_filled)
+
+dem_hillshade |> 
+  as_rast() |> 
+  plot(col = grDevices::gray.colors(10))
+```
+
+# 4. Raster summary stats
+
+One can get `WhiteboxRaster` summary statistics by running familiar functions from base R (and `{terra}`):
+
+```{r summary_stats}
+# Raw DEM
+summary(dem)
+wbw_cols(dem) # Number of columns
+wbw_rows(dem) # Number of rows
+num_cells(dem) # Number of cells
+wbw_res(dem) # Raster resolution
+
+# NA-Filled DEM
+summary(dem_filled)
+wbw_cols(dem_filled) # Number of columns
+wbw_rows(dem_filled) # Number of rows
+num_cells(dem_filled) # Number of cells
+wbw_res(dem_filled) # Raster resolution
+```
+
+# 5. Extracting land-surface parameters (LSPs)
+Now let's extract some common land-surface parameters (LSPs), the basic building blocks of a geomorphometric analysis.
+
+Slope and aspect are two of the most common LSPs.
+
+```{r slope_and_aspect}
+# Slope
+slope <- wbw_slope(dem_filled)
+aspect <- wbw_aspect(dem_filled)
+
+# Set up a 1x2 plotting layout
+par(mfrow = c(1, 2))
+
+# Plot the first raster (Slope)
+plot(as_rast(slope),
+     main = "Slope",
+     legend = FALSE,
+     col = terrain.colors(100),
+     mar=c(1,1,1,1))
+
+# Plot the second raster (Aspect)
+plot(as_rast(aspect),
+     main = "Aspect",
+     legend = FALSE,
+     mar=c(1,1,1,1))
+
+```

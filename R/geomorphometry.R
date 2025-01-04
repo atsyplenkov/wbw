@@ -213,7 +213,7 @@ S7::method(wbw_ruggedness_index, WhiteboxRaster) <-
 #' @return [WhiteboxRaster] object
 #'
 #' @eval rd_wbw_link("fill_missing_data")
-#' @eval rd_example("fill_missing_data")
+#' @eval rd_example("wbw_fill_missing_data")
 #'
 #' @export
 wbw_fill_missing_data <-

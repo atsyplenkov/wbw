@@ -13,15 +13,26 @@ authors:
 template:
   bootstrap: 5
   light-switch: true
+  math-rendering: mathjax
   bslib:
     base_font: {google: "Inter"}
     heading_font: {google: "Recursive"}
     code_font: {google: "Fira Code"}
 
 navbar:
+  components:
+    faq:
+      text: FAQ
+      href: articles/FAQ.html
+    tutorials:
+      text: Tutorials
+      menu:
+      - text: Tutorial 1
+      - text: Tutorial 2
+        href: articles/Tutorial-2.html
   structure:
-    left:  [reference, articles, tutorials, news]
-    right: [search, github, lightswitch]
+    left:  [reference, tutorials, news]
+    right: [faq, search, github, lightswitch]
 
 reference:
 - title: "Input/Output"
