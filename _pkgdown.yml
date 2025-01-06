@@ -96,4 +96,4 @@ reference:
 - title: "Methods"
   desc: "S3 methods for WhiteboxRaster and WhiteboxVector objects"
   contents:
-  - has_keyword("methods")
+  - has_keyword("methods") 
