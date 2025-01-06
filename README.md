@@ -22,10 +22,10 @@ commit](https://img.shields.io/github/last-commit/atsyplenkov/wbw)
 
 ---
 
-The `{wbw}` R package provides R bindings to the [Whitebox Workflows for Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html) — a powerful and fast library for advanced geoprocessing, with focus on hydrological, geomorphometric and remote sensing analysis of raster, vector and LiDAR data.
-
 > [!NOTE]
 > `{wbw}` is currently in alpha. Expect breaking changes both in the API and in outputs.
+
+The `{wbw}` R package provides R bindings to the [Whitebox Workflows for Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html) — a powerful and fast library for advanced geoprocessing, with focus on hydrological, geomorphometric and remote sensing analysis of raster, vector and LiDAR data.
 
 ## Basic workflow
 

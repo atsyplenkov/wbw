@@ -6,8 +6,3 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
         args: ["--unsafe"]
-  - repo: https://github.com/lorenzwalthert/precommit
-    rev: v0.4.3
-    hooks:
-    - id: readme-rmd-rendered
-      exclude: ^README\.md$
