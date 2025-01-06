@@ -4,7 +4,7 @@ output:
   rmarkdown::html_vignette:
     toc: false
 vignette: >
-  %\VignetteIndexEntry{FAQ}
+  %\VignetteIndexEntry{Frequently Asked Questions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{terra}
@@ -27,7 +27,7 @@ requireNamespace("waldo", quietly = TRUE)
 
 # How can I plot `WhiteboxRaster` objects?
 
-While there exists a built-in `plot()` method for all `WhiteboxRaster` and `WhiteboxVector` objects, it is highly advisable to use `{terra}`'s plotting functionality by converting the `Whitebox...` objects to `SpatRaster` or `SpatVector` accordingly as follows:
+While there exists a built-in `plot` method for all `WhiteboxRaster` and `WhiteboxVector` objects, it is highly advisable to use [`{terra}`](https://rspatial.github.io/terra/index.html)'s plotting functionality by converting the `Whitebox...` objects to `SpatRaster` or `SpatVector` accordingly as follows:
 
 ```{r terra_plot, message=FALSE, warning=FALSE}
 library(wbw)
@@ -62,7 +62,7 @@ waldo::compare(
 )
 ```
 
-However, this issue is fixed when transitioning from `WhiteboxRaster` to `SpatRaster` via the [`as_rast()`](https://wbw.anatolii.nz/reference/as_rast) command:
+However, this issue is fixed when transitioning from `WhiteboxRaster` to `SpatRaster` via the `as_rast()` command:
 
 ```{r extent_difference2, warning = FALSE, message = FALSE}
 converted_raster <- as_rast(wbw_raster)

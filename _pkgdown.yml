@@ -1,3 +1,6 @@
+# landing page is build from pkgdown/index.md, NOT README.md
+# This is done to support builtin Github Formatting of callouts
+
 url: https://wbw.anatolii.nz
 
 repo:
@@ -26,13 +29,12 @@ navbar:
       href: articles/FAQ.html
     tutorials:
       text: Tutorials
+      href: articles/tutorials.html
       menu:
       - text: Tutorial 1
       - text: Tutorial 2
         href: articles/Tutorial-2.html
       - text: Tutorial 3
-      - text: Tutorial 4
-      - text: Tutorial 5
     articles:
       text: Articles
       menu:

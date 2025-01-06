@@ -1,6 +1,6 @@
 Package: wbw
 Title: Whitebox Workflows for R
-Version: 0.0.1
+Version: 0.0.2
 URL: https://wbw.anatolii.nz
 BugReports: https://github.com/atsyplenkov/wbw/issues
 Authors@R:

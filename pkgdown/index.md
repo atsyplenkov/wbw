@@ -1,5 +1,3 @@
-<!-- Don't forget to update pkgdown/index.md -->
-
 # Whitebox Workflows for R `{wbw}` <img src="man/figures/logo.png" align="right" height="135" alt="" />
 
 <!-- badges: start -->
@@ -15,16 +13,11 @@ coverage](https://codecov.io/gh/atsyplenkov/wbw/graph/badge.svg)](https://app.co
 commit](https://img.shields.io/github/last-commit/atsyplenkov/wbw)
 <!-- badges: end -->
 
-<br>
-<center>
-<a href="https://wbw.anatolii.nz/articles/FAQ.html"><big><b>FAQ</b></big></a> ◽ <a href="https://wbw.anatolii.nz/articles/tutorials.html"><big><b>Tutorials</b></big></a> ◽ <a href="https://wbw.anatolii.nz/articles/benchmarks.html"><big><b>Benchmarks</b></big></a> ◽ <a href="https://github.com/atsyplenkov/wbw?tab=readme-ov-file#installation"><big><b>Installation</b></big></a>
-</center>
-<br>
-
-The `{wbw}` R package provides R bindings to the [Whitebox Workflows for Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html) — a powerful and fast library for advanced geoprocessing, with focus on hydrological, geomorphometric and remote sensing analysis of raster, vector and LiDAR data.
-
-> [!NOTE]
-> `{wbw}` is currently in alpha. Expect breaking changes both in the API and in outputs.
+The `{wbw}` R package provides R bindings to the [Whitebox Workflows for
+Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html)
+— a powerful and fast library for advanced geoprocessing, with focus on
+hydrological, geomorphometric and remote sensing analysis of raster,
+vector and LiDAR data.
 
 ## Basic workflow
 
@@ -142,8 +135,6 @@ You can install the development version of wbw from
 # install.packages("pak")
 pak::pak("atsyplenkov/wbw")
 ```
-
-> [!TIP]
 > The `{wbw}` package requires the `whitebox-workflows` Python library
 > v1.3.3+. However, you should not worry about it, as the package
 > designed to install all dependencies automatically on the first run.
