@@ -15,11 +15,12 @@ coverage](https://codecov.io/gh/atsyplenkov/wbw/graph/badge.svg)](https://app.co
 commit](https://img.shields.io/github/last-commit/atsyplenkov/wbw)
 <!-- badges: end -->
 
-<br>
-<center>
+---
+<div align="center">
 <a href="https://wbw.anatolii.nz/articles/FAQ.html"><big><b>FAQ</b></big></a> ◽ <a href="https://wbw.anatolii.nz/articles/tutorials.html"><big><b>Tutorials</b></big></a> ◽ <a href="https://wbw.anatolii.nz/articles/benchmarks.html"><big><b>Benchmarks</b></big></a> ◽ <a href="https://github.com/atsyplenkov/wbw?tab=readme-ov-file#installation"><big><b>Installation</b></big></a>
-</center>
-<br>
+</div>
+
+---
 
 The `{wbw}` R package provides R bindings to the [Whitebox Workflows for Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html) — a powerful and fast library for advanced geoprocessing, with focus on hydrological, geomorphometric and remote sensing analysis of raster, vector and LiDAR data.
 
@@ -95,7 +96,7 @@ wbw_read_raster(raster_path) |>
   plot(main = "Aspect")
 ```
 
-<img src="man/figures/README-terra-1.png" width="75%" />
+<img src="man/figures/README-terra-1.png" width="75%" alt =""/>
 
 Even though `{wbw}` can be faster than `{terra}` in some cases, it is by
 no means intended to replace it.
