@@ -106,18 +106,18 @@ WhiteboxRaster <-
             return("@max must be a single numeric value")
           }
         }
-      ),
-      extent = S7::new_property(
-        class = WhiteboxExtent,
-        getter = function(self) {
-          conf <- self@source$configs
-          WhiteboxExtent(
-            west = conf$west,
-            east = conf$east,
-            south = conf$south,
-            north = conf$north
-          )
-        }
       )
+      # extent = S7::new_property(
+      #   class = WhiteboxExtent,
+      #   getter = function(self) {
+      #     conf <- self@source$configs
+      #     WhiteboxExtent(
+      #       west = conf$west,
+      #       east = conf$east,
+      #       south = conf$south,
+      #       north = conf$north
+      #     )
+      #   }
+      # )
     )
   )

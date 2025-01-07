@@ -1,6 +1,6 @@
 #' Print Method for WhiteboxRaster
 #' @keywords methods
-#' 
+#'
 #' @param x [WhiteboxRaster] object to print
 #' @param ... additional arguments passed to print method
 #' @export
@@ -11,9 +11,8 @@
 
   # Create content
   lines <- c(
-    # Split class name to remove namespace
-    sub("^.*::", "", class(x)[1]), # Remove namespace from class
-    name, # Move name to second line
+    sub("^.*::", "", class(x)[1]),
+    name,
     sprintf("bands       : %d", conf$bands),
     sprintf("dimensions  : %d, %d  (nrow, ncol)", conf$rows, conf$columns),
     sprintf(
@@ -21,6 +20,10 @@
       conf$resolution_x, conf$resolution_y
     ),
     sprintf("EPSG        : %s  (%s)", epsg, conf$xy_units),
+    sprintf(
+      "extent      : %1.0f %1.0f %1.0f %1.0f",
+      conf$west, conf$east, conf$south, conf$north
+    ),
     sprintf("min value   : %f", x@min),
     sprintf("max value   : %f", x@max)
   )
@@ -59,10 +62,10 @@
 #' @keywords utils
 #'
 #' @description
-#' Displays the tags contained within a GeoTIFF file. This is useful when 
+#' Displays the tags contained within a GeoTIFF file. This is useful when
 #' importing GeoTIFF files into different software environments. The tool prints
-#' tag information to the console. Tags containing more than 100 values are 
-#' truncated in the output. GeoKeys are interpreted according to the GeoTIFF 
+#' tag information to the console. Tags containing more than 100 values are
+#' truncated in the output. GeoKeys are interpreted according to the GeoTIFF
 #' specification.
 #'
 #' @param file_name \code{character}, path to raster file

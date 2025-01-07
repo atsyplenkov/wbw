@@ -17,5 +17,11 @@ S7::method(wbw_ext, WhiteboxRaster) <-
   function(x) {
     # Checks
     check_env(wbe)
-    x@extent
+    conf <- x@source$configs
+    WhiteboxExtent(
+      west = conf$west,
+      east = conf$east,
+      south = conf$south,
+      north = conf$north
+    )
   }

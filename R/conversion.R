@@ -125,12 +125,12 @@ S7::method(as_rast, WhiteboxRaster) <-
     # Prepare CRS and Extent
     ext <-
       c(
-        x@extent@west,
         # Note the differences in east and south between reading by
         # GDAL (i.e. terra) and WhiteboxTools
-        x@extent@east + wbw_xres(x),
-        x@extent@south - wbw_yres(x),
-        x@extent@north
+        x@source$configs$west,
+        x@source$configs$east + wbw_xres(x),
+        x@source$configs$south - wbw_yres(x),
+        x@source$configs$north
       )
     crs <- if (x@source$configs$epsg_code == 0) {
       x@source$configs$coordinate_ref_system_wkt
