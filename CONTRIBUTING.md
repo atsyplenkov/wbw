@@ -63,9 +63,7 @@ This repo adheres to the [conventional commit](https://www.conventionalcommits.o
 - **refactor**: A code change that neither fixes a bug nor adds a feature
 - **lint**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 - **test**: Adding missing tests or correcting existing tests
-- **translation**: Adding missing translations or correcting existing ones
 - **revert**: When reverting a commit
-- **style**: A change that affects the scss, less, css styles
 - **release**: All related to changeset (pre exit...)
 
 For example:

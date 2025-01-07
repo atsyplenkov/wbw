@@ -45,6 +45,12 @@ navbar:
     left:  [faq, reference, tutorials, articles, news]
     right: [search, github, lightswitch]
 
+footer:
+  structure: 
+    left: [attribution]
+  components:
+    attribution: "R bindings to the ['Whitebox Workflows for Python'](https://www.whiteboxgeo.com/whitebox-workflows-for-python/)"
+
 reference:
 - title: "Input/Output"
   desc: "Functions for reading and writing data"
@@ -97,4 +103,4 @@ reference:
 - title: "Methods"
   desc: "S3 methods for WhiteboxRaster and WhiteboxVector objects"
   contents:
-  - has_keyword("methods") 
+  - has_keyword("methods")

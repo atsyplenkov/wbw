@@ -271,9 +271,18 @@ bench::mark(
 
 ```
 
-
 ```{r cleanup, include = FALSE}
 unlink(tmp_wbw)
 unlink(tmp_terra)
 unlink(tmp)
 ```
+
+
+# Session Info
+
+<details>
+<summary> Show </summary>
+```{r sessioninfo}
+sessionInfo()
+```
+</details>

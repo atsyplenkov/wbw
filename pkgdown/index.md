@@ -13,7 +13,7 @@ coverage](https://codecov.io/gh/atsyplenkov/wbw/graph/badge.svg)](https://app.co
 commit](https://img.shields.io/github/last-commit/atsyplenkov/wbw)
 <!-- badges: end -->
 
-The `{wbw}` R package provides R bindings to the [Whitebox Workflows for
+The `{wbw}` package provides R bindings for the [Whitebox Workflows for
 Python](https://www.whiteboxgeo.com/manual/wbw-user-manual/book/preface.html)
 — a powerful and fast library for advanced geoprocessing, with focus on
 hydrological, geomorphometric and remote sensing analysis of raster,
@@ -146,7 +146,7 @@ Your machine should have **Python 3.8+** installed with `pip` and `venv` configu
 
 ```bash
 apt update
-apt install python3-pip python3-venv -y
+apt install python3 python3-pip python3-venv -y
 ```
 
 ## Contributing
@@ -158,8 +158,10 @@ contains a list of functions yet to be implemented. This is a good place
 to start.
 
 ## See also
+
 Geomorphometric and hydrological analysis in R can be also done with:
-- [`{whitebox}`](https://github.com/opengeos/whiteboxR) — An R frontend for the [WhiteboxTools](https://www.whiteboxgeo.com) standalone runner.
-- [`{traudem}`](https://github.com/lucarraro/traudem/) — R bindings to [TauDEM](https://hydrology.usu.edu/taudem/taudem5/) (Terrain Analysis Using Digital Elevation Models) command-line interface.
-- [`{RSagacmd}`](https://github.com/stevenpawley/Rsagacmd/) and [`{RSAGA}`](https://github.com/r-spatial/RSAGA) — Links R with [SAGA GIS](https://sourceforge.net/projects/saga-gis/).
+
+- [`{whitebox}`](https://github.com/opengeos/whiteboxR) — An R frontend for the [WhiteboxTools](https://www.whiteboxgeo.com) standalone runner. <br>
+- [`{traudem}`](https://github.com/lucarraro/traudem/) — R bindings to [TauDEM](https://hydrology.usu.edu/taudem/taudem5/) (Terrain Analysis Using Digital Elevation Models) command-line interface. <br>
+- [`{RSagacmd}`](https://github.com/stevenpawley/Rsagacmd/) and [`{RSAGA}`](https://github.com/r-spatial/RSAGA) — Links R with [SAGA GIS](https://sourceforge.net/projects/saga-gis/). <br>
 - [`{rivnet}`](https://github.com/lucarraro/rivnet) — river network extraction from DEM using TauDEM.
