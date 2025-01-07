@@ -98,7 +98,7 @@ wbw_read_raster(raster_path) |>
 
 <img src="man/figures/README-terra-1.png" width="75%" alt ="Aspect calculated via wbw and plotted using terra R package"/>
 
-The `{wbw}` package is quite fast; you can see the benchmarks [here](https://wbw.anatolii.nz/articles/benchmarks.html). In most cases, it outperforms both `{terra}` and `{whitebox}` by 2 to 3 times.
+The `{wbw}` package is quite fast; you can see the detailed benchmarks [here](https://wbw.anatolii.nz/articles/benchmarks.html). In most cases, it is as fast as `terra`, while excelling in some more complex tasks (such as hillshading and filtering). Additionally, `wbw` outperforms the original `{whitebox}` by 2 to 3 times, as the amount of I/O operations is reduced to a minimum.
 
 ![](https://wbw.anatolii.nz/articles/benchmarks_files/figure-html/hill_bench_plot-1.png)
 

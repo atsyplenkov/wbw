@@ -166,3 +166,114 @@ plot(terra_hillshade,
 
 ```
 
+# Terrain Parameters
+
+When it comes to slope estimation, the difference between packages is not that significant. 
+
+```{r bench_slope}
+# Create a tempfile for {whitebox}
+tmp <- tempfile(fileext = ".tif")
+
+bench_slope <-
+  bench::mark(
+    wbw = {
+      wbw_read_raster(f) |>
+        wbw_slope()
+    },
+    whitebox = {
+      whitebox::wbt_slope(
+        f,
+        output = tmp,
+        compress_rasters = FALSE
+      )
+    },
+    terra = {
+      terra::rast(f) |> 
+        terra::terrain("slope")
+    },
+    check = FALSE,
+    time_unit = "ms",
+    iterations = 21L
+  )
+
+bench_slope
+
+```
+
+
+# Raster Summary Stats and I/O
+
+As a rule of thumb, majority of in-memory operations happens similarly fast in `wbw` compared to `terra`. Mind the difference in performance for the slope estimation when rasters are loaded into R session.
+
+```{r bench_stats, message = FALSE, warning = FALSE}
+# Load libraries
+library(wbw)
+library(terra)
+
+# Load file
+f <- system.file("extdata/dem.tif", package = "wbw")
+w <- wbw_read_raster(f)
+r <- terra::rast(f)
+
+# Conversion raster to matrix
+bench::mark(
+  wbw = as_matrix(w),
+  terra = as.matrix(r, wide = TRUE),
+  check = TRUE,
+  time_unit = "ms",
+  iterations = 21L
+)
+
+# Estimating true mean
+bench::mark(
+  wbw = mean(w),
+  terra = global(r, "mean")$mean,
+  check = TRUE,
+  time_unit = "ms",
+  iterations = 21L
+)
+
+
+# Estimating slope
+bench::mark(
+  wbw = wbw_slope(w),
+  terra = terrain(r, "slope"),
+  check = FALSE,
+  time_unit = "ms",
+  iterations = 21L
+)
+
+```
+
+However, this happens because `terra` is not actually loading the whole raster into memory, unlike `wbw`. Therefore, the *input* operations are much faster for `terra`, while the *output* operations are more efficient in `wbw`.
+
+```{r bench_io}
+# Reading raster
+bench::mark(
+  wbw = wbw_read_raster(f),
+  terra = rast(r),
+  check = FALSE,
+  time_unit = "ms",
+  iterations = 21L
+)
+
+# Writing uncompressed raster
+tmp_wbw <- tempfile(fileext = ".tif")
+tmp_terra <- tempfile(fileext = ".tif")
+
+bench::mark(
+  wbw = wbw_write_raster(w, tmp_wbw, compress = FALSE),
+  terra = writeRaster(r, tmp_terra, overwrite = TRUE),
+  check = FALSE,
+  time_unit = "ms",
+  iterations = 21L
+)
+
+```
+
+
+```{r cleanup, include = FALSE}
+unlink(tmp_wbw)
+unlink(tmp_terra)
+unlink(tmp)
+```
