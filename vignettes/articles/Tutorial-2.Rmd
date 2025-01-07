@@ -7,7 +7,7 @@ vignette: >
   %\VignetteIndexEntry{Tutorial 2: Geomorphometric Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  %\VignetteDepends{terra}
+  %\VignetteDepends{terra, waldo}
 ---
 
 ```{r knitr_setup, include = FALSE}
@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 )
 
 requireNamespace("terra", quietly = TRUE)
+requireNamespace("waldo", quietly = TRUE)
 ```
 
 > NB! This tutorial is based on the [Whitebox Workflows for Python (WbW) Tutorial 2: Geomorphometric Analysis](https://github.com/jblindsay/jblindsay.github.io/blob/master/WhiteboxTutorials/WbW_tutorials/WbW_tutorial2.ipynb)
@@ -82,25 +83,28 @@ One can get `WhiteboxRaster` summary statistics by running familiar functions fr
 
 ```{r summary_stats}
 # Raw DEM
-summary(dem)
 wbw_cols(dem) # Number of columns
 wbw_rows(dem) # Number of rows
 num_cells(dem) # Number of cells
 wbw_res(dem) # Raster resolution
 
 # NA-Filled DEM
-summary(dem_filled)
 wbw_cols(dem_filled) # Number of columns
 wbw_rows(dem_filled) # Number of rows
 num_cells(dem_filled) # Number of cells
 wbw_res(dem_filled) # Raster resolution
+
+# Number of NoData values:
+waldo::compare(
+  sum(is.na(as_vector(dem))),
+  sum(is.na(as_vector(dem_filled)))
+)
 ```
 
 # 5. Extracting land-surface parameters (LSPs)
 Now let's extract some common land-surface parameters (LSPs), the basic building blocks of a geomorphometric analysis.
 
-Slope and aspect are two of the most common LSPs.
-
+## Slope and Aspect
 ```{r slope_and_aspect}
 # Slope
 slope <- wbw_slope(dem_filled)

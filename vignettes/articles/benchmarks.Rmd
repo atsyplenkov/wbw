@@ -1,0 +1,167 @@
+---
+title: "Benchmarks"
+output:
+   rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Benchmarks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{terra, ggplot2, bench, whitebox}
+---
+
+```{r knitr_setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  dpi = 150,
+  retina = 2
+)
+
+requireNamespace("terra", quietly = TRUE)
+requireNamespace("whitebox", quietly = TRUE)
+requireNamespace("ggplot2", quietly = TRUE)
+requireNamespace("bench", quietly = TRUE)
+
+# Install WhiteboxTools
+if (!whitebox::check_whitebox_binary()) {
+  whitebox::install_whitebox()
+}
+whitebox::wbt_verbose(verbose = FALSE)
+
+ggplot2::theme_set(
+  ggplot2::theme_bw() +
+    ggplot2::theme(axis.text.y = ggplot2::element_text(face = "bold"))
+)
+
+```
+
+To evaluate the performance of different R packages for terrain analysis, here three different implementations are benchmarked:
+
+1. **wbw** (WhiteboxWorkflows for R): this package
+2. [**whitebox**](https://github.com/opengeos/whiteboxR/) (WhiteboxTools for R): A traditional command-line based approach that writes results to disk
+3. [**terra**](https://rspatial.github.io/terra/): R's leading package for raster processing, using an optimized C++ backend
+
+# Hillshade
+
+The traditional hillshading, repeating the procedure from the `terra::shade()` documentation. Each process was run 21 times.
+
+```{r bench_hillshade, message = FALSE, warning = FALSE}
+# Load libraries
+library(wbw)
+library(whitebox)
+library(terra)
+
+# Load file
+f <- system.file("extdata/dem.tif", package = "wbw")
+# Create a tempfile for {whitebox}
+tmp <- tempfile(fileext = ".tif")
+
+bench_hillshade <-
+  bench::mark(
+    wbw = {
+      wbw_read_raster(f) |>
+        wbw_hillshade(
+          azimuth = 270,
+          altitude = 40
+        )
+    },
+    whitebox = {
+      whitebox::wbt_hillshade(
+        f,
+        azimuth = 270,
+        altitude = 40,
+        output = tmp,
+        compress_rasters = FALSE
+      )
+    },
+    terra = {
+      r <- terra::rast(f)
+      s <- terra::terrain(r, "slope", unit = "radians")
+      a <- terra::terrain(r, "aspect", unit = "radians")
+      terra::shade(slope = s, aspect = a, angle = 40, direction = 270, normalize = TRUE)
+    },
+    check = FALSE,
+    time_unit = "ms",
+    iterations = 21L
+  )
+
+bench_hillshade
+
+```
+
+All three packages performed adequately, with `wbw` being `r round(as.numeric(bench_hillshade$median[3]) / as.numeric(bench_hillshade$median[1]), 2)` times faster than `terra` and `r round(as.numeric(bench_hillshade$median[2]) / as.numeric(bench_hillshade$median[1]), 2)` times faster than the original `whitebox`. While with the latter, the raster object is not yet loaded into the R session.
+
+```{r hill_bench_plot}
+library(ggplot2)
+
+ggplot2::autoplot(bench_hillshade, type = "boxplot") +
+  ggplot2::labs(
+    title = "Time to compute hillshade from DEM",
+    y = "Elapsed time, milliseconds",
+    x = NULL
+  )
+
+```
+
+One can plot all hillshades next to each other to ensure that they all look alike.
+
+```{r hillshade_plot}
+
+# wbw
+wbw_hillshade <-
+  wbw_read_raster(f) |>
+  wbw_hillshade(
+    azimuth = 270,
+    altitude = 40
+  ) |>
+  as_rast()
+
+# whitebox
+wbt_hillshade <- terra::rast(tmp)
+
+# terra
+r <- terra::rast(f)
+s <- terra::terrain(r, "slope", unit = "radians")
+a <- terra::terrain(r, "aspect", unit = "radians")
+terra_hillshade <-
+  terra::shade(
+    slope = s,
+    aspect = a,
+    angle = 40,
+    direction = 270,
+    normalize = TRUE
+  )
+
+# Set up a 1x3 plotting layout
+par(mfrow = c(1, 3))
+clrs <- grey(0:100/100)
+
+# wbw
+plot(wbw_hillshade,
+  main = "wbw",
+  legend = FALSE,
+  col = clrs,
+  mar = c(1, 1, 1, 1)
+)
+
+# whitebox
+plot(wbt_hillshade,
+  main = "whitebox",
+  legend = FALSE,
+  col = clrs,
+  mar = c(1, 1, 1, 1)
+)
+
+# terra
+plot(terra_hillshade,
+  main = "terra",
+  legend = FALSE,
+  col = clrs,
+  mar = c(1, 1, 1, 1)
+)
+
+```
+

@@ -96,58 +96,32 @@ wbw_read_raster(raster_path) |>
   plot(main = "Aspect")
 ```
 
-<img src="man/figures/README-terra-1.png" width="75%" alt =""/>
+<img src="man/figures/README-terra-1.png" width="75%" alt ="Aspect calculated via wbw and plotted using terra R package"/>
 
-Even though `{wbw}` can be faster than `{terra}` in some cases, it is by
-no means intended to replace it.
+The `{wbw}` package is quite fast; you can see the benchmarks [here](https://wbw.anatolii.nz/articles/benchmarks.html). In most cases, it outperforms both `{terra}` and `{whitebox}` by 2 to 3 times.
 
-``` r
-requireNamespace("bench", quietly = TRUE)
-
-bench::mark(
-  terra = {
-    s <- 
-      raster_path |> 
-        rast() |> 
-        terrain("slope", unit = "radians") |> 
-        focal(w = 15, "mean") |> 
-        global(\(x) median(x, na.rm = TRUE))
-
-  round(s$global, 2)
-
-  },
-  wbw = {
-    raster_path |>
-      wbw_read_raster() |> 
-      wbw_slope("radians") |> 
-      wbw_mean_filter(15, 15) |> 
-      median() |> 
-      round(2)
-  },
-  check = TRUE,
-  iterations = 11L
-)
-#> # A tibble: 2 × 6
-#>   expression      min   median `itr/sec` mem_alloc `gc/sec`
-#>   <bch:expr> <bch:tm> <bch:tm>     <dbl> <bch:byt>    <dbl>
-#> 1 terra       290.7ms  291.5ms      3.43   28.58MB     17.2
-#> 2 wbw          37.5ms   39.1ms     25.5     3.72KB      0
-```
+![](https://wbw.anatolii.nz/articles/benchmarks_files/figure-html/hill_bench_plot-1.png)
 
 ## Installation
 
-You can install the development version of wbw from
+You can install the development version of `{wbw}` from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
 pak::pak("atsyplenkov/wbw")
 ```
-
 > [!TIP]
 > The `{wbw}` package requires the `whitebox-workflows` Python library
 > v1.3.3+. However, you should not worry about it, as the package
-> designed to install all dependencies automatically on the first run.
+> is designed to install all dependencies automatically on the first run.
+
+Your machine should have **Python 3.8+** installed with `pip` and `venv` configured. Usually, these requirements are met on all modern computers. However, clean Debian installs may require the installation of system dependencies:
+
+```bash
+apt update
+apt install python3-pip python3-venv -y
+```
 
 ## Contributing
 
@@ -156,3 +130,10 @@ guidelines](CONTRIBUTING.md) for details. There is an open issue for the
 `{wbw}` package [here](https://github.com/atsyplenkov/wbw/issues/1) that
 contains a list of functions yet to be implemented. This is a good place
 to start.
+
+## See also
+Geomorphometric and hydrological analysis in R can be also done with:
+- [`{whitebox}`](https://github.com/opengeos/whiteboxR) — An R frontend for the [WhiteboxTools](https://www.whiteboxgeo.com) standalone runner.
+- [`{traudem}`](https://github.com/lucarraro/traudem/) — R bindings to [TauDEM](https://hydrology.usu.edu/taudem/taudem5/) (Terrain Analysis Using Digital Elevation Models) command-line interface.
+- [`{RSagacmd}`](https://github.com/stevenpawley/Rsagacmd/) and [`{RSAGA}`](https://github.com/r-spatial/RSAGA) — Links R with [SAGA GIS](https://sourceforge.net/projects/saga-gis/).
+- [`{rivnet}`](https://github.com/lucarraro/rivnet) — river network extraction from DEM using TauDEM.

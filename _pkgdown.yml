@@ -39,6 +39,7 @@ navbar:
       text: Articles
       menu:
       - text: Benchmarks
+        href: articles/benchmarks.html
       - text: wbw and terra
   structure:
     left:  [faq, reference, tutorials, articles, news]
