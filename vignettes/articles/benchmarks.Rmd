@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
 requireNamespace("terra", quietly = TRUE)
 requireNamespace("whitebox", quietly = TRUE)
 requireNamespace("ggplot2", quietly = TRUE)
+requireNamespace("tidyr", quietly = TRUE)
 requireNamespace("bench", quietly = TRUE)
 
 # Install WhiteboxTools
