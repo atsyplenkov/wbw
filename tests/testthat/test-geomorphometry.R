@@ -35,6 +35,24 @@ test_that(
     expect_error(wbw_multidirectional_hillshade(x, z_factor = "2.5"))
     expect_error(wbw_multidirectional_hillshade(x, full_360_mode = "YES"))
     expect_error(wbw_multidirectional_hillshade(NULL))
+
+    # wbw_multidirectional_hillshade
+    expect_error(wbw_hillshade(mtcars))
+    expect_error(wbw_hillshade(x, azimuth = -1))
+    expect_error(wbw_hillshade(x, altitude = 100))
+    expect_error(wbw_hillshade(x, z_factor = "2.5"))
+    expect_error(wbw_hillshade(NULL))
+  }
+)
+
+test_that(
+  "Snapshots",{
+    expect_snapshot(wbw_aspect(x))
+    expect_snapshot(wbw_slope(x))
+    expect_snapshot(wbw_ruggedness_index(x))
+    expect_snapshot(wbw_fill_missing_data(x))
+    expect_snapshot(wbw_multidirectional_hillshade(x))
+    expect_snapshot(wbw_hillshade(x))
   }
 )
 
@@ -76,10 +94,16 @@ test_that(
       wbw_fill_missing_data(x),
       WhiteboxRaster
     )
-    
+
     # wbw_multidirectional_hillshade
     expect_s7_class(
       wbw_multidirectional_hillshade(x),
+      WhiteboxRaster
+    )
+
+    # wbw_multidirectional_hillshade
+    expect_s7_class(
+      wbw_hillshade(x),
       WhiteboxRaster
     )
   }
