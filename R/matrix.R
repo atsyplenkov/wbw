@@ -27,15 +27,8 @@ as_matrix <-
 S7::method(as_matrix, WhiteboxRaster) <-
   function(x, raw = FALSE) {
     checkmate::assert_environment(wbw_env)
-    m <- wbw_env$wbw_to_matrix(x@source)
-    m <- as.matrix(m)
-
-    if (!raw) {
-      wbw_nodata <- x@source$configs$nodata
-      m[m == wbw_nodata] <- NA
-    }
-
-    m
+    m <- wbw_env$wbw_to_matrix(x@source, raw)
+    as.matrix(m)
   }
 
 #' Convert objects to vectors
@@ -82,15 +75,8 @@ as_vector <- S7::new_generic(
 
 S7::method(as_vector, WhiteboxRaster) <- function(x, raw = FALSE) {
   checkmate::assert_environment(wbw_env)
-  v <- wbw_env$wbw_to_vector(x@source)
-  v <- as.vector(v)
-
-  if (!raw) {
-    wbw_nodata <- x@source$configs$nodata
-    v[v == wbw_nodata] <- NA
-  }
-
-  v
+  v <- wbw_env$wbw_to_vector(x@source, raw)
+  as.vector(v)
 }
 
 S7::method(as_vector, WhiteboxExtent) <- function(x) {

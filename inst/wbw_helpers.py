@@ -1,40 +1,51 @@
 import numpy as np
 
 
-def wbw_to_vector(wbw_raster):
+def wbw_to_vector(wbw_raster, raw=False):
     """
     Converts a Whitebox Raster object to a 1d numpy array, column-wise.
 
     Args:
         wbw_raster: A Whitebox Raster object
+        raw: If False (default), replaces NoData values with None/np.nan. If True, keeps original values.
 
     Returns:
         A 1d numpy array with values arranged column by column.
     """
     # First get the data as a matrix
-    matrix = wbw_to_matrix(wbw_raster)
+    matrix = wbw_to_matrix(wbw_raster, raw=raw)
 
     # Convert to 1D array column-wise (Fortran-style ordering)
     return matrix.flatten(order="C")
 
 
-def wbw_to_matrix(wbw_raster):
+def wbw_to_matrix(wbw_raster, raw=False):
     """
     Converts a Whitebox Raster object to a 2d numpy array.
 
     Args:
         wbw_raster: A Whitebox Raster object
+        raw: If False (default), replaces NoData values with None/np.nan. If True, keeps original values.
 
     Returns:
         A 2d numpy array.
     """
     nrows = wbw_raster.configs.rows
     ncols = wbw_raster.configs.columns
+    dtype = raster_dtype(wbw_raster)
 
-    matrix = np.zeros((nrows, ncols), dtype=raster_dtype(wbw_raster))
+    # For integer types, convert to float64 if we need to represent NoData
+    if not raw and np.issubdtype(dtype, np.integer):
+        dtype = np.float64
+
+    matrix = np.zeros((nrows, ncols), dtype=dtype)
 
     for i in range(nrows):
         matrix[i] = wbw_raster.get_row_data(i)
+
+    if not raw:
+        nodata = wbw_raster.configs.nodata
+        matrix[matrix == nodata] = np.nan
 
     return matrix
 
