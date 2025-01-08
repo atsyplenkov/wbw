@@ -26,9 +26,10 @@ Install Required Python Modules
 \details{
 This function provides a basic wrapper around
 \code{reticulate::py_install()}, except it defaults to using the Python package
-manager \code{pip} and virtual environment. It creates the \code{r-wbw} virtual
-environment in the default location (run \code{reticulate::virtualenv_root()} to
-find it) and installs the required python packages.
+manager \code{pip} and virtual environment. It creates the \code{r-wbw}
+virtual environment in the default location
+(run \code{reticulate::virtualenv_root()} to find it) and installs the
+required python packages.
 }
 \keyword{The}
 \keyword{This}

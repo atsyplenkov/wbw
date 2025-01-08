@@ -16,8 +16,9 @@
 \item A \link{WhiteboxExtent} object
 }}
 
-\item{raw}{logical. For \link{WhiteboxRaster} only: Should the raw data be returned
-(\code{raw = TRUE}) or should NoData values be transformed to \code{NA} (\code{raw = FALSE})?}
+\item{raw}{logical. For \link{WhiteboxRaster} only: Should the raw data be
+returned (\code{raw = TRUE}) or should NoData values be transformed
+to \code{NA} (\code{raw = FALSE})?}
 }
 \value{
 A vector, with type depending on the input:
@@ -29,7 +30,8 @@ A vector, with type depending on the input:
 \description{
 Converts various Whitebox objects to vectors:
 \itemize{
-\item For \link{WhiteboxRaster}: converts raster values to a vector in row-major order
+\item For \link{WhiteboxRaster}: converts raster values to a vector in row-major
+order
 \item For \link{WhiteboxExtent}: converts extent boundaries to a named vector
 }
 }
