@@ -38,14 +38,16 @@ S7::method(as_matrix, WhiteboxRaster) <-
 #' 
 #' @description
 #' Converts various Whitebox objects to vectors:
-#' * For [WhiteboxRaster]: converts raster values to a vector in row-major order
+#' * For [WhiteboxRaster]: converts raster values to a vector in row-major 
+#' order
 #' * For [WhiteboxExtent]: converts extent boundaries to a named vector
 #'
 #' @param x Object to convert to vector. Can be:
 #'   * A [WhiteboxRaster] object
 #'   * A [WhiteboxExtent] object
-#' @param raw logical. For [WhiteboxRaster] only: Should the raw data be returned
-#'   (`raw = TRUE`) or should NoData values be transformed to `NA` (`raw = FALSE`)?
+#' @param raw logical. For [WhiteboxRaster] only: Should the raw data be 
+#' returned (`raw = TRUE`) or should NoData values be transformed 
+#' to `NA` (`raw = FALSE`)?
 #' 
 #' @return A vector, with type depending on the input:
 #' * For [WhiteboxRaster]: vector containing raster values

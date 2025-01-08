@@ -14,9 +14,10 @@
 #'
 #' @details This function provides a basic wrapper around
 #'  `reticulate::py_install()`, except it defaults to using the Python package
-#' manager \code{pip} and virtual environment. It creates the \code{r-wbw} virtual
-#' environment in the default location (run `reticulate::virtualenv_root()` to
-#' find it) and installs the required python packages.
+#' manager \code{pip} and virtual environment. It creates the \code{r-wbw} 
+#' virtual environment in the default location 
+#' (run `reticulate::virtualenv_root()` to find it) and installs the 
+#' required python packages.
 #'
 #' @return `NULL`, or `try-error` (invisibly) on R code execution error.
 #'

@@ -147,7 +147,10 @@ wbw_download_sample_data <-
 
     # Return download path
     cli::cli_alert_success(
-      "Sample dataset '{.val {data_set}}' downloaded to: {.file {download_path}}"
+      c(
+        "Sample dataset '{.val {data_set}}' ",
+        "downloaded to: {.file {download_path}}"
+      )
     )
     return(download_path)
   }

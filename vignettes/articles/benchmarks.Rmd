@@ -82,7 +82,12 @@ bench_hillshade <-
       r <- terra::rast(f)
       s <- terra::terrain(r, "slope", unit = "radians")
       a <- terra::terrain(r, "aspect", unit = "radians")
-      terra::shade(slope = s, aspect = a, angle = 40, direction = 270, normalize = TRUE)
+      terra::shade(
+        slope = s, 
+        aspect = a, 
+        angle = 40, 
+        direction = 270, 
+        normalize = TRUE)
     },
     check = FALSE,
     time_unit = "ms",
