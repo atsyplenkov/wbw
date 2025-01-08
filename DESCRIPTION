@@ -6,7 +6,7 @@ BugReports: https://github.com/atsyplenkov/wbw/issues
 Authors@R: c(person(given = "Anatoly", family = "Tsyplenkov", role = c("aut", "cre"), email = "atsyplenkov@fastmail.com", comment = c(ORCID = "0000-0003-4144-8402")))
 Maintainer: Anatoly Tsyplenkov <atsyplenkov@fastmail.com>
 Description: Provides R bindings to the proprietary Whitebox Workflows Python library, developed by Whitebox Geospatial Inc. 'Whitebox Workflows' is an advanced geospatial data analysis library for Geographic Information Systems (GIS) and remote sensing analysis, as well as manipulation of raster, vector, and LiDAR data.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
