@@ -85,6 +85,84 @@ test_that(
       wbw_conservative_smoothing_filter("x", filter_size_y = "a")
     )
 
+    # high_pass_filter
+    expect_error(
+      wbw_high_pass_filter(
+        x,
+        filter_size_x = 10, filter_size_y = 11
+      )
+    )
+    expect_error(
+      wbw_high_pass_filter(
+        x,
+        filter_size_x = 11, filter_size_y = 10
+      )
+    )
+    expect_error(
+      wbw_high_pass_filter(
+        x,
+        filter_size_x = 11.1, filter_size_y = 11
+      )
+    )
+    expect_error(
+      wbw_high_pass_filter(
+        "x",
+        filter_size_x = 11, filter_size_y = 11
+      )
+    )
+
+    # high_pass_median_filter
+    expect_error(
+      wbw_high_pass_median_filter(
+        x,
+        filter_size_x = 10, filter_size_y = 11
+      )
+    )
+    expect_error(
+      wbw_high_pass_median_filter(
+        x,
+        filter_size_x = 11, filter_size_y = 10
+      )
+    )
+    expect_error(
+      wbw_high_pass_median_filter(
+        x,
+        filter_size_x = 11.1, filter_size_y = 11
+      )
+    )
+    expect_error(
+      wbw_high_pass_median_filter(
+        "x",
+        filter_size_x = 11, filter_size_y = 11
+      )
+    )
+
+    # median_filter
+    expect_error(
+      wbw_median_filter(
+        x,
+        filter_size_x = 10, filter_size_y = 11
+      )
+    )
+    expect_error(
+      wbw_median_filter(
+        x,
+        filter_size_x = 11, filter_size_y = 10
+      )
+    )
+    expect_error(
+      wbw_median_filter(
+        x,
+        filter_size_x = 11.1, filter_size_y = 11
+      )
+    )
+    expect_error(
+      wbw_median_filter(
+        "x",
+        filter_size_x = 11, filter_size_y = 11
+      )
+    )
+
     # Gaussian filter
     expect_error(
       wbw_gaussian_filter(x, sigma = 0.2)
@@ -156,6 +234,50 @@ test_that(
       WhiteboxRaster
     )
 
+    # high_pass_median_filter
+    expect_s7_class(
+      wbw_high_pass_median_filter(x),
+      WhiteboxRaster
+    )
+    expect_s7_class(
+      wbw_high_pass_median_filter(
+        x,
+        filter_size_x = 25,
+        filter_size_y = 25,
+        sig_digits = 3
+      ),
+      WhiteboxRaster
+    )
+
+    # high_pass_filter
+    expect_s7_class(
+      wbw_high_pass_filter(x),
+      WhiteboxRaster
+    )
+    expect_s7_class(
+      wbw_high_pass_filter(
+        x,
+        filter_size_x = 25,
+        filter_size_y = 25
+      ),
+      WhiteboxRaster
+    )
+
+    # median_filter
+    expect_s7_class(
+      wbw_median_filter(x),
+      WhiteboxRaster
+    )
+    expect_s7_class(
+      wbw_median_filter(
+        x,
+        filter_size_x = 25,
+        filter_size_y = 25,
+        sig_digits = 3
+      ),
+      WhiteboxRaster
+    )
+
     # Gaussian filter
     expect_s7_class(
       wbw_gaussian_filter(x),
@@ -176,7 +298,13 @@ test_that(
     # Adaptive filter
     expect_type(
       all.equal(
-        median(wbw_adaptive_filter(x, filter_size_x = 51, filter_size_y = 51)),
+        median(
+          wbw_adaptive_filter(
+            x,
+            filter_size_x = 51,
+            filter_size_y = 51
+          )
+        ),
         true_median
       ),
       "character"
@@ -215,8 +343,53 @@ test_that(
         median(
           wbw_conservative_smoothing_filter(
             x,
-            filter_size_x = 3, 
+            filter_size_x = 3,
             filter_size_y = 3
+          )
+        ),
+        true_median
+      ),
+      "character"
+    )
+
+    # high_pass_filter
+    expect_type(
+      all.equal(
+        median(
+          wbw_high_pass_filter(
+            x,
+            filter_size_x = 51,
+            filter_size_y = 51
+          )
+        ),
+        true_median
+      ),
+      "character"
+    )
+
+    # high_pass_median_filter
+    expect_type(
+      all.equal(
+        median(
+          wbw_high_pass_median_filter(
+            x,
+            filter_size_x = 51,
+            filter_size_y = 51
+          )
+        ),
+        true_median
+      ),
+      "character"
+    )
+
+    # median_filter
+    expect_type(
+      all.equal(
+        median(
+          wbw_median_filter(
+            x,
+            filter_size_x = 11,
+            filter_size_y = 11
           )
         ),
         true_median
@@ -234,6 +407,9 @@ test_that(
     mean_filter <- wbw_mean_filter(x)
     gaussian_filter <- wbw_gaussian_filter(x)
     conservative_smoothing_filter <- wbw_conservative_smoothing_filter(x)
+    high_pass_filter <- wbw_high_pass_filter(x)
+    high_pass_median_filter <- wbw_high_pass_median_filter(x)
+    median_filter <- wbw_median_filter(x)
 
     # Class
     expect_snapshot(adaptive_filter)
@@ -241,5 +417,8 @@ test_that(
     expect_snapshot(mean_filter)
     expect_snapshot(gaussian_filter)
     expect_snapshot(conservative_smoothing_filter)
+    expect_snapshot(high_pass_filter)
+    expect_snapshot(high_pass_median_filter)
+    expect_snapshot(median_filter)
   }
 )

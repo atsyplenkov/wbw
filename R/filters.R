@@ -2,14 +2,14 @@
 #' @keywords image_processing
 #'
 #' @description
-#' Applies an adaptive filter to reduce random noise (shot noise) in a raster 
-#' image. The filter modifies pixel values only where they differ substantially 
+#' Applies an adaptive filter to reduce random noise (shot noise) in a raster
+#' image. The filter modifies pixel values only where they differ substantially
 #' from their neighbors.
 #'
 #' @details
-#' The algorithm calculates the average value in a moving window centered on 
-#' each grid cell. If the absolute difference between the window mean and the 
-#' center cell value exceeds the user-defined threshold, the output cell is 
+#' The algorithm calculates the average value in a moving window centered on
+#' each grid cell. If the absolute difference between the window mean and the
+#' center cell value exceeds the user-defined threshold, the output cell is
 #' assigned the mean value. Otherwise, it retains its original value.
 #'
 #' Neighbourhood size, or filter size, is specified in the x and y dimensions
@@ -164,7 +164,7 @@ S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
 #' @details
 #' Uses an efficient integral image approach (Crow, 1984) that is independent
 #' of filter size. While commonly used, mean filters can be more aggressive in
-#' their smoothing compared to edge-preserving alternatives like the 
+#' their smoothing compared to edge-preserving alternatives like the
 #' [wbw_bilateral_filter] or [wbw_gaussian_filter].
 #'
 #' Neighbourhood size, or filter size, is specified in the x and y dimensions
@@ -177,10 +177,10 @@ S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
 #'
 #' @return [WhiteboxRaster] object containing filtered values
 #'
-#' @references 
-#' Crow, F. C. (1984, January). Summed-area tables for texture mapping. 
+#' @references
+#' Crow, F. C. (1984, January). Summed-area tables for texture mapping.
 #' In ACM SIGGRAPH computer graphics (Vol. 18, No. 3, pp. 207-212). ACM.
-#' 
+#'
 #' @seealso [wbw_bilateral_filter()], [wbw_gaussian_filter()]
 #'
 #' @eval rd_wbw_link("mean_filter")
@@ -295,21 +295,21 @@ S7::method(wbw_gaussian_filter, WhiteboxRaster) <-
 #' @keywords image_processing
 #'
 #' @description
-#' This tool performs a conservative smoothing filter on a raster image. 
-#' A conservative smoothing filter can be used to remove short-range 
-#' variability in an image, effectively acting to smooth the image. 
+#' This tool performs a conservative smoothing filter on a raster image.
+#' A conservative smoothing filter can be used to remove short-range
+#' variability in an image, effectively acting to smooth the image.
 #' It is particularly useful for eliminating local spikes and reducing the
-#'  noise in an image. 
+#'  noise in an image.
 #'
 #' @details
 #' The algorithm operates by calculating the minimum and maximum neighbouring
 #'  values surrounding a grid cell. If the cell at the centre of the
-#'  kernel is greater than the calculated maximum value, it is replaced 
-#' with the maximum value in the output image. Similarly, if the cell 
-#' value at the kernel centre is less than the neighbouring minimum value, 
-#' the corresponding grid cell in the output image is replaced with the 
+#'  kernel is greater than the calculated maximum value, it is replaced
+#' with the maximum value in the output image. Similarly, if the cell
+#' value at the kernel centre is less than the neighbouring minimum value,
+#' the corresponding grid cell in the output image is replaced with the
 #' minimum value.
-#' 
+#'
 #' Neighbourhood size, or filter size, is specified in the x and y dimensions
 #' using `filter_size_x` and `filter_size_y` These dimensions should be odd,
 #' positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
@@ -320,7 +320,7 @@ S7::method(wbw_gaussian_filter, WhiteboxRaster) <-
 #'
 #' @return [WhiteboxRaster] object containing filtered values
 #'
-#' @seealso [wbw_bilateral_filter()], [wbw_gaussian_filter()], 
+#' @seealso [wbw_bilateral_filter()], [wbw_gaussian_filter()],
 #' [wbw_mean_filter()]
 #'
 #' @eval rd_wbw_link("conservative_smoothing_filter")
@@ -365,6 +365,263 @@ S7::method(wbw_conservative_smoothing_filter, WhiteboxRaster) <-
         raster = x@source,
         filter_size_x = filter_size_x,
         filter_size_y = filter_size_y
+      )
+    # Return Raster
+    WhiteboxRaster(
+      name = x@name,
+      source = out
+    )
+  }
+
+
+#' High Pass Filter
+#' @keywords image_processing
+#'
+#' @description
+#' This tool performs a high-pass filter on a raster image. High-pass filters
+#' can be used to emphasize the short-range variability in an image.
+#' The algorithm operates essentially by subtracting the value at the grid
+#'  cell at the centre of the window from the average value in the surrounding
+#'  neighbourhood (i.e. window.)
+#'
+#' @details
+#' Neighbourhood size, or filter size, is specified in the x and y dimensions
+#' using `filter_size_x` and `filter_size_y` These dimensions should be odd,
+#' positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+#'
+#' @eval rd_input_raster("x")
+#' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
+#' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
+#'
+#' @return [WhiteboxRaster] object containing filtered values
+#'
+#' @seealso [wbw_mean_filter()], [wbw_high_pass_median_filter()]
+#'
+#' @eval rd_wbw_link("high_pass_filter")
+#' @eval rd_example("wbw_high_pass_filter",
+#' c("filter_size_x = 3L", "filter_size_y = 3L"))
+#'
+#' @export
+wbw_high_pass_filter <-
+  S7::new_generic(
+    name = "wbw_high_pass_filter",
+    dispatch_args = "x",
+    fun = function(x,
+                   filter_size_x = 11L,
+                   filter_size_y = 11L) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_high_pass_filter, WhiteboxRaster) <-
+  function(x,
+           filter_size_x = 11L,
+           filter_size_y = 11L) {
+    # Checks
+    check_env(wbe)
+    filter_size_x <-
+      checkmate::asInteger(
+        filter_size_x,
+        lower = 0L,
+        len = 1L
+      )
+    filter_size_y <-
+      checkmate::asInteger(
+        filter_size_y,
+        lower = 0L,
+        len = 1L
+      )
+    checkmate::assert_true(filter_size_x %% 2 == 1)
+    checkmate::assert_true(filter_size_y %% 2 == 1)
+    # Filter
+    out <-
+      wbe$high_pass_filter(
+        raster = x@source,
+        filter_size_x = filter_size_x,
+        filter_size_y = filter_size_y
+      )
+    # Return Raster
+    WhiteboxRaster(
+      name = x@name,
+      source = out
+    )
+  }
+
+
+
+#' High Pass Median Filter
+#' @keywords image_processing
+#'
+#' @description
+#' This tool performs a high-pass median filter on a raster image.
+#' High-pass filters can be used to emphasize the short-range variability in
+#'  an image. The algorithm operates essentially by subtracting the value at
+#' the grid cell at the centre of the window from the median value in the
+#' surrounding neighbourhood (i.e. window.)
+#'
+#' @details
+#' Neighbourhood size, or filter size, is specified in the x and y dimensions
+#' using `filter_size_x` and `filter_size_y` These dimensions should be odd,
+#' positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+#'
+#' @eval rd_input_raster("x")
+#' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
+#' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
+#' @param sig_digits \code{integer}
+#'
+#' @return [WhiteboxRaster] object containing filtered values
+#'
+#' @seealso [wbw_median_filter()], [wbw_high_pass_filter()]
+#'
+#' @eval rd_wbw_link("high_pass_median_filter")
+#' @eval rd_example("wbw_high_pass_median_filter",
+#' c("filter_size_x = 3L", "filter_size_y = 3L"))
+#'
+#' @export
+wbw_high_pass_median_filter <-
+  S7::new_generic(
+    name = "wbw_high_pass_median_filter",
+    dispatch_args = "x",
+    fun = function(x,
+                   filter_size_x = 11L,
+                   filter_size_y = 11L,
+                   sig_digits = 2L) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_high_pass_median_filter, WhiteboxRaster) <-
+  function(x,
+           filter_size_x = 11L,
+           filter_size_y = 11L,
+           sig_digits = 2L) {
+    # Checks
+    check_env(wbe)
+    filter_size_x <-
+      checkmate::asInteger(
+        filter_size_x,
+        lower = 0L,
+        len = 1L
+      )
+    filter_size_y <-
+      checkmate::asInteger(
+        filter_size_y,
+        lower = 0L,
+        len = 1L
+      )
+    checkmate::assert_true(filter_size_x %% 2 == 1)
+    checkmate::assert_true(filter_size_y %% 2 == 1)
+    sig_digits <-
+      checkmate::asInteger(
+        sig_digits,
+        lower = 0L,
+        len = 1L
+      )
+    # Filter
+    out <-
+      wbe$high_pass_median_filter(
+        raster = x@source,
+        filter_size_x = filter_size_x,
+        filter_size_y = filter_size_y,
+        sig_digits = sig_digits
+      )
+    # Return Raster
+    WhiteboxRaster(
+      name = x@name,
+      source = out
+    )
+  }
+
+
+
+#' Median Filter
+#' @keywords image_processing
+#'
+#' @description
+#' This tool performs a median filter on a raster image. Median filters, a 
+#' type of low-pass filter, can be used to emphasize the longer-range 
+#' variability in an image, effectively acting to smooth the image. This 
+#' can be useful for reducing the noise in an image.
+#'
+#' @details
+#' The algorithm operates by calculating the median value (middle value in 
+#' a sorted list) in a moving window centred on each grid cell. Specifically,
+#'  this tool uses the efficient running-median filtering algorithm of
+#'  Huang et al. (1979). The median value is not influenced by 
+#' anomolously high or low values in the distribution to the extent 
+#' that the average is. As such, the median filter is far less sensitive 
+#' to shot noise in an image than the mean filter.
+#' 
+#' Neighbourhood size, or filter size, is specified in the x and y dimensions
+#' using `filter_size_x` and `filter_size_y` These dimensions should be odd,
+#' positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+#'
+#' @eval rd_input_raster("x")
+#' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
+#' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
+#' @param sig_digits \code{integer}
+#'
+#' @return [WhiteboxRaster] object containing filtered values
+#'
+#' @seealso [wbw_mean_filter()], [wbw_high_pass_filter()],
+#' [wbw_high_pass_median_filter()]
+#'
+#' @references
+#' Huang, T., Yang, G.J.T.G.Y. and Tang, G., 1979. A fast two-dimensional 
+#' median filtering algorithm. IEEE Transactions on Acoustics, Speech, and
+#'  Signal Processing, 27(1), pp.13-18.
+#' 
+#' @eval rd_wbw_link("median_filter")
+#' @eval rd_example("wbw_median_filter",
+#' c("filter_size_x = 3L", "filter_size_y = 3L"))
+#'
+#' @export
+wbw_median_filter <-
+  S7::new_generic(
+    name = "wbw_median_filter",
+    dispatch_args = "x",
+    fun = function(x,
+                   filter_size_x = 11L,
+                   filter_size_y = 11L,
+                   sig_digits = 2L) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_median_filter, WhiteboxRaster) <-
+  function(x,
+           filter_size_x = 11L,
+           filter_size_y = 11L,
+           sig_digits = 2L) {
+    # Checks
+    check_env(wbe)
+    filter_size_x <-
+      checkmate::asInteger(
+        filter_size_x,
+        lower = 0L,
+        len = 1L
+      )
+    filter_size_y <-
+      checkmate::asInteger(
+        filter_size_y,
+        lower = 0L,
+        len = 1L
+      )
+    checkmate::assert_true(filter_size_x %% 2 == 1)
+    checkmate::assert_true(filter_size_y %% 2 == 1)
+    sig_digits <-
+      checkmate::asInteger(
+        sig_digits,
+        lower = 0L,
+        len = 1L
+      )
+    # Filter
+    out <-
+      wbe$median_filter(
+        raster = x@source,
+        filter_size_x = filter_size_x,
+        filter_size_y = filter_size_y,
+        sig_digits = sig_digits
       )
     # Return Raster
     WhiteboxRaster(
