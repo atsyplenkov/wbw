@@ -43,13 +43,13 @@ test_that("WhiteboxRaster to SpatRaster conversion works", {
 
 test_that("WhiteboxRaster to SpatRaster conversion works with integer data", {
   skip_if_not_installed("terra")
-  
+
   # Setup
   r <- terra::rast(f)
   r <- terra::as.int(r)
   wbwr <- wbw_read_raster(f)
   converted <- as_rast(wbwr)
-  
+
   # Tests
   expect_true(terra::is.int(converted))
   expect_true(terra::is.int(r))
@@ -58,13 +58,13 @@ test_that("WhiteboxRaster to SpatRaster conversion works with integer data", {
 
 test_that("WhiteboxRaster to SpatRaster conversion handles NA values", {
   skip_if_not_installed("terra")
-  
+
   # Setup
   r <- terra::rast(f)
   r[r < mean(r[], na.rm = TRUE)] <- NA
   wbwr <- as_wbw_raster(r)
   converted <- as_rast(wbwr)
-  
+
   # Tests
   expect_equal(sum(is.na(converted[])), sum(is.na(r[])))
   expect_equal(as.vector(converted), as.vector(r))
@@ -72,13 +72,13 @@ test_that("WhiteboxRaster to SpatRaster conversion handles NA values", {
 
 test_that("SpatRaster to WhiteboxRaster conversion handles different CRS", {
   skip_if_not_installed("terra")
-  
+
   # Setup
   r <- terra::rast(f)
   r <- terra::project(r, "EPSG:4326")
   wbwr <- as_wbw_raster(r)
   converted <- as_rast(wbwr)
-  
+
   # Tests
   expect_equal(terra::crs(converted), terra::crs(r))
   expect_equal(as.vector(converted), as.vector(r))
@@ -86,12 +86,12 @@ test_that("SpatRaster to WhiteboxRaster conversion handles different CRS", {
 
 test_that("SpatRaster to WhiteboxRaster conversion validates inputs", {
   skip_if_not_installed("terra")
-  
+
   # Test multilayer error
   r <- terra::rast(f)
   r2 <- c(r, r)
   expect_error(as_wbw_raster(r2), "nlyr.*1")
-  
+
   # Test NA flag handling
   r_na <- terra::rast(f)
   terra::NAflag(r_na) <- NaN
@@ -101,12 +101,12 @@ test_that("SpatRaster to WhiteboxRaster conversion validates inputs", {
 
 test_that("Conversion preserves raster properties", {
   skip_if_not_installed("terra")
-  
+
   # Setup
   r <- terra::rast(f)
   wbwr <- as_wbw_raster(r)
   converted <- as_rast(wbwr)
-  
+
   # Tests
   expect_equal(terra::res(converted), terra::res(r))
   expect_equal(as.vector(terra::ext(converted)), as.vector(terra::ext(r)))
@@ -117,7 +117,7 @@ test_that("Conversion preserves raster properties", {
 
 test_that("Conversion works with boolean and factor rasters", {
   skip_if_not_installed("terra")
-  
+
   # Test boolean raster
   r <- terra::rast(f)
   r <- r > mean(r[], na.rm = TRUE)
@@ -127,7 +127,7 @@ test_that("Conversion works with boolean and factor rasters", {
   # wbwr <- as_wbw_raster(r)
   # converted <- as_rast(wbwr)
   # expect_equal(as.vector(converted), as.vector(r))
-  
+
   # Test factor raster
   r_fact <- terra::as.factor(terra::classify(r, c(0, 1)))
   wbwr_fact <- as_wbw_raster(r_fact)

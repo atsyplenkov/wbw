@@ -1,7 +1,4 @@
-# source("../test-setup.R")
-raster_path <-
-  system.file("extdata/dem.tif", package = "wbw")
-x <- wbw_read_raster(raster_path)
+source("../test-setup.R")
 
 # Helper function to create temporary files
 create_temp_file <- function(ext) {

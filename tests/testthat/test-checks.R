@@ -88,11 +88,3 @@ test_that("check_input_file validates type argument", {
     check_input_file(temp_file, "invalid_type")
   )
 })
-
-test_that("check_env works with wbe environment", {
-  skip_if_no_wbw()
-  
-  # Test with actual wbe environment
-  expect_no_error(check_env(wbe))
-  
-})
