@@ -95,86 +95,73 @@ S7::method(as_rast, WhiteboxRaster) <-
 #' }
 #' @export
 as_wbw_raster <-
-  S7::new_generic(
-    name = "as_wbw_raster",
-    dispatch_args = "x",
-    fun = function(x) {
-      S7::S7_dispatch()
+  function(x) {
+    # Checks
+    checkmate::assert_class(x, "SpatRaster")
+    checkmate::assert_class(
+      wbw,
+      classes = c(
+        "python.builtin.module",
+        "python.builtin.object"
+      )
+    )
+    checkmate::assert_true(
+      terra::nlyr(x) == 1
+    )
+
+    # SpatRaster information
+    na_terra <- terra::NAflag(x)
+    nodata_value <- if (is.nan(na_terra)) {
+      -9999
+    } else {
+      na_terra
     }
-  )
+    res_terra <- terra::res(x)
+    name_terra <- names(x)
+    type_terra <- any(c(
+      terra::is.int(x),
+      terra::is.bool(x),
+      terra::is.factor(x)
+    ))
+    ext_terra <- terra::ext(x)
+    data_terra <- as.matrix(x, wide = TRUE)
+    data_terra[is.na(data_terra)] <- nodata_value
 
-if (requireNamespace("terra", quietly = TRUE)) {
-  S7::method(
-    as_wbw_raster,
-    methods::getClass("SpatRaster", where = asNamespace("terra"))
-  ) <-
-    function(x) {
-      # Checks
-      checkmate::assert_class(
-        wbw,
-        classes = c(
-          "python.builtin.module",
-          "python.builtin.object"
-        )
-      )
-      checkmate::assert_true(
-        terra::nlyr(x) == 1
-      )
+    # Create new RasterConfigs
+    new_config <- wbw$RasterConfigs()
+    new_config$title <- name_terra
 
-      # SpatRaster information
-      na_terra <- terra::NAflag(x)
-      nodata_value <- if (is.nan(na_terra)) {
-        -9999
+    # Dimensions
+    new_config$bands <- as.integer(terra::nlyr(x))
+    new_config$columns <- as.integer(terra::ncol(x))
+    new_config$rows <- as.integer(terra::nrow(x))
+    new_config$west <- as.double(ext_terra[1])
+    ## Note the differences in east and south between reading by
+    ## GDAL (i.e. terra) and WhiteboxTools
+    new_config$east <- as.double(ext_terra[2]) - res_terra[1]
+    new_config$south <- as.double(ext_terra[3]) + res_terra[2]
+    new_config$north <- as.double(ext_terra[4])
+
+    # CRS
+    new_config$coordinate_ref_system_wkt <- terra::crs(x)
+    new_config$resolution_x <- res_terra[1]
+    new_config$resolution_y <- res_terra[2]
+
+    # Data type
+    new_config$nodata <- nodata_value
+    new_config$data_type <-
+      if (type_terra) {
+        wbw$RasterDataType$I16
       } else {
-        na_terra
+        wbw$RasterDataType$F32
       }
-      res_terra <- terra::res(x)
-      name_terra <- names(x)
-      type_terra <- any(c(
-        terra::is.int(x),
-        terra::is.bool(x),
-        terra::is.factor(x)
-      ))
-      ext_terra <- terra::ext(x)
-      data_terra <- as.matrix(x, wide = TRUE)
-      data_terra[is.na(data_terra)] <- nodata_value
 
-      # Create new RasterConfigs
-      new_config <- wbw$RasterConfigs()
-      new_config$title <- name_terra
+    # Create WhiteboxRaster
+    new_raster <- wbe$new_raster(new_config)
+    wbw_env$matrix_to_wbw(data_terra, new_raster)
 
-      # Dimensions
-      new_config$bands <- as.integer(terra::nlyr(x))
-      new_config$columns <- as.integer(terra::ncol(x))
-      new_config$rows <- as.integer(terra::nrow(x))
-      new_config$west <- as.double(ext_terra[1])
-      ## Note the differences in east and south between reading by
-      ## GDAL (i.e. terra) and WhiteboxTools
-      new_config$east <- as.double(ext_terra[2]) - res_terra[1]
-      new_config$south <- as.double(ext_terra[3]) + res_terra[2]
-      new_config$north <- as.double(ext_terra[4])
-
-      # CRS
-      new_config$coordinate_ref_system_wkt <- terra::crs(x)
-      new_config$resolution_x <- res_terra[1]
-      new_config$resolution_y <- res_terra[2]
-
-      # Data type
-      new_config$nodata <- nodata_value
-      new_config$data_type <-
-        if (type_terra) {
-          wbw$RasterDataType$I16
-        } else {
-          wbw$RasterDataType$F32
-        }
-
-      # Create WhiteboxRaster
-      new_raster <- wbe$new_raster(new_config)
-      wbw_env$matrix_to_wbw(data_terra, new_raster)
-
-      WhiteboxRaster(
-        name = name_terra,
-        source = new_raster
-      )
-    }
-}
+    WhiteboxRaster(
+      name = name_terra,
+      source = new_raster
+    )
+  }

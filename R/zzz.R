@@ -172,7 +172,7 @@ wbw_version <-
 .onAttach <- function(libname, pkgname) {
   wbwv <- wbw_version()
   suppress <-
-    !grepl("suppress", Sys.getenv("wbw.message"), ignore.case = TRUE)
+    !grepl("suppressed", Sys.getenv("wbw.message"), ignore.case = TRUE)
 
   if (is.null(wbwv) && suppress && interactive()) {
     cli::cli_alert_warning(c(
@@ -181,7 +181,7 @@ wbw_version <-
     ))
   } else if (!is.null(wbwv) && suppress) {
     cli::cli_alert_success(c(
-      "wbw v{wbwv} -- using whitebox-workflows v{wbwv}"
+      "wbw v{utils::packageVersion('wbw')} -- using whitebox-workflows v{wbwv}"
     ))
   }
 }

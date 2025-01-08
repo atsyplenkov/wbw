@@ -6,8 +6,8 @@ raster_path <-
 x <- wbw_read_raster(raster_path)
 
 # Path to terra's files
-f <- system.file("ex/elev.tif", package = "terra")
-# if (requireNamespace("terra", quietly = TRUE)) {
-#   library(terra)
-#   f <- system.file("ex/elev.tif", package = "terra")
-# }
+# f <- system.file("ex/elev.tif", package = "terra")
+if (requireNamespace("terra", quietly = TRUE)) {
+  library(terra)
+  f <- system.file("ex/elev.tif", package = "terra")
+}
