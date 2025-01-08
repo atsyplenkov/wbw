@@ -65,6 +65,26 @@ test_that(
       wbw_mean_filter("x", filter_size_y = "a")
     )
 
+    # conservative_smoothing_filter
+    expect_error(
+      wbw_conservative_smoothing_filter(x, filter_size_x = 10L)
+    )
+    expect_error(
+      wbw_conservative_smoothing_filter(x, filter_size_y = 2)
+    )
+    expect_error(
+      wbw_conservative_smoothing_filter(x, filter_size_y = c(1:2))
+    )
+    expect_error(
+      wbw_conservative_smoothing_filter(x, filter_size_y = 1.5)
+    )
+    expect_error(
+      wbw_conservative_smoothing_filter(x, filter_size_y = "a")
+    )
+    expect_error(
+      wbw_conservative_smoothing_filter("x", filter_size_y = "a")
+    )
+
     # Gaussian filter
     expect_error(
       wbw_gaussian_filter(x, sigma = 0.2)
@@ -122,6 +142,20 @@ test_that(
       WhiteboxRaster
     )
 
+    # conservative_smoothing_filter
+    expect_s7_class(
+      wbw_conservative_smoothing_filter(x),
+      WhiteboxRaster
+    )
+    expect_s7_class(
+      wbw_conservative_smoothing_filter(
+        x,
+        filter_size_x = 5,
+        filter_size_y = 5
+      ),
+      WhiteboxRaster
+    )
+
     # Gaussian filter
     expect_s7_class(
       wbw_gaussian_filter(x),
@@ -174,20 +208,38 @@ test_that(
       ),
       "character"
     )
+
+    # conservative_smoothing_filter
+    expect_type(
+      all.equal(
+        median(
+          wbw_conservative_smoothing_filter(
+            x,
+            filter_size_x = 3, 
+            filter_size_y = 3
+          )
+        ),
+        true_median
+      ),
+      "character"
+    )
   }
 )
 
 test_that(
-  "Snapshots",{
+  "Snapshots",
+  {
     adaptive_filter <- wbw_adaptive_filter(x)
     bilateral_filter <- wbw_bilateral_filter(x)
     mean_filter <- wbw_mean_filter(x)
     gaussian_filter <- wbw_gaussian_filter(x)
+    conservative_smoothing_filter <- wbw_conservative_smoothing_filter(x)
 
-    # Class 
+    # Class
     expect_snapshot(adaptive_filter)
     expect_snapshot(bilateral_filter)
     expect_snapshot(mean_filter)
     expect_snapshot(gaussian_filter)
+    expect_snapshot(conservative_smoothing_filter)
   }
 )

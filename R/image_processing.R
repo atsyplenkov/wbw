@@ -289,3 +289,86 @@ S7::method(wbw_gaussian_filter, WhiteboxRaster) <-
       source = out
     )
   }
+
+
+#' Conservative Smoothing Filter
+#' @keywords image_processing
+#'
+#' @description
+#' This tool performs a conservative smoothing filter on a raster image. 
+#' A conservative smoothing filter can be used to remove short-range 
+#' variability in an image, effectively acting to smooth the image. 
+#' It is particularly useful for eliminating local spikes and reducing the
+#'  noise in an image. 
+#'
+#' @details
+#' The algorithm operates by calculating the minimum and maximum neighbouring
+#'  values surrounding a grid cell. If the cell at the centre of the
+#'  kernel is greater than the calculated maximum value, it is replaced 
+#' with the maximum value in the output image. Similarly, if the cell 
+#' value at the kernel centre is less than the neighbouring minimum value, 
+#' the corresponding grid cell in the output image is replaced with the 
+#' minimum value.
+#' 
+#' Neighbourhood size, or filter size, is specified in the x and y dimensions
+#' using `filter_size_x` and `filter_size_y` These dimensions should be odd,
+#' positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+#'
+#' @eval rd_input_raster("x")
+#' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
+#' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
+#'
+#' @return [WhiteboxRaster] object containing filtered values
+#'
+#' @seealso [wbw_bilateral_filter()], [wbw_gaussian_filter()], 
+#' [wbw_mean_filter()]
+#'
+#' @eval rd_wbw_link("conservative_smoothing_filter")
+#' @eval rd_example("wbw_conservative_smoothing_filter",
+#' c("filter_size_x = 3L", "filter_size_y = 3L"))
+#'
+#' @export
+wbw_conservative_smoothing_filter <-
+  S7::new_generic(
+    name = "wbw_conservative_smoothing_filter",
+    dispatch_args = "x",
+    fun = function(x,
+                   filter_size_x = 3L,
+                   filter_size_y = 3L) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_conservative_smoothing_filter, WhiteboxRaster) <-
+  function(x,
+           filter_size_x = 3L,
+           filter_size_y = 3L) {
+    # Checks
+    check_env(wbe)
+    filter_size_x <-
+      checkmate::asInteger(
+        filter_size_x,
+        lower = 0L,
+        len = 1L
+      )
+    filter_size_y <-
+      checkmate::asInteger(
+        filter_size_y,
+        lower = 0L,
+        len = 1L
+      )
+    checkmate::assert_true(filter_size_x %% 2 == 1)
+    checkmate::assert_true(filter_size_y %% 2 == 1)
+    # Filter
+    out <-
+      wbe$conservative_smoothing_filter(
+        raster = x@source,
+        filter_size_x = filter_size_x,
+        filter_size_y = filter_size_y
+      )
+    # Return Raster
+    WhiteboxRaster(
+      name = x@name,
+      source = out
+    )
+  }
