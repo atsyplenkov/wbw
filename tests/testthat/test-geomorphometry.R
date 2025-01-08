@@ -47,12 +47,20 @@ test_that(
 
 test_that(
   "Snapshots",{
-    expect_snapshot(wbw_aspect(x))
-    expect_snapshot(wbw_slope(x))
-    expect_snapshot(wbw_ruggedness_index(x))
-    expect_snapshot(wbw_fill_missing_data(x))
-    expect_snapshot(wbw_multidirectional_hillshade(x))
-    expect_snapshot(wbw_hillshade(x))
+    aspect <- wbw_aspect(x)
+    slope <- wbw_slope(x)
+    ruggedness_index <- wbw_ruggedness_index(x)
+    fill_missing_data<- wbw_fill_missing_data(x)
+    multidirectional_hillshade <- wbw_multidirectional_hillshade(x)
+    hillshade <- wbw_hillshade(x)
+
+    # Class 
+    expect_snapshot(aspect)
+    expect_snapshot(slope)
+    expect_snapshot(ruggedness_index)
+    expect_snapshot(fill_missing_data)
+    expect_snapshot(multidirectional_hillshade)
+    expect_snapshot(hillshade)
   }
 )
 

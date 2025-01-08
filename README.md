@@ -135,10 +135,7 @@ to start.
 
 Geomorphometric and hydrological analysis in R can be also done with:
 
-- [`{whitebox}`](https://github.com/opengeos/whiteboxR) — An R frontend for the [WhiteboxTools](https://www.whiteboxgeo.com) standalone runner.
-
-- [`{traudem}`](https://github.com/lucarraro/traudem/) — R bindings to [TauDEM](https://hydrology.usu.edu/taudem/taudem5/) (Terrain Analysis Using Digital Elevation Models) command-line interface.
-
-- [`{RSagacmd}`](https://github.com/stevenpawley/Rsagacmd/) and [`{RSAGA}`](https://github.com/r-spatial/RSAGA) — Links R with [SAGA GIS](https://sourceforge.net/projects/saga-gis/).
-
+- [`{whitebox}`](https://github.com/opengeos/whiteboxR) — An R frontend for the [WhiteboxTools](https://www.whiteboxgeo.com) standalone runner. <br>
+- [`{traudem}`](https://github.com/lucarraro/traudem/) — R bindings to [TauDEM](https://hydrology.usu.edu/taudem/taudem5/) (Terrain Analysis Using Digital Elevation Models) command-line interface. <br>
+- [`{RSagacmd}`](https://github.com/stevenpawley/Rsagacmd/) and [`{RSAGA}`](https://github.com/r-spatial/RSAGA) — Links R with [SAGA GIS](https://sourceforge.net/projects/saga-gis/). <br>
 - [`{rivnet}`](https://github.com/lucarraro/rivnet) — river network extraction from DEM using TauDEM.

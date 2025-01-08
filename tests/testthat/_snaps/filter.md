@@ -1,61 +1,7 @@
 # Snapshots
 
     Code
-      aspect
-    Output
-      +-----------------------------------------------+ 
-      | WhiteboxRaster                                |
-      | Aspect                                        |
-      |...............................................| 
-      | bands       : 1                               |
-      | dimensions  : 726, 800  (nrow, ncol)          |
-      | resolution  : 5.002392, 5.000243  (x, y)      |
-      | EPSG        : 2193  (Linear_Meter)            |
-      | extent      : 1925449 1929446 5582091 5585717 |
-      | min value   : -1.000000                       |
-      | max value   : 359.999481                      |
-      +-----------------------------------------------+ 
-
----
-
-    Code
-      slope
-    Output
-      +-----------------------------------------------+ 
-      | WhiteboxRaster                                |
-      | Slope (degrees)                               |
-      |...............................................| 
-      | bands       : 1                               |
-      | dimensions  : 726, 800  (nrow, ncol)          |
-      | resolution  : 5.002392, 5.000243  (x, y)      |
-      | EPSG        : 2193  (Linear_Meter)            |
-      | extent      : 1925449 1929446 5582091 5585717 |
-      | min value   : 0.000000                        |
-      | max value   : 70.131950                       |
-      +-----------------------------------------------+ 
-
----
-
-    Code
-      ruggedness_index
-    Output
-      +-----------------------------------------------+ 
-      | WhiteboxRaster                                |
-      | TRI                                           |
-      |...............................................| 
-      | bands       : 1                               |
-      | dimensions  : 726, 800  (nrow, ncol)          |
-      | resolution  : 5.002392, 5.000243  (x, y)      |
-      | EPSG        : 2193  (Linear_Meter)            |
-      | extent      : 1925449 1929446 5582091 5585717 |
-      | min value   : 0.000000                        |
-      | max value   : 11.271574                       |
-      +-----------------------------------------------+ 
-
----
-
-    Code
-      fill_missing_data
+      adaptive_filter
     Output
       +-----------------------------------------------+ 
       | WhiteboxRaster                                |
@@ -73,36 +19,54 @@
 ---
 
     Code
-      multidirectional_hillshade
+      bilateral_filter
     Output
       +-----------------------------------------------+ 
       | WhiteboxRaster                                |
-      | dem.tif(Hillshade)                            |
+      | dem.tif                                       |
       |...............................................| 
       | bands       : 1                               |
       | dimensions  : 726, 800  (nrow, ncol)          |
       | resolution  : 5.002392, 5.000243  (x, y)      |
       | EPSG        : 2193  (Linear_Meter)            |
       | extent      : 1925449 1929446 5582091 5585717 |
-      | min value   : 0.000000                        |
-      | max value   : 28354.000000                    |
+      | min value   : 64.003914                       |
+      | max value   : 360.693237                      |
       +-----------------------------------------------+ 
 
 ---
 
     Code
-      hillshade
+      mean_filter
     Output
       +-----------------------------------------------+ 
       | WhiteboxRaster                                |
-      | dem.tif(Hillshade)                            |
+      | dem.tif                                       |
       |...............................................| 
       | bands       : 1                               |
       | dimensions  : 726, 800  (nrow, ncol)          |
       | resolution  : 5.002392, 5.000243  (x, y)      |
       | EPSG        : 2193  (Linear_Meter)            |
       | extent      : 1925449 1929446 5582091 5585717 |
-      | min value   : 0.000000                        |
-      | max value   : 32713.000000                    |
+      | min value   : 67.234825                       |
+      | max value   : 351.684509                      |
+      +-----------------------------------------------+ 
+
+---
+
+    Code
+      gaussian_filter
+    Output
+      +-----------------------------------------------+ 
+      | WhiteboxRaster                                |
+      | dem.tif                                       |
+      |...............................................| 
+      | bands       : 1                               |
+      | dimensions  : 726, 800  (nrow, ncol)          |
+      | resolution  : 5.002392, 5.000243  (x, y)      |
+      | EPSG        : 2193  (Linear_Meter)            |
+      | extent      : 1925449 1929446 5582091 5585717 |
+      | min value   : 64.262215                       |
+      | max value   : 359.898285                      |
       +-----------------------------------------------+ 
 

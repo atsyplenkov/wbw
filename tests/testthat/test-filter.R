@@ -176,3 +176,18 @@ test_that(
     )
   }
 )
+
+test_that(
+  "Snapshots",{
+    adaptive_filter <- wbw_adaptive_filter(x)
+    bilateral_filter <- wbw_bilateral_filter(x)
+    mean_filter <- wbw_mean_filter(x)
+    gaussian_filter <- wbw_gaussian_filter(x)
+
+    # Class 
+    expect_snapshot(adaptive_filter)
+    expect_snapshot(bilateral_filter)
+    expect_snapshot(mean_filter)
+    expect_snapshot(gaussian_filter)
+  }
+)
