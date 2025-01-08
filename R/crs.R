@@ -3,12 +3,17 @@
 #'
 #' @eval rd_input_raster("x")
 #'
+#' @examples
+#' f <- system.file("extdata/dem.tif", package = "wbw")
+#' wbw_read_raster(f) |>
+#'   wbw_ext()
 #' @export
 wbw_ext <-
   S7::new_generic(
     name = "wbw_ext",
     dispatch_args = "x",
     fun = function(x) {
+      # Add some input validation
       S7::S7_dispatch()
     }
   )
@@ -16,7 +21,6 @@ wbw_ext <-
 S7::method(wbw_ext, WhiteboxRaster) <-
   function(x) {
     # Checks
-    check_env(wbe)
     conf <- x@source$configs
     WhiteboxExtent(
       west = conf$west,

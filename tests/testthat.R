@@ -15,3 +15,5 @@ have_numpy <- reticulate::py_module_available("numpy")
 if (!have_wbw & !have_numpy) {
   wbw_install(system = TRUE)
 }
+
+test_check("wbw")

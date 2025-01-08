@@ -77,3 +77,22 @@ test_that("check_input_file works for raster files", {
     check_input_file(temp_wrong, "raster")
   )
 })
+
+test_that("check_input_file validates type argument", {
+  temp_file <- tempfile(fileext = ".tif")
+  file.create(temp_file)
+  on.exit(unlink(temp_file))
+  
+  # Should error with invalid type
+  expect_error(
+    check_input_file(temp_file, "invalid_type")
+  )
+})
+
+test_that("check_env works with wbe environment", {
+  skip_if_no_wbw()
+  
+  # Test with actual wbe environment
+  expect_no_error(check_env(wbe))
+  
+})

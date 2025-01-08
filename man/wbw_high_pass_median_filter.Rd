@@ -44,6 +44,6 @@ wbw_read_raster(f) |>
 For more information, see \url{https://www.whiteboxgeo.com/manual/wbw-user-manual/book/tool_help.html#high_pass_median_filter}
 }
 \seealso{
-\code{\link[=wbw_mean_filter]{wbw_mean_filter()}}, \code{\link[=wbw_high_pass_filter]{wbw_high_pass_filter()}}
+\code{\link[=wbw_median_filter]{wbw_median_filter()}}, \code{\link[=wbw_high_pass_filter]{wbw_high_pass_filter()}}
 }
 \keyword{image_processing}

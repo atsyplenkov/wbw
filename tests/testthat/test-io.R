@@ -1,6 +1,4 @@
-raster_path <-
-  system.file("extdata/dem.tif", package = "wbw")
-x <- wbw_read_raster(raster_path)
+source('../test-setup.R')
 
 test_that(
   desc = "wbw_read function works",

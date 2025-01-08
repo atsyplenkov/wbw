@@ -1,6 +1,4 @@
-raster_path <-
-  system.file("extdata/dem.tif", package = "wbw")
-x <- wbw_read_raster(raster_path)
+source('../test-setup.R')
 
 test_that(
   "as_matrix converts WhiteboxRaster to matrix",
@@ -61,3 +59,50 @@ test_that(
     expect_equal(round(variance(x), 1), round(var(as.vector(m)), 1))
   }
 )
+
+test_that("summary function works correctly", {
+  
+  # Test summary output
+  expect_output(summary(x), "minimum")
+  expect_output(summary(x), "maximum")
+  expect_output(summary(x), "average")
+  expect_output(summary(x), "standard deviation")
+})
+
+test_that("summary stats handle edge cases", {
+  
+  # Test error cases with invalid raster
+  expect_error(max(invalid_raster))
+  expect_error(min(invalid_raster))
+  expect_error(median(invalid_raster))
+  expect_error(mean(invalid_raster))
+  expect_error(stdev(invalid_raster))
+  expect_error(variance(invalid_raster))
+  
+  # Test with raster containing NA values
+  skip_if_not_installed("terra")
+  f <- system.file("ex/elev.tif", package="terra")
+  r <- wbw_read_raster(f)
+  
+  # Test that summary stats handle NA values
+  expect_no_error(max(r))
+  expect_no_error(min(r))
+  expect_no_error(mean(r))
+  expect_no_error(median(r))
+  expect_no_error(stdev(r))
+  expect_no_error(variance(r))
+})
+
+test_that("summary stats are consistent with matrix calculations", {
+  
+  m <- as_matrix(x)
+  v <- as.vector(m)
+  
+  # More precise testing of summary statistics
+  expect_equal(max(x), max(m, na.rm = TRUE))
+  expect_equal(min(x), min(m, na.rm = TRUE))
+  expect_equal(mean(x), mean(m, na.rm = TRUE))
+  expect_equal(median(x), median(v, na.rm = TRUE), tolerance = 1e-5)
+  expect_equal(stdev(x), sd(v, na.rm = TRUE), tolerance = 1e-5)
+  expect_equal(variance(x), var(v, na.rm = TRUE), tolerance = 1e-5)
+})

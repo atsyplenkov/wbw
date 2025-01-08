@@ -12,4 +12,9 @@ wbw_ext(x)
 \description{
 Get WhiteboxExtent
 }
+\examples{
+f <- system.file("extdata/dem.tif", package = "wbw")
+wbw_read_raster(f) |>
+  wbw_ext()
+}
 \keyword{crs}
