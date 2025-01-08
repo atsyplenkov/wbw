@@ -118,8 +118,6 @@ test_that(
 test_that(
   "Sample data download works correctly and fill missing data works",
   {
-    skip_if_offline() # Skip if no internet connection
-
     # Use temp directory for testing
     temp_dir <- tempdir()
 
