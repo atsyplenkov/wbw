@@ -12,16 +12,15 @@ Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
+    cli,
     checkmate,
-    graphics,
-    grDevices,
     reticulate,
     S7 (>= 0.2.0),
-    stats,
-    cli
+    graphics,
+    grDevices,
+    stats
 Suggests: 
-    terra (>= 1.7),
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+    tinytest,
+    terra
 SystemRequirements: Python (>= 3.8.0), numpy, whitebox-workflows (>= v1.3.3)
 Config/Needs/website: rmarkdown, waldo, bench, whitebox, ggplot2, tidyr
