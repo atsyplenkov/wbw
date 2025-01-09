@@ -276,6 +276,51 @@ bench::mark(
 
 ```
 
+# Image Processing
+
+Below is application of a simple minimum filter, which assigns each cell in the output grid the minimum value in a 3×3 moving window centred on each grid cell in the input raster.
+
+```{r bench_filters, message = FALSE, warning = FALSE}
+
+# Load file
+f <- system.file("extdata/dem.tif", package = "wbw")
+r <- terra::rast(f)
+x <- wbw_read_raster(f)
+
+# Create a tempfile for {whitebox}
+tmp <- tempfile(fileext = ".tif")
+
+bench_filters <-
+  bench::mark(
+    wbw = wbw_minimum_filter(x, 3, 3),
+    whitebox = {
+      whitebox::wbt_minimum_filter(
+        f,
+        output = tmp,
+        filterx = 3L,
+        filtery = 3L,
+        compress_rasters = FALSE
+      )
+    },
+    terra = focal(r, w = 3, fun = "min", na.rm = T),
+    check = FALSE,
+    time_unit = "ms",
+    iterations = 21L
+  )
+
+bench_filters
+
+```
+
+Make sure that there's no difference between `{wbw}` and `{terra}`:
+
+```{r filter_comparison}
+waldo::compare(
+  wbw_minimum_filter(x, 3, 3) |> as_matrix(),
+  focal(r, w = 3, fun = "min", na.rm = T) |> as.matrix(wide = TRUE)
+)
+```
+
 ```{r cleanup, include = FALSE}
 unlink(tmp_wbw)
 unlink(tmp_terra)
