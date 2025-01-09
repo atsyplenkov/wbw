@@ -48,12 +48,4 @@ check_input_file <-
     }
   }
 
-#' Skip tests if we don't have the 'wbw' module
-#' @rdname checks
-#' @keywords internal
-skip_if_no_wbw <- function() {
-  have_wbw <- reticulate::py_module_available("whitebox_workflows")
-  if (!have_wbw) {
-    testthat::skip("WbW is not available for testing")
-  }
-}
+

@@ -4,7 +4,6 @@
 \alias{check_package}
 \alias{check_env}
 \alias{check_input_file}
-\alias{skip_if_no_wbw}
 \title{Check if package is installed}
 \usage{
 check_package(package)
@@ -12,8 +11,6 @@ check_package(package)
 check_env(env = wbe)
 
 check_input_file(file_name, type)
-
-skip_if_no_wbw()
 }
 \description{
 Check if package is installed
@@ -21,7 +18,5 @@ Check if package is installed
 Check if whitebox environment is present
 
 Check input file extension
-
-Skip tests if we don't have the 'wbw' module
 }
 \keyword{internal}

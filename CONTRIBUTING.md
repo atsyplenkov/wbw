@@ -37,7 +37,7 @@ See our guide on [how to create a great issue](https://code-review.tidyverse.org
 
 *  We use [roxygen2](https://cran.r-project.org/package=roxygen2), with [Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd-formatting.html), for documentation.  
 
-*  We use [testthat](https://cran.r-project.org/package=testthat) for unit tests. 
+*  We use [tinytest](https://cran.r-project.org/package=tinytest) for unit tests. 
    Contributions with test cases included are easier to accept.
 
 ### Writing S7 documentation

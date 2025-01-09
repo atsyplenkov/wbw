@@ -1,3 +1,8 @@
+# wbw 0.0.2 (2024-01-09)
+
+* Swithced from `{testthat}` to `{tinytest}` to
+reduce dependencies
+
 # wbw 0.0.2 (2024-01-07)
 
 * Documentation updates:
