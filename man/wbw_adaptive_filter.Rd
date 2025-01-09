@@ -30,8 +30,8 @@ center cell value exceeds the user-defined threshold, the output cell is
 assigned the mean value. Otherwise, it retains its original value.
 
 Neighbourhood size, or filter size, is specified in the x and y dimensions
-using \code{filter_size_x} and \code{filter_size_y} These dimensions should be odd,
-positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+using \code{filter_size_x} and \code{filter_size_y} These dimensions should
+be odd, positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
 }
 \examples{
 f <- system.file("extdata/dem.tif", package = "wbw")

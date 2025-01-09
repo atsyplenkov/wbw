@@ -18,7 +18,8 @@ wbw_high_pass_median_filter(
 
 \item{filter_size_y}{\code{integer}, Y dimension of the neighbourhood size}
 
-\item{sig_digits}{\code{integer}}
+\item{sig_digits}{\code{integer}, default 2. Required for rounding of
+floating points inputs.}
 }
 \value{
 \link{WhiteboxRaster} object containing filtered values
@@ -32,8 +33,8 @@ surrounding neighbourhood (i.e. window.)
 }
 \details{
 Neighbourhood size, or filter size, is specified in the x and y dimensions
-using \code{filter_size_x} and \code{filter_size_y} These dimensions should be odd,
-positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+using \code{filter_size_x} and \code{filter_size_y} These dimensions should
+be odd, positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
 }
 \examples{
 f <- system.file("extdata/dem.tif", package = "wbw")
