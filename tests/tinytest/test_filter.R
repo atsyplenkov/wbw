@@ -1,5 +1,4 @@
-source("tests/tinytest/setup.R")
-# source("setup.R")
+source("setup.R")
 
 # Test adaptive filter failures
 # expect_error(wbw_adaptive_filter(x, filter_size_x = 10L))
@@ -79,6 +78,12 @@ expect_inherits(
 expect_inherits(
   wbw_minimum_filter(x), c("wbw::WhiteboxRaster", "S7_object")
 )
+expect_inherits(
+  wbw_olympic_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+)
+expect_inherits(
+  wbw_percentile_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+)
 
 
 # Test filter alterations
@@ -157,6 +162,18 @@ expect_true(
 )
 expect_true(
   wbw_minimum_filter(x) |>
+    median() |>
+    all.equal(true_median) |>
+    is.character()
+)
+expect_true(
+  wbw_olympic_filter(x) |>
+    median() |>
+    all.equal(true_median) |>
+    is.character()
+)
+expect_true(
+  wbw_percentile_filter(x) |>
     median() |>
     all.equal(true_median) |>
     is.character()

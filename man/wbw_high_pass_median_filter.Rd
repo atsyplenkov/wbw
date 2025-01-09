@@ -18,7 +18,8 @@ wbw_high_pass_median_filter(
 
 \item{filter_size_y}{\code{integer}, Y dimension of the neighbourhood size}
 
-\item{sig_digits}{\code{integer}}
+\item{sig_digits}{\code{integer}, default 2. Required for rounding of
+floating points inputs.}
 }
 \value{
 \link{WhiteboxRaster} object containing filtered values
