@@ -27,8 +27,8 @@ their smoothing compared to edge-preserving alternatives like the
 \link{wbw_bilateral_filter} or \link{wbw_gaussian_filter}.
 
 Neighbourhood size, or filter size, is specified in the x and y dimensions
-using \code{filter_size_x} and \code{filter_size_y} These dimensions should be odd,
-positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+using \code{filter_size_x} and \code{filter_size_y} These dimensions should
+be odd, positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
 }
 \examples{
 f <- system.file("extdata/dem.tif", package = "wbw")

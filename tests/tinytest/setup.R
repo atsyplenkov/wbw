@@ -17,8 +17,3 @@ skip_if_not_installed <- function(pkg) {
     exit_file("Package", pkg, "not available")
   }
 }
-
-register_tinytest_extension(
-	"wbw",
-	"expect_snapshot"
-)
