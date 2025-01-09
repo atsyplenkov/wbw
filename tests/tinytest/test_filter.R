@@ -1,49 +1,5 @@
 source("setup.R")
 
-# Test adaptive filter failures
-# expect_error(wbw_adaptive_filter(x, filter_size_x = 10L))
-# expect_error(wbw_adaptive_filter(x, filter_size_y = 2))
-# expect_error(wbw_adaptive_filter(x, filter_size_y = c(1:2)))
-# expect_error(wbw_adaptive_filter(x, filter_size_y = 1.5))
-# expect_error(wbw_adaptive_filter(x, threshold = "a"))
-# expect_error(wbw_adaptive_filter("x", threshold = "a"))
-
-# # Test bilateral filter failures
-# expect_error(wbw_bilateral_filter(x, sigma_dist = 10L))
-# expect_error(wbw_bilateral_filter(x, sigma_int = -2))
-# expect_error(wbw_bilateral_filter(x, sigma_dist = c(1:2)))
-# expect_error(wbw_bilateral_filter(x, sigma_dist = 20.1))
-# expect_error(wbw_bilateral_filter(x, sigma_dist = "a"))
-# expect_error(wbw_bilateral_filter("x", sigma_int = "a"))
-
-# # Test mean filter failures
-# expect_error(wbw_mean_filter(x, filter_size_x = 10L))
-# expect_error(wbw_mean_filter(x, filter_size_y = 2))
-# expect_error(wbw_mean_filter(x, filter_size_y = c(1:2)))
-# expect_error(wbw_mean_filter(x, filter_size_y = 1.5))
-# expect_error(wbw_mean_filter(x, filter_size_y = "a"))
-# expect_error(wbw_mean_filter("x", filter_size_y = "a"))
-
-# # Test conservative smoothing filter failures
-# expect_error(wbw_conservative_smoothing_filter(x, filter_size_x = 10L))
-# expect_error(wbw_conservative_smoothing_filter(x, filter_size_y = 2))
-# expect_error(wbw_conservative_smoothing_filter(x, filter_size_y = c(1:2)))
-# expect_error(wbw_conservative_smoothing_filter(x, filter_size_y = 1.5))
-# expect_error(wbw_conservative_smoothing_filter(x, filter_size_y = "a"))
-# expect_error(wbw_conservative_smoothing_filter("x", filter_size_y = "a"))
-
-# # Test high pass filter failures
-# expect_error(wbw_high_pass_filter(x, filter_size_x = 10, filter_size_y = 11))
-# expect_error(wbw_high_pass_filter(x, filter_size_x = 11, filter_size_y = 10))
-# expect_error(wbw_high_pass_filter(x, filter_size_x = 11.1, filter_size_y = 11))
-# expect_error(wbw_high_pass_filter("x", filter_size_x = 11, filter_size_y = 11))
-
-# # Test high pass median filter failures
-# expect_error(wbw_high_pass_median_filter(x, filter_size_x = 10, filter_size_y = 11))
-# expect_error(wbw_high_pass_median_filter(x, filter_size_x = 11, filter_size_y = 10))
-# expect_error(wbw_high_pass_median_filter(x, filter_size_x = 11.1, filter_size_y = 11))
-# expect_error(wbw_high_pass_median_filter("x", filter_size_x = 11, filter_size_y = 11))
-
 # Test successful filter returns
 expect_inherits(
   wbw_adaptive_filter(x), c("wbw::WhiteboxRaster", "S7_object")
@@ -89,6 +45,9 @@ expect_inherits(
 )
 expect_inherits(
   wbw_total_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+)
+expect_inherits(
+  wbw_standard_deviation_filter(x), c("wbw::WhiteboxRaster", "S7_object")
 )
 
 # Test filter alterations
@@ -191,6 +150,12 @@ expect_true(
 )
 expect_true(
   wbw_total_filter(x) |>
+    median() |>
+    all.equal(true_median) |>
+    is.character()
+)
+expect_true(
+  wbw_standard_deviation_filter(x) |>
     median() |>
     all.equal(true_median) |>
     is.character()

@@ -465,7 +465,7 @@ S7::method(wbw_high_pass_filter, WhiteboxRaster) <-
 #' @eval rd_input_raster("x")
 #' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
 #' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
-#' @param sig_digits \code{integer}, default 2. Required for rounding of 
+#' @param sig_digits \code{integer}, default 2. Required for rounding of
 #' floating points inputs.
 #'
 #' @return [WhiteboxRaster] object containing filtered values
@@ -556,7 +556,7 @@ S7::method(wbw_high_pass_median_filter, WhiteboxRaster) <-
 #' @eval rd_input_raster("x")
 #' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
 #' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
-#' @param sig_digits \code{integer}, default 2. Required for rounding of 
+#' @param sig_digits \code{integer}, default 2. Required for rounding of
 #' floating points inputs.
 #'
 #' @return [WhiteboxRaster] object containing filtered values
@@ -926,35 +926,35 @@ S7::method(wbw_olympic_filter, WhiteboxRaster) <-
 #' @keywords image_processing
 #'
 #' @description
-#' This tool calculates the percentile of the center cell in a moving filter 
-#' window applied to an input image (\code{x}). This indicates the value 
-#' below which a given percentage of the neighbouring values in within the 
-#' filter fall. For example, the 35th percentile is the value below which 35% 
-#' of the neighbouring values in the filter window may be found. As such, 
-#' the percentile of a pixel value is indicative of the relative location 
-#' of the site within the statistical distribution of values contained 
-#' within a filter window. 
-#' 
-#' When applied to input digital elevation models, percentile is a measure of 
+#' This tool calculates the percentile of the center cell in a moving filter
+#' window applied to an input image (\code{x}). This indicates the value
+#' below which a given percentage of the neighbouring values in within the
+#' filter fall. For example, the 35th percentile is the value below which 35%
+#' of the neighbouring values in the filter window may be found. As such,
+#' the percentile of a pixel value is indicative of the relative location
+#' of the site within the statistical distribution of values contained
+#' within a filter window.
+#'
+#' When applied to input digital elevation models, percentile is a measure of
 #' local topographic position, or elevation residual.
-#' 
-#' 
+#'
+#'
 #' @details
 #' Neighbourhood size, or filter size, is specified in the x and y dimensions
 #' using \code{filter_size_x} and \code{filter_size_y} These dimensions should
 #' be odd, positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
-#' 
-#' This tool takes advantage of the redundancy between overlapping, 
-#' neighbouring filters to enhance computationally efficiency, using a 
-#' method similar to Huang et al. (1979). This efficient method of 
-#' calculating percentiles requires rounding of floating-point inputs, 
-#' and therefore the user must specify the number of significant 
-#' digits (\code{sig_digits}) to be used during the processing. 
+#'
+#' This tool takes advantage of the redundancy between overlapping,
+#' neighbouring filters to enhance computationally efficiency, using a
+#' method similar to Huang et al. (1979). This efficient method of
+#' calculating percentiles requires rounding of floating-point inputs,
+#' and therefore the user must specify the number of significant
+#' digits (\code{sig_digits}) to be used during the processing.
 #'
 #' @eval rd_input_raster("x")
 #' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
 #' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
-#' @param sig_digits \code{integer}, default 2. Required for rounding of 
+#' @param sig_digits \code{integer}, default 2. Required for rounding of
 #' floating points inputs.
 #'
 #' @return [WhiteboxRaster] object containing filtered values
@@ -1031,7 +1031,7 @@ S7::method(wbw_percentile_filter, WhiteboxRaster) <-
 #'
 #' @description
 #' A range filter assigns to each cell in the output grid the range
-#'  (maximum - minimum) of the values contained within a moving window 
+#'  (maximum - minimum) of the values contained within a moving window
 #' centred on each grid cell.
 #'
 #' @details
@@ -1102,7 +1102,7 @@ S7::method(wbw_range_filter, WhiteboxRaster) <-
 #' @keywords image_processing
 #'
 #' @description
-#' A total filter assigns to each cell in the output grid the total (sum) 
+#' A total filter assigns to each cell in the output grid the total (sum)
 #' of all values in a moving window centred on each grid cell.
 #'
 #' @details
@@ -1159,6 +1159,79 @@ S7::method(wbw_total_filter, WhiteboxRaster) <-
     # Filter
     out <-
       wbe$total_filter(
+        raster = x@source,
+        filter_size_x = filter_size_x,
+        filter_size_y = filter_size_y
+      )
+    # Return Raster
+    WhiteboxRaster(
+      name = x@name,
+      source = out
+    )
+  }
+
+#' Standard Deviation Filter
+#' @keywords image_processing
+#'
+#' @description
+#' A standard deviation filter assigns to each cell in the output grid the 
+#' standard deviation, a measure of dispersion, of the values contained within 
+#' a moving window centred on each grid cell.
+#'
+#' @details
+#' Neighbourhood size, or filter size, is specified in the x and y dimensions
+#' using \code{filter_size_x} and \code{filter_size_y} These dimensions should
+#' be odd, positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+#'
+#' @eval rd_input_raster("x")
+#' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
+#' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
+#'
+#' @return [WhiteboxRaster] object containing filtered values
+#'
+#' @seealso [wbw_minimum_filter()], [wbw_maximum_filter()],
+#' [wbw_range_filter()], [wbw_majority_filter()], [wbw_total_filter()]
+#'
+#' @eval rd_wbw_link("standard_deviation_filter")
+#' @eval rd_example("wbw_standard_deviation_filter",
+#' c("filter_size_x = 3L", "filter_size_y = 3L"))
+#'
+#' @export
+wbw_standard_deviation_filter <-
+  S7::new_generic(
+    name = "wbw_standard_deviation_filter",
+    dispatch_args = "x",
+    fun = function(x,
+                   filter_size_x = 11L,
+                   filter_size_y = 11L) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_standard_deviation_filter, WhiteboxRaster) <-
+  function(x,
+           filter_size_x = 11L,
+           filter_size_y = 11L) {
+    # Checks
+    check_env(wbe)
+    filter_size_x <-
+      checkmate::asInteger(
+        filter_size_x,
+        lower = 0L,
+        len = 1L
+      )
+    filter_size_y <-
+      checkmate::asInteger(
+        filter_size_y,
+        lower = 0L,
+        len = 1L
+      )
+    checkmate::assert_true(filter_size_x %% 2 == 1)
+    checkmate::assert_true(filter_size_y %% 2 == 1)
+
+    # Filter
+    out <-
+      wbe$standard_deviation_filter(
         raster = x@source,
         filter_size_x = filter_size_x,
         filter_size_y = filter_size_y
