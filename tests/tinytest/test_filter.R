@@ -1,6 +1,4 @@
-# FIXME:
-source("tests/tinytest/setup.R")
-# source("setup.R")
+source("setup.R")
 
 # Test adaptive filter failures
 # expect_error(wbw_adaptive_filter(x, filter_size_x = 10L))
