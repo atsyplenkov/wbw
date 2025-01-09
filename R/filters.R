@@ -1024,3 +1024,148 @@ S7::method(wbw_percentile_filter, WhiteboxRaster) <-
       source = out
     )
   }
+
+
+#' Range Filter
+#' @keywords image_processing
+#'
+#' @description
+#' A range filter assigns to each cell in the output grid the range
+#'  (maximum - minimum) of the values contained within a moving window 
+#' centred on each grid cell.
+#'
+#' @details
+#' Neighbourhood size, or filter size, is specified in the x and y dimensions
+#' using \code{filter_size_x} and \code{filter_size_y} These dimensions should
+#' be odd, positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+#'
+#' @eval rd_input_raster("x")
+#' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
+#' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
+#'
+#' @return [WhiteboxRaster] object containing filtered values
+#'
+#' @seealso [wbw_minimum_filter()], [wbw_maximum_filter()]
+#'
+#' @eval rd_wbw_link("range_filter")
+#' @eval rd_example("wbw_range_filter",
+#' c("filter_size_x = 3L", "filter_size_y = 3L"))
+#'
+#' @export
+wbw_range_filter <-
+  S7::new_generic(
+    name = "wbw_range_filter",
+    dispatch_args = "x",
+    fun = function(x,
+                   filter_size_x = 11L,
+                   filter_size_y = 11L) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_range_filter, WhiteboxRaster) <-
+  function(x,
+           filter_size_x = 11L,
+           filter_size_y = 11L) {
+    # Checks
+    check_env(wbe)
+    filter_size_x <-
+      checkmate::asInteger(
+        filter_size_x,
+        lower = 0L,
+        len = 1L
+      )
+    filter_size_y <-
+      checkmate::asInteger(
+        filter_size_y,
+        lower = 0L,
+        len = 1L
+      )
+    checkmate::assert_true(filter_size_x %% 2 == 1)
+    checkmate::assert_true(filter_size_y %% 2 == 1)
+
+    # Filter
+    out <-
+      wbe$range_filter(
+        raster = x@source,
+        filter_size_x = filter_size_x,
+        filter_size_y = filter_size_y
+      )
+    # Return Raster
+    WhiteboxRaster(
+      name = x@name,
+      source = out
+    )
+  }
+
+#' Total Filter
+#' @keywords image_processing
+#'
+#' @description
+#' A total filter assigns to each cell in the output grid the total (sum) 
+#' of all values in a moving window centred on each grid cell.
+#'
+#' @details
+#' Neighbourhood size, or filter size, is specified in the x and y dimensions
+#' using \code{filter_size_x} and \code{filter_size_y} These dimensions should
+#' be odd, positive integer values (e.g. 3L, 5L, 7L, 9L, etc.).
+#'
+#' @eval rd_input_raster("x")
+#' @param filter_size_x \code{integer}, X dimension of the neighbourhood size
+#' @param filter_size_y \code{integer}, Y dimension of the neighbourhood size
+#'
+#' @return [WhiteboxRaster] object containing filtered values
+#'
+#' @seealso [wbw_minimum_filter()], [wbw_maximum_filter()],
+#' [wbw_range_filter()], [wbw_majority_filter()]
+#'
+#' @eval rd_wbw_link("total_filter")
+#' @eval rd_example("wbw_total_filter",
+#' c("filter_size_x = 3L", "filter_size_y = 3L"))
+#'
+#' @export
+wbw_total_filter <-
+  S7::new_generic(
+    name = "wbw_total_filter",
+    dispatch_args = "x",
+    fun = function(x,
+                   filter_size_x = 11L,
+                   filter_size_y = 11L) {
+      S7::S7_dispatch()
+    }
+  )
+
+S7::method(wbw_total_filter, WhiteboxRaster) <-
+  function(x,
+           filter_size_x = 11L,
+           filter_size_y = 11L) {
+    # Checks
+    check_env(wbe)
+    filter_size_x <-
+      checkmate::asInteger(
+        filter_size_x,
+        lower = 0L,
+        len = 1L
+      )
+    filter_size_y <-
+      checkmate::asInteger(
+        filter_size_y,
+        lower = 0L,
+        len = 1L
+      )
+    checkmate::assert_true(filter_size_x %% 2 == 1)
+    checkmate::assert_true(filter_size_y %% 2 == 1)
+
+    # Filter
+    out <-
+      wbe$total_filter(
+        raster = x@source,
+        filter_size_x = filter_size_x,
+        filter_size_y = filter_size_y
+      )
+    # Return Raster
+    WhiteboxRaster(
+      name = x@name,
+      source = out
+    )
+  }

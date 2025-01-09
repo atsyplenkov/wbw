@@ -1,4 +1,6 @@
-source("setup.R")
+# FIXME:
+source("tests/tinytest/setup.R")
+# source("setup.R")
 
 # Test adaptive filter failures
 # expect_error(wbw_adaptive_filter(x, filter_size_x = 10L))
@@ -84,7 +86,12 @@ expect_inherits(
 expect_inherits(
   wbw_percentile_filter(x), c("wbw::WhiteboxRaster", "S7_object")
 )
-
+expect_inherits(
+  wbw_range_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+)
+expect_inherits(
+  wbw_total_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+)
 
 # Test filter alterations
 # Here is near-equality check is happening. If two values are close to
@@ -174,6 +181,18 @@ expect_true(
 )
 expect_true(
   wbw_percentile_filter(x) |>
+    median() |>
+    all.equal(true_median) |>
+    is.character()
+)
+expect_true(
+  wbw_range_filter(x) |>
+    median() |>
+    all.equal(true_median) |>
+    is.character()
+)
+expect_true(
+  wbw_total_filter(x) |>
     median() |>
     all.equal(true_median) |>
     is.character()
