@@ -12,4 +12,4 @@ expect_identical(ext@north, x@source$configs$north)
 
 # Test error cases
 expect_error(wbw_ext("x"))
-expect_error(wbw_ext(NULL)) 
+expect_error(wbw_ext(NULL))

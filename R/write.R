@@ -3,7 +3,7 @@
 #' @keywords io
 #'
 #' @description
-#' Writes an in-memory WhiteboxRaster object to a file in a supported raster 
+#' Writes an in-memory WhiteboxRaster object to a file in a supported raster
 #' format.
 #'
 #' @eval rd_wbw_link("write_raster")
@@ -22,26 +22,28 @@
 #' - ESRI Binary (*.flt)
 #' - ESRI BIL (*.bil)
 #'
-#' The tool can read GeoTIFFs compressed using PackBits, DEFLATE, or LZW 
+#' The tool can read GeoTIFFs compressed using PackBits, DEFLATE, or LZW
 #' methods.
 #'
 #' When writing GeoTIFFs, use `compress=TRUE` to enable DEFLATE compression.
 #'
 #' @export
-wbw_write_raster <-
-  S7::new_generic(
-    name = "wbw_write_raster",
-    dispatch_args = "x",
-    fun = function(x, file_name, compress = TRUE) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_write_raster, WhiteboxRaster) <-
-  function(x, file_name, compress = TRUE) {
-    # Checks
-    check_env(wbe)
-    checkmate::assert_logical(compress, len = 1)
-    # Write
-    wbe$write_raster(x@source, file_name = file_name, compress = compress)
+wbw_write_raster <- S7::new_generic(
+  name = "wbw_write_raster",
+  dispatch_args = "x",
+  fun = function(x, file_name, compress = TRUE) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_write_raster, WhiteboxRaster) <- function(
+  x,
+  file_name,
+  compress = TRUE
+) {
+  # Checks
+  check_env(wbe)
+  checkmate::assert_logical(compress, len = 1)
+  # Write
+  wbe$write_raster(x@source, file_name = file_name, compress = compress)
+}

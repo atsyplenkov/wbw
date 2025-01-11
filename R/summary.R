@@ -10,7 +10,7 @@ NULL
 #' @rdname summarize
 #' @docType methods
 #' @keywords stats
-#' 
+#'
 #' @description
 #' Computes summary statistics for cells in a [WhiteboxRaster] object.
 #'
@@ -21,12 +21,11 @@ NULL
 #' @eval rd_wbw_link("raster_summary_stats")
 #'
 #' @export
-`summary.wbw::WhiteboxRaster` <-
-  function(object, ...) {
-    cat(
-      wbe$raster_summary_stats(object@source)
-    )
-  }
+`summary.wbw::WhiteboxRaster` <- function(object, ...) {
+  cat(
+    wbe$raster_summary_stats(object@source)
+  )
+}
 
 #' @rdname summarize
 #' @docType methods
@@ -61,7 +60,7 @@ NULL
 #' @docType methods
 #'
 #' @param x WhiteboxRaster object
-#' @param na.rm logical indicating whether NA values should 
+#' @param na.rm logical indicating whether NA values should
 #' be stripped (not used)
 #' @param ... additional arguments (not used)
 #'
@@ -95,21 +94,19 @@ NULL
 #' @eval rd_example("stdev")
 #'
 #' @export
-stdev <-
-  S7::new_generic(
-    name = "stdev",
-    dispatch_args = "x",
-    fun = function(x) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(stdev, WhiteboxRaster) <-
-  function(x) {
-    check_env(wbe)
-    stats <- wbe$raster_summary_stats(x@source)
-    extract_stat(stats, "standard deviation")
+stdev <- S7::new_generic(
+  name = "stdev",
+  dispatch_args = "x",
+  fun = function(x) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(stdev, WhiteboxRaster) <- function(x) {
+  check_env(wbe)
+  stats <- wbe$raster_summary_stats(x@source)
+  extract_stat(stats, "standard deviation")
+}
 
 #' @rdname summarize
 #' @docType methods
@@ -119,21 +116,19 @@ S7::method(stdev, WhiteboxRaster) <-
 #' @eval rd_example("variance")
 #'
 #' @export
-variance <-
-  S7::new_generic(
-    name = "variance",
-    dispatch_args = "x",
-    fun = function(x) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(variance, WhiteboxRaster) <-
-  function(x) {
-    check_env(wbe)
-    stats <- wbe$raster_summary_stats(x@source)
-    extract_stat(stats, "variance")
+variance <- S7::new_generic(
+  name = "variance",
+  dispatch_args = "x",
+  fun = function(x) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(variance, WhiteboxRaster) <- function(x) {
+  check_env(wbe)
+  stats <- wbe$raster_summary_stats(x@source)
+  extract_stat(stats, "variance")
+}
 
 # Helper function to extract numeric value from a specific stat line
 extract_stat <- function(stats_text, pattern) {

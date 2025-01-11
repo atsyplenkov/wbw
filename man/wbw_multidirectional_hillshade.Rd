@@ -43,7 +43,7 @@ illumination.
 }
 \details{
 The hillshade value (HS) of a DEM grid cell is calculate as:
-\deqn{HS = \frac{\tan(s)}{\sqrt{1 - \tan(s)^2}} \times 
+\deqn{HS = \frac{\tan(s)}{\sqrt{1 - \tan(s)^2}} \times
 [\frac{\sin(Alt)}{\tan(s)} - \cos(Alt) \times \sin(Az - a)]}
 where \eqn{s} and \eqn{a} are the local slope gradient and aspect
 (orientation) respectively and \eqn{Alt} and \eqn{Az} are the illumination

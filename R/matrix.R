@@ -15,40 +15,38 @@
 #' @eval rd_example("as_matrix", args = c("raw = TRUE"))
 #'
 #' @export
-as_matrix <-
-  S7::new_generic(
-    name = "as_matrix",
-    dispatch_args = "x",
-    fun = function(x, raw = FALSE) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(as_matrix, WhiteboxRaster) <-
-  function(x, raw = FALSE) {
-    checkmate::assert_environment(wbw_env)
-    m <- wbw_env$wbw_to_matrix(x@source, raw)
-    as.matrix(m)
+as_matrix <- S7::new_generic(
+  name = "as_matrix",
+  dispatch_args = "x",
+  fun = function(x, raw = FALSE) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(as_matrix, WhiteboxRaster) <- function(x, raw = FALSE) {
+  checkmate::assert_environment(wbw_env)
+  m <- wbw_env$wbw_to_matrix(x@source, raw)
+  as.matrix(m)
+}
 
 #' Convert objects to vectors
 #' @name as_vector
 #' @rdname vector
 #' @keywords transform
-#' 
+#'
 #' @description
 #' Converts various Whitebox objects to vectors:
-#' * For [WhiteboxRaster]: converts raster values to a vector in row-major 
+#' * For [WhiteboxRaster]: converts raster values to a vector in row-major
 #' order
 #' * For [WhiteboxExtent]: converts extent boundaries to a named vector
 #'
 #' @param x Object to convert to vector. Can be:
 #'   * A [WhiteboxRaster] object
 #'   * A [WhiteboxExtent] object
-#' @param raw logical. For [WhiteboxRaster] only: Should the raw data be 
-#' returned (`raw = TRUE`) or should NoData values be transformed 
+#' @param raw logical. For [WhiteboxRaster] only: Should the raw data be
+#' returned (`raw = TRUE`) or should NoData values be transformed
 #' to `NA` (`raw = FALSE`)?
-#' 
+#'
 #' @return A vector, with type depending on the input:
 #' * For [WhiteboxRaster]: vector containing raster values
 #' * For [WhiteboxExtent]: named vector containing extent values
@@ -62,10 +60,10 @@ S7::method(as_matrix, WhiteboxRaster) <-
 #' @examples
 #' f <- system.file("extdata/dem.tif", package = "wbw")
 #' x <- wbw_read_raster(f)
-#' 
+#'
 #' # Return WhiteboxRaster's data:
 #' head(as_vector(x))
-#' 
+#'
 #' # Return WhiteboxExtent's data:
 #' as_vector(wbw_ext(x))
 #'

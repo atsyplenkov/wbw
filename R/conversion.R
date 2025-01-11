@@ -15,29 +15,27 @@
 #'   wbw_slope(units = "d") |>
 #'   wbw_to_radians()
 #' @export
-wbw_to_radians <-
-  S7::new_generic(
-    name = "wbw_to_radians",
-    dispatch_args = "x",
-    fun = function(x) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_to_radians, WhiteboxRaster) <-
-  function(x) {
-    # Checks
-    check_env(wbe)
-    # Return Raster
-    WhiteboxRaster(
-      name = if (grepl("\\(degrees\\)", x@name)) {
-        sub("\\(degrees\\)", "(radians)", x@name)
-      } else {
-        x@name
-      },
-      source = x@source$to_radians()
-    )
+wbw_to_radians <- S7::new_generic(
+  name = "wbw_to_radians",
+  dispatch_args = "x",
+  fun = function(x) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_to_radians, WhiteboxRaster) <- function(x) {
+  # Checks
+  check_env(wbe)
+  # Return Raster
+  WhiteboxRaster(
+    name = if (grepl("\\(degrees\\)", x@name)) {
+      sub("\\(degrees\\)", "(radians)", x@name)
+    } else {
+      x@name
+    },
+    source = x@source$to_radians()
+  )
+}
 
 #' Convert to degrees
 #' @keywords conversions
@@ -56,27 +54,24 @@ S7::method(wbw_to_radians, WhiteboxRaster) <-
 #'   wbw_slope(units = "r") |>
 #'   wbw_to_degrees()
 #' @export
-wbw_to_degrees <-
-  S7::new_generic(
-    name = "wbw_to_degrees",
-    dispatch_args = "x",
-    fun = function(x) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_to_degrees, WhiteboxRaster) <-
-  function(x) {
-    # Checks
-    check_env(wbe)
-    # Return Raster
-    WhiteboxRaster(
-      name = if (grepl("\\(radians\\)", x@name)) {
-        sub("\\(radians\\)", "(degrees)", x@name)
-      } else {
-        x@name
-      },
-      source = x@source$to_degrees()
-    )
+wbw_to_degrees <- S7::new_generic(
+  name = "wbw_to_degrees",
+  dispatch_args = "x",
+  fun = function(x) {
+    S7::S7_dispatch()
   }
+)
 
+S7::method(wbw_to_degrees, WhiteboxRaster) <- function(x) {
+  # Checks
+  check_env(wbe)
+  # Return Raster
+  WhiteboxRaster(
+    name = if (grepl("\\(radians\\)", x@name)) {
+      sub("\\(radians\\)", "(degrees)", x@name)
+    } else {
+      x@name
+    },
+    source = x@source$to_degrees()
+  )
+}

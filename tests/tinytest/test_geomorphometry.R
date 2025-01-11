@@ -29,14 +29,17 @@ expect_inherits(wbw_aspect(x), c("wbw::WhiteboxRaster", "S7_object"))
 expect_inherits(wbw_slope(x), c("wbw::WhiteboxRaster", "S7_object"))
 expect_inherits(wbw_ruggedness_index(x), c("wbw::WhiteboxRaster", "S7_object"))
 expect_inherits(wbw_fill_missing_data(x), c("wbw::WhiteboxRaster", "S7_object"))
-expect_inherits(wbw_multidirectional_hillshade(x), c("wbw::WhiteboxRaster", "S7_object"))
+expect_inherits(
+	wbw_multidirectional_hillshade(x),
+	c("wbw::WhiteboxRaster", "S7_object")
+)
 expect_inherits(wbw_hillshade(x), c("wbw::WhiteboxRaster", "S7_object"))
 
 # Test sample data download and fill missing data
 temp_dir <- tempdir()
 test_path <- wbw_download_sample_data(
-  data_set = "Grand_Junction",
-  path = temp_dir
+	data_set = "Grand_Junction",
+	path = temp_dir
 )
 
 expect_true(dir.exists(test_path))
@@ -55,4 +58,4 @@ m_filled <- as_matrix(dem_filled)
 expect_true(sum(is.na(m_filled)) <= sum(is.na(m)))
 
 # Clean up
-unlink(file.path(temp_dir, "Grand_Junction"), recursive = TRUE) 
+unlink(file.path(temp_dir, "Grand_Junction"), recursive = TRUE)

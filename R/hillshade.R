@@ -8,11 +8,11 @@
 #'
 #' @details
 #' The hillshade value (HS) of a DEM grid cell is calculate as:
-#' \deqn{HS = \frac{\tan(s)}{\sqrt{1 - \tan(s)^2}} \times 
+#' \deqn{HS = \frac{\tan(s)}{\sqrt{1 - \tan(s)^2}} \times
 #' [\frac{\sin(Alt)}{\tan(s)} - \cos(Alt) \times \sin(Az - a)]}
-#' where \eqn{s} and \eqn{a} are the local slope gradient and aspect 
-#' (orientation) respectively and \eqn{Alt} and \eqn{Az} are the illumination 
-#' source altitude and azimuth respectively. Slope and aspect are calculated 
+#' where \eqn{s} and \eqn{a} are the local slope gradient and aspect
+#' (orientation) respectively and \eqn{Alt} and \eqn{Az} are the illumination
+#' source altitude and azimuth respectively. Slope and aspect are calculated
 #' using Horn's (1981) 3rd-order finate difference method.
 #'
 #' @eval rd_input_raster("dem")
@@ -45,69 +45,66 @@
 #' @eval rd_example("wbw_multidirectional_hillshade")
 #'
 #' @export
-wbw_multidirectional_hillshade <-
-  S7::new_generic(
-    name = "wbw_multidirectional_hillshade",
-    dispatch_args = "dem",
-    fun = function(dem,
-                   altitude = 30,
-                   z_factor = 1,
-                   full_360_mode = FALSE) {
-      S7::S7_dispatch()
-    }
+wbw_multidirectional_hillshade <- S7::new_generic(
+  name = "wbw_multidirectional_hillshade",
+  dispatch_args = "dem",
+  fun = function(dem, altitude = 30, z_factor = 1, full_360_mode = FALSE) {
+    S7::S7_dispatch()
+  }
+)
+
+S7::method(wbw_multidirectional_hillshade, WhiteboxRaster) <- function(
+  dem,
+  altitude = 30,
+  z_factor = 1,
+  full_360_mode = FALSE
+) {
+  # Checks
+  check_env(wbe)
+  checkmate::assert_double(altitude, len = 1, lower = 0, upper = 90)
+  checkmate::assert_double(z_factor, len = 1)
+  checkmate::assert_logical(full_360_mode, len = 1)
+
+  # WBT
+  out <- wbe$multidirectional_hillshade(
+    dem = dem@source,
+    altitude = altitude,
+    z_factor = z_factor,
+    full_360_mode = full_360_mode
   )
 
-S7::method(wbw_multidirectional_hillshade, WhiteboxRaster) <-
-  function(dem,
-           altitude = 30,
-           z_factor = 1,
-           full_360_mode = FALSE) {
-    # Checks
-    check_env(wbe)
-    checkmate::assert_double(altitude, len = 1, lower = 0, upper = 90)
-    checkmate::assert_double(z_factor, len = 1)
-    checkmate::assert_logical(full_360_mode, len = 1)
-
-    # WBT
-    out <- wbe$multidirectional_hillshade(
-      dem = dem@source,
-      altitude = altitude,
-      z_factor = z_factor,
-      full_360_mode = full_360_mode
-    )
-
-    # Return
-    WhiteboxRaster(
-      name = paste0(dem@name, "(Hillshade)"),
-      source = out
-    )
-  }
+  # Return
+  WhiteboxRaster(
+    name = paste0(dem@name, "(Hillshade)"),
+    source = out
+  )
+}
 
 #' Hillshade
 #' @keywords geomorphometry
 #'
 #' @description
-#' This tool performs a hillshade operation (also called shaded relief) on an 
-#' input digital elevation model (DEM). 
+#' This tool performs a hillshade operation (also called shaded relief) on an
+#' input digital elevation model (DEM).
 #'
 #' @details
 #' The hillshade value (HS) of a DEM grid cell is calculate as:
-#' \deqn{HS = \frac{\tan(s)}{\sqrt{1 - \tan(s)^2}} \times 
+#' \deqn{HS = \frac{\tan(s)}{\sqrt{1 - \tan(s)^2}} \times
 #' [\frac{\sin(Alt)}{\tan(s)} - \cos(Alt) \times \sin(Az - a)]}
-#' where \eqn{s} and \eqn{a} are the local slope gradient and aspect 
-#' (orientation) respectively and \eqn{Alt} and \eqn{Az} are the illumination 
-#' source altitude and azimuth respectively. Slope and aspect are calculated 
+#' where \eqn{s} and \eqn{a} are the local slope gradient and aspect
+#' (orientation) respectively and \eqn{Alt} and \eqn{Az} are the illumination
+#' source altitude and azimuth respectively. Slope and aspect are calculated
 #' using Horn's (1981) 3rd-order finate difference method.
-#' 
-#'  If the DEM is in the geographic coordinate system (latitude and longitude), 
+#'
+#'  If the DEM is in the geographic coordinate system (latitude and longitude),
 #' the following equation is used:
 #' \deqn{zfactor = \frac{1.0}{111320.0 \times \cos(midlat)}}
-#' 
-#' where \eqn{midlat} is the latitude of the centre of the raster, 
+#'
+#' where \eqn{midlat} is the latitude of the centre of the raster,
 #' in radians.
 #'
 #' @eval rd_input_raster("dem")
-#' @param azimuth \code{double}, illumination source azimuth or 
+#' @param azimuth \code{double}, illumination source azimuth or
 #' sun direction (0 to 360 degrees)
 #' @param altitude \code{double}, the altitude of the illumination sources.
 #' i.e. the elevation of the sun above the horizon, measured as an angle from
@@ -130,40 +127,37 @@ S7::method(wbw_multidirectional_hillshade, WhiteboxRaster) <-
 #' @eval rd_example("wbw_hillshade")
 #'
 #' @export
-wbw_hillshade <-
-  S7::new_generic(
-    name = "wbw_hillshade",
-    dispatch_args = "dem",
-    fun = function(dem,
-                   azimuth = 315,
-                   altitude = 30,
-                   z_factor = 1) {
-      S7::S7_dispatch()
-    }
+wbw_hillshade <- S7::new_generic(
+  name = "wbw_hillshade",
+  dispatch_args = "dem",
+  fun = function(dem, azimuth = 315, altitude = 30, z_factor = 1) {
+    S7::S7_dispatch()
+  }
+)
+
+S7::method(wbw_hillshade, WhiteboxRaster) <- function(
+  dem,
+  azimuth = 315,
+  altitude = 30,
+  z_factor = 1
+) {
+  # Checks
+  check_env(wbe)
+  checkmate::assert_double(azimuth, len = 1, lower = 0, upper = 360)
+  checkmate::assert_double(altitude, len = 1, lower = 0, upper = 90)
+  checkmate::assert_double(z_factor, len = 1)
+
+  # WBT
+  out <- wbe$hillshade(
+    dem = dem@source,
+    azimuth = azimuth,
+    altitude = altitude,
+    z_factor = z_factor
   )
 
-S7::method(wbw_hillshade, WhiteboxRaster) <-
-  function(dem,
-           azimuth = 315,
-           altitude = 30,
-           z_factor = 1) {
-    # Checks
-    check_env(wbe)
-    checkmate::assert_double(azimuth, len = 1, lower = 0, upper = 360)
-    checkmate::assert_double(altitude, len = 1, lower = 0, upper = 90)
-    checkmate::assert_double(z_factor, len = 1)
-
-    # WBT
-    out <- wbe$hillshade(
-      dem = dem@source,
-      azimuth = azimuth,
-      altitude = altitude,
-      z_factor = z_factor
-    )
-
-    # Return
-    WhiteboxRaster(
-      name = paste0(dem@name, "(Hillshade)"),
-      source = out
-    )
-  }
+  # Return
+  WhiteboxRaster(
+    name = paste0(dem@name, "(Hillshade)"),
+    source = out
+  )
+}

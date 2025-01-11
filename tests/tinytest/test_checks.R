@@ -6,12 +6,12 @@ expect_error(wbw:::check_package("nonexistentpackage123"))
 
 # Environment checks
 mock_env <- structure(
-  list(),
-  class = c(
-    "whitebox_workflows.WbEnvironment",
-    "python.builtin.WbEnvironmentBase",
-    "python.builtin.object"
-  )
+	list(),
+	class = c(
+		"whitebox_workflows.WbEnvironment",
+		"python.builtin.WbEnvironmentBase",
+		"python.builtin.object"
+	)
 )
 
 expect_silent(wbw:::check_env(mock_env))

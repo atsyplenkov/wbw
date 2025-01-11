@@ -25,14 +25,12 @@ expect_equal(round(median(x), 4), round(median(v, na.rm = TRUE), 4))
 expect_equal(round(wbw::stdev(x), 4), round(sd(v, na.rm = TRUE), 4))
 expect_equal(round(variance(x), 1), round(var(v, na.rm = TRUE), 1))
 
-
 # Test summary function output
 s <- capture.output(summary(x))
 expect_true(any(grepl("minimum", s)))
 expect_true(any(grepl("maximum", s)))
 expect_true(any(grepl("average", s)))
 expect_true(any(grepl("standard deviation", s)))
-
 
 # Test NoData handling
 exit_if_not(requireNamespace("terra", quietly = TRUE))

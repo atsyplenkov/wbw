@@ -28,52 +28,48 @@
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_adaptive_filter <-
-  S7::new_generic(
-    name = "wbw_adaptive_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L,
-                   threshold = 2) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_adaptive_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L,
-           threshold = 2) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-    checkmate::assert_double(threshold, len = 1)
-    # Filter
-    out <-
-      wbe$adaptive_filter(
-        raster = x@source, filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y, threshold = threshold
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_adaptive_filter <- S7::new_generic(
+  name = "wbw_adaptive_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L, threshold = 2) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_adaptive_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L,
+  threshold = 2
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+  checkmate::assert_double(threshold, len = 1)
+  # Filter
+  out <- wbe$adaptive_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y,
+    threshold = threshold
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Bilateral Filter
 #' @keywords image_processing
@@ -116,43 +112,44 @@ S7::method(wbw_adaptive_filter, WhiteboxRaster) <-
 #' c("sigma_dist = 1.5", "sigma_int = 1.1"))
 #'
 #' @export
-wbw_bilateral_filter <-
-  S7::new_generic(
-    name = "wbw_bilateral_filter",
-    dispatch_args = "x",
-    fun = function(x, sigma_dist = 0.75, sigma_int = 1) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
-  function(x, sigma_dist = 0.75, sigma_int = 1) {
-    # Checks
-    check_env(wbe)
-    checkmate::assert_double(
-      sigma_dist,
-      lower = 0.5,
-      upper = 20,
-      len = 1L
-    )
-    checkmate::assert_double(
-      sigma_int,
-      lower = 0,
-      len = 1L
-    )
-    # Filter
-    out <-
-      wbe$bilateral_filter(
-        raster = x@source,
-        sigma_dist = sigma_dist,
-        sigma_int = sigma_int
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_bilateral_filter <- S7::new_generic(
+  name = "wbw_bilateral_filter",
+  dispatch_args = "x",
+  fun = function(x, sigma_dist = 0.75, sigma_int = 1) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_bilateral_filter, WhiteboxRaster) <- function(
+  x,
+  sigma_dist = 0.75,
+  sigma_int = 1
+) {
+  # Checks
+  check_env(wbe)
+  checkmate::assert_double(
+    sigma_dist,
+    lower = 0.5,
+    upper = 20,
+    len = 1L
+  )
+  checkmate::assert_double(
+    sigma_int,
+    lower = 0,
+    len = 1L
+  )
+  # Filter
+  out <- wbe$bilateral_filter(
+    raster = x@source,
+    sigma_dist = sigma_dist,
+    sigma_int = sigma_int
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Mean Filter
 #' @keywords image_processing
@@ -188,50 +185,45 @@ S7::method(wbw_bilateral_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_mean_filter <-
-  S7::new_generic(
-    name = "wbw_mean_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_mean_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-    # Filter
-    out <-
-      wbe$mean_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_mean_filter <- S7::new_generic(
+  name = "wbw_mean_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_mean_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+  # Filter
+  out <- wbe$mean_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Gaussian Filter
 #' @keywords image_processing
@@ -258,38 +250,34 @@ S7::method(wbw_mean_filter, WhiteboxRaster) <-
 #' @eval rd_example("wbw_gaussian_filter", c("sigma = 1.5"))
 #'
 #' @export
-wbw_gaussian_filter <-
-  S7::new_generic(
-    name = "wbw_gaussian_filter",
-    dispatch_args = "x",
-    fun = function(x, sigma = 0.75) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_gaussian_filter, WhiteboxRaster) <-
-  function(x, sigma = 0.75) {
-    # Checks
-    check_env(wbe)
-    checkmate::assert_double(
-      sigma,
-      lower = 0.5,
-      upper = 20,
-      len = 1L
-    )
-    # Filter
-    out <-
-      wbe$gaussian_filter(
-        raster = x@source,
-        sigma = sigma
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_gaussian_filter <- S7::new_generic(
+  name = "wbw_gaussian_filter",
+  dispatch_args = "x",
+  fun = function(x, sigma = 0.75) {
+    S7::S7_dispatch()
   }
+)
 
+S7::method(wbw_gaussian_filter, WhiteboxRaster) <- function(x, sigma = 0.75) {
+  # Checks
+  check_env(wbe)
+  checkmate::assert_double(
+    sigma,
+    lower = 0.5,
+    upper = 20,
+    len = 1L
+  )
+  # Filter
+  out <- wbe$gaussian_filter(
+    raster = x@source,
+    sigma = sigma
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Conservative Smoothing Filter
 #' @keywords image_processing
@@ -328,51 +316,45 @@ S7::method(wbw_gaussian_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_conservative_smoothing_filter <-
-  S7::new_generic(
-    name = "wbw_conservative_smoothing_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 3L,
-                   filter_size_y = 3L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_conservative_smoothing_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 3L,
-           filter_size_y = 3L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-    # Filter
-    out <-
-      wbe$conservative_smoothing_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_conservative_smoothing_filter <- S7::new_generic(
+  name = "wbw_conservative_smoothing_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 3L, filter_size_y = 3L) {
+    S7::S7_dispatch()
   }
+)
 
+S7::method(wbw_conservative_smoothing_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 3L,
+  filter_size_y = 3L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+  # Filter
+  out <- wbe$conservative_smoothing_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' High Pass Filter
 #' @keywords image_processing
@@ -402,50 +384,45 @@ S7::method(wbw_conservative_smoothing_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_high_pass_filter <-
-  S7::new_generic(
-    name = "wbw_high_pass_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_high_pass_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-    # Filter
-    out <-
-      wbe$high_pass_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_high_pass_filter <- S7::new_generic(
+  name = "wbw_high_pass_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_high_pass_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+  # Filter
+  out <- wbe$high_pass_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' High Pass Median Filter
 #' @keywords image_processing
@@ -477,59 +454,52 @@ S7::method(wbw_high_pass_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_high_pass_median_filter <-
-  S7::new_generic(
-    name = "wbw_high_pass_median_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L,
-                   sig_digits = 2L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_high_pass_median_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L,
-           sig_digits = 2L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-    sig_digits <-
-      checkmate::asInteger(
-        sig_digits,
-        lower = 0L,
-        len = 1L
-      )
-    # Filter
-    out <-
-      wbe$high_pass_median_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y,
-        sig_digits = sig_digits
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_high_pass_median_filter <- S7::new_generic(
+  name = "wbw_high_pass_median_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L, sig_digits = 2L) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_high_pass_median_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L,
+  sig_digits = 2L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+  sig_digits <- checkmate::asInteger(
+    sig_digits,
+    lower = 0L,
+    len = 1L
+  )
+  # Filter
+  out <- wbe$high_pass_median_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y,
+    sig_digits = sig_digits
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Median Filter
 #' @keywords image_processing
@@ -574,59 +544,52 @@ S7::method(wbw_high_pass_median_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_median_filter <-
-  S7::new_generic(
-    name = "wbw_median_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L,
-                   sig_digits = 2L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_median_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L,
-           sig_digits = 2L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-    sig_digits <-
-      checkmate::asInteger(
-        sig_digits,
-        lower = 0L,
-        len = 1L
-      )
-    # Filter
-    out <-
-      wbe$median_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y,
-        sig_digits = sig_digits
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_median_filter <- S7::new_generic(
+  name = "wbw_median_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L, sig_digits = 2L) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_median_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L,
+  sig_digits = 2L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+  sig_digits <- checkmate::asInteger(
+    sig_digits,
+    lower = 0L,
+    len = 1L
+  )
+  # Filter
+  out <- wbe$median_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y,
+    sig_digits = sig_digits
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Majority Filter
 #' @keywords image_processing
@@ -654,52 +617,46 @@ S7::method(wbw_median_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_majority_filter <-
-  S7::new_generic(
-    name = "wbw_majority_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_majority_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-
-    # Filter
-    out <-
-      wbe$majority_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_majority_filter <- S7::new_generic(
+  name = "wbw_majority_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L) {
+    S7::S7_dispatch()
   }
+)
 
+S7::method(wbw_majority_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+
+  # Filter
+  out <- wbe$majority_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Maximum Filter
 #' @keywords image_processing
@@ -727,52 +684,46 @@ S7::method(wbw_majority_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_maximum_filter <-
-  S7::new_generic(
-    name = "wbw_maximum_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_maximum_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-
-    # Filter
-    out <-
-      wbe$maximum_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_maximum_filter <- S7::new_generic(
+  name = "wbw_maximum_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L) {
+    S7::S7_dispatch()
   }
+)
 
+S7::method(wbw_maximum_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+
+  # Filter
+  out <- wbe$maximum_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Minimum Filter
 #' @keywords image_processing
@@ -800,51 +751,46 @@ S7::method(wbw_maximum_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_minimum_filter <-
-  S7::new_generic(
-    name = "wbw_minimum_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_minimum_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-
-    # Filter
-    out <-
-      wbe$minimum_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_minimum_filter <- S7::new_generic(
+  name = "wbw_minimum_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_minimum_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+
+  # Filter
+  out <- wbe$minimum_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Olympic Filter
 #' @keywords image_processing
@@ -875,52 +821,46 @@ S7::method(wbw_minimum_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_olympic_filter <-
-  S7::new_generic(
-    name = "wbw_olympic_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_olympic_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-
-    # Filter
-    out <-
-      wbe$olympic_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_olympic_filter <- S7::new_generic(
+  name = "wbw_olympic_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L) {
+    S7::S7_dispatch()
   }
+)
 
+S7::method(wbw_olympic_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+
+  # Filter
+  out <- wbe$olympic_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Percentile Filter
 #' @keywords image_processing
@@ -971,60 +911,52 @@ S7::method(wbw_olympic_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_percentile_filter <-
-  S7::new_generic(
-    name = "wbw_percentile_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L,
-                   sig_digits = 2L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_percentile_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L,
-           sig_digits = 2L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-    sig_digits <-
-      checkmate::asInteger(
-        sig_digits,
-        lower = 0L,
-        len = 1L
-      )
-    # Filter
-    out <-
-      wbe$percentile_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y,
-        sig_digits = sig_digits
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_percentile_filter <- S7::new_generic(
+  name = "wbw_percentile_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L, sig_digits = 2L) {
+    S7::S7_dispatch()
   }
+)
 
+S7::method(wbw_percentile_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L,
+  sig_digits = 2L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+  sig_digits <- checkmate::asInteger(
+    sig_digits,
+    lower = 0L,
+    len = 1L
+  )
+  # Filter
+  out <- wbe$percentile_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y,
+    sig_digits = sig_digits
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Range Filter
 #' @keywords image_processing
@@ -1052,51 +984,46 @@ S7::method(wbw_percentile_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_range_filter <-
-  S7::new_generic(
-    name = "wbw_range_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_range_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-
-    # Filter
-    out <-
-      wbe$range_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_range_filter <- S7::new_generic(
+  name = "wbw_range_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_range_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+
+  # Filter
+  out <- wbe$range_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Total Filter
 #' @keywords image_processing
@@ -1124,58 +1051,53 @@ S7::method(wbw_range_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_total_filter <-
-  S7::new_generic(
-    name = "wbw_total_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_total_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-
-    # Filter
-    out <-
-      wbe$total_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_total_filter <- S7::new_generic(
+  name = "wbw_total_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_total_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+
+  # Filter
+  out <- wbe$total_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
 
 #' Standard Deviation Filter
 #' @keywords image_processing
 #'
 #' @description
-#' A standard deviation filter assigns to each cell in the output grid the 
-#' standard deviation, a measure of dispersion, of the values contained within 
+#' A standard deviation filter assigns to each cell in the output grid the
+#' standard deviation, a measure of dispersion, of the values contained within
 #' a moving window centred on each grid cell.
 #'
 #' @details
@@ -1197,48 +1119,43 @@ S7::method(wbw_total_filter, WhiteboxRaster) <-
 #' c("filter_size_x = 3L", "filter_size_y = 3L"))
 #'
 #' @export
-wbw_standard_deviation_filter <-
-  S7::new_generic(
-    name = "wbw_standard_deviation_filter",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size_x = 11L,
-                   filter_size_y = 11L) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_standard_deviation_filter, WhiteboxRaster) <-
-  function(x,
-           filter_size_x = 11L,
-           filter_size_y = 11L) {
-    # Checks
-    check_env(wbe)
-    filter_size_x <-
-      checkmate::asInteger(
-        filter_size_x,
-        lower = 0L,
-        len = 1L
-      )
-    filter_size_y <-
-      checkmate::asInteger(
-        filter_size_y,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_true(filter_size_x %% 2 == 1)
-    checkmate::assert_true(filter_size_y %% 2 == 1)
-
-    # Filter
-    out <-
-      wbe$standard_deviation_filter(
-        raster = x@source,
-        filter_size_x = filter_size_x,
-        filter_size_y = filter_size_y
-      )
-    # Return Raster
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
+wbw_standard_deviation_filter <- S7::new_generic(
+  name = "wbw_standard_deviation_filter",
+  dispatch_args = "x",
+  fun = function(x, filter_size_x = 11L, filter_size_y = 11L) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_standard_deviation_filter, WhiteboxRaster) <- function(
+  x,
+  filter_size_x = 11L,
+  filter_size_y = 11L
+) {
+  # Checks
+  check_env(wbe)
+  filter_size_x <- checkmate::asInteger(
+    filter_size_x,
+    lower = 0L,
+    len = 1L
+  )
+  filter_size_y <- checkmate::asInteger(
+    filter_size_y,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_true(filter_size_x %% 2 == 1)
+  checkmate::assert_true(filter_size_y %% 2 == 1)
+
+  # Filter
+  out <- wbe$standard_deviation_filter(
+    raster = x@source,
+    filter_size_x = filter_size_x,
+    filter_size_y = filter_size_y
+  )
+  # Return Raster
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}

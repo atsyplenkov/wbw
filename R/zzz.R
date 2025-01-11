@@ -2,7 +2,6 @@
 # https://github.com/JosiahParry/pyfns as an examples.
 # Thanks guys!
 
-
 wbw <- NULL
 wbe <- NULL
 
@@ -10,21 +9,19 @@ wbe <- NULL
 #' @return character. Version Number.
 #' @export
 #' @importFrom reticulate py_eval
-wbw_version <-
-  function() {
-    try(
-      reticulate::py_run_string("from importlib.metadata import version"),
-      silent = TRUE
-    )
-    version <-
-      try(
-        reticulate::py_eval("version('whitebox_workflows')"),
-        silent = TRUE
-      )
-    if (!inherits(version, "try-error")) {
-      version
-    }
+wbw_version <- function() {
+  try(
+    reticulate::py_run_string("from importlib.metadata import version"),
+    silent = TRUE
+  )
+  version <- try(
+    reticulate::py_eval("version('whitebox_workflows')"),
+    silent = TRUE
+  )
+  if (!inherits(version, "try-error")) {
+    version
   }
+}
 
 #' @importFrom reticulate import
 #' @importFrom reticulate py_run_string
@@ -33,11 +30,10 @@ wbw_version <-
     try(
       {
         reticulate::use_virtualenv(virtualenv = "r-wbw")
-        wbw <<-
-          reticulate::import(
-            "whitebox_workflows",
-            delay_load = TRUE
-          )
+        wbw <<- reticulate::import(
+          "whitebox_workflows",
+          delay_load = TRUE
+        )
       },
       silent = TRUE
     )
@@ -103,11 +99,13 @@ wbw_version <-
       cli::cli_alert_warning(
         "Library {.code whitebox-workflows} is required but not found."
       )
-      choice <- utils::menu(c(
-        "Install dependencies in a virtual environment (recommended)",
-        "Install dependencies system-wide",
-        "Do nothing"
-      ))
+      choice <- utils::menu(
+        c(
+          "Install dependencies in a virtual environment (recommended)",
+          "Install dependencies system-wide",
+          "Do nothing"
+        )
+      )
 
       if (choice == 1) {
         cli::cli_alert_info(
@@ -167,22 +165,28 @@ wbw_version <-
   }
 }
 
-
 #' @importFrom utils packageVersion
 .onAttach <- function(libname, pkgname) {
   wbwv <- wbw_version()
-  suppress <-
-    !grepl("suppressed", Sys.getenv("wbw.message"), ignore.case = TRUE)
+  suppress <- !grepl(
+    "suppressed",
+    Sys.getenv("wbw.message"),
+    ignore.case = TRUE
+  )
 
   if (is.null(wbwv) && suppress && interactive()) {
-    cli::cli_alert_warning(c(
-      "Python package `whitebox-workflows` cannot be found.",
-      "Run {.code wbw::wbw_install()} and reload R session."
-    ))
+    cli::cli_alert_warning(
+      c(
+        "Python package `whitebox-workflows` cannot be found.",
+        "Run {.code wbw::wbw_install()} and reload R session."
+      )
+    )
   } else if (!is.null(wbwv) && suppress) {
-    cli::cli_alert_success(c(
-      "wbw v{utils::packageVersion('wbw')} -- using whitebox-workflows v{wbwv}"
-    ))
+    cli::cli_alert_success(
+      c(
+        "wbw v{utils::packageVersion('wbw')} -- using whitebox-workflows v{wbwv}"
+      )
+    )
   }
 }
 
