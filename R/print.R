@@ -17,12 +17,16 @@
     sprintf("dimensions  : %d, %d  (nrow, ncol)", conf$rows, conf$columns),
     sprintf(
       "resolution  : %f, %f  (x, y)",
-      conf$resolution_x, conf$resolution_y
+      conf$resolution_x,
+      conf$resolution_y
     ),
     sprintf("EPSG        : %s  (%s)", epsg, conf$xy_units),
     sprintf(
       "extent      : %1.0f %1.0f %1.0f %1.0f",
-      conf$west, conf$east, conf$south, conf$north
+      conf$west,
+      conf$east,
+      conf$south,
+      conf$north
     ),
     sprintf("min value   : %f", x@min),
     sprintf("max value   : %f", x@max)

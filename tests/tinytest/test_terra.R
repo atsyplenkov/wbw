@@ -8,32 +8,32 @@ wbwr <- as_rast(x)
 
 # Test extent
 expect_identical(
-  as.vector(terra::ext(r)),
-  as.vector(terra::ext(wbwr))
+	as.vector(terra::ext(r)),
+	as.vector(terra::ext(wbwr))
 )
 
 # Test content
 expect_identical(
-  as.vector(r),
-  as.vector(wbwr)
+	as.vector(r),
+	as.vector(wbwr)
 )
 
 # Test resolution
 expect_identical(
-  terra::res(r),
-  terra::res(wbwr)
+	terra::res(r),
+	terra::res(wbwr)
 )
 
 # Test CRS
 expect_identical(
-  terra::crs(r),
-  terra::crs(wbwr)
+	terra::crs(r),
+	terra::crs(wbwr)
 )
 
 # Test data type
 expect_identical(
-  terra::is.int(r),
-  terra::is.int(wbwr)
+	terra::is.int(r),
+	terra::is.int(wbwr)
 )
 
 # Test integer data

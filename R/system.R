@@ -26,19 +26,17 @@
 #' system.time(wbw_slope(x))
 #' }
 #' @export
-wbw_max_procs <-
-  function(max_procs = -1) {
-    check_env(wbe)
-    max_procs <- checkmate::asInteger(
-      max_procs,
-      len = 1
-    )
-    checkmate::assert_true(
-      max_procs >= -1 && max_procs != 0
-    )
-    wbe$max_procs <- max_procs
-  }
-
+wbw_max_procs <- function(max_procs = -1) {
+  check_env(wbe)
+  max_procs <- checkmate::asInteger(
+    max_procs,
+    len = 1
+  )
+  checkmate::assert_true(
+    max_procs >= -1 && max_procs != 0
+  )
+  wbe$max_procs <- max_procs
+}
 
 #' Download Sample Data
 #' @keywords system
@@ -48,7 +46,7 @@ wbw_max_procs <-
 #' to test Whitebox Workflows for Python.
 #'
 #' @param data_set \code{character}, dataset name. See Details
-#' @param path \code{character}, path to where download sample datasets. If 
+#' @param path \code{character}, path to where download sample datasets. If
 #' \code{NULL}, the currect working directory is used
 #'
 #' @details
@@ -75,82 +73,80 @@ wbw_max_procs <-
 #' }
 #' @export
 #' @importFrom utils download.file unzip
-wbw_download_sample_data <-
-  function(data_set = NULL, path = NULL) {
-    # Set Download Path if NULL
-    if (is.null(path)) {
-      path <- getwd()
-    }
-    checkmate::assert_directory(
-      path,
-      access = "w"
-    )
-
-    # Select Dataset
-    data_set <-
-      checkmate::matchArg(
-        data_set,
-        choices = c(
-          "Guelph_landsat",
-          "Grand_Junction",
-          "GTA_lidar",
-          "jay_brook",
-          "Jay_State_Forest",
-          "Kitchener_lidar",
-          "London_air_photo",
-          "mill_brook",
-          "peterborough_drumlins",
-          "Southern_Ontario_roads",
-          "StElisAk"
-        )
-      )
-
-    # Create sub-directory if it doesn't exist
-    download_path <- file.path(path, data_set)
-    if (!dir.exists(download_path)) {
-      dir.create(download_path)
-    }
-
-    # Download Data
-    base_url <- "https://www.whiteboxgeo.com/sample_data/"
-    data_url <- paste0(base_url, data_set, ".zip")
-    download.file(
-      data_url,
-      destfile = file.path(download_path, paste0(data_set, ".zip"))
-    )
-
-    # Unzip Data
-    temp_dir <- file.path(download_path, "temp_extract")
-    dir.create(temp_dir)
-    
-    unzip(
-      file.path(download_path, paste0(data_set, ".zip")),
-      exdir = temp_dir
-    )
-    
-    # Check if data_set folder exists inside the extracted contents
-    dataset_folder <- file.path(temp_dir, data_set)
-    if (dir.exists(dataset_folder)) {
-      # If dataset folder exists, move its contents to download_path
-      files_to_move <- list.files(dataset_folder, full.names = TRUE)
-      file.copy(files_to_move, download_path, recursive = TRUE)
-    } else {
-      # If no specific dataset folder, move all contents except __MACOSX
-      all_contents <- list.files(temp_dir, full.names = TRUE)
-      files_to_move <- all_contents[!grepl("__MACOSX", all_contents)]
-      file.copy(files_to_move, download_path, recursive = TRUE)
-    }
-    
-    # Clean up
-    unlink(temp_dir, recursive = TRUE)
-    unlink(file.path(download_path, paste0(data_set, ".zip")))
-
-    # Return download path
-    cli::cli_alert_success(
-      c(
-        "Sample dataset '{.val {data_set}}' ",
-        "downloaded to: {.file {download_path}}"
-      )
-    )
-    return(download_path)
+wbw_download_sample_data <- function(data_set = NULL, path = NULL) {
+  # Set Download Path if NULL
+  if (is.null(path)) {
+    path <- getwd()
   }
+  checkmate::assert_directory(
+    path,
+    access = "w"
+  )
+
+  # Select Dataset
+  data_set <- checkmate::matchArg(
+    data_set,
+    choices = c(
+      "Guelph_landsat",
+      "Grand_Junction",
+      "GTA_lidar",
+      "jay_brook",
+      "Jay_State_Forest",
+      "Kitchener_lidar",
+      "London_air_photo",
+      "mill_brook",
+      "peterborough_drumlins",
+      "Southern_Ontario_roads",
+      "StElisAk"
+    )
+  )
+
+  # Create sub-directory if it doesn't exist
+  download_path <- file.path(path, data_set)
+  if (!dir.exists(download_path)) {
+    dir.create(download_path)
+  }
+
+  # Download Data
+  base_url <- "https://www.whiteboxgeo.com/sample_data/"
+  data_url <- paste0(base_url, data_set, ".zip")
+  download.file(
+    data_url,
+    destfile = file.path(download_path, paste0(data_set, ".zip"))
+  )
+
+  # Unzip Data
+  temp_dir <- file.path(download_path, "temp_extract")
+  dir.create(temp_dir)
+
+  unzip(
+    file.path(download_path, paste0(data_set, ".zip")),
+    exdir = temp_dir
+  )
+
+  # Check if data_set folder exists inside the extracted contents
+  dataset_folder <- file.path(temp_dir, data_set)
+  if (dir.exists(dataset_folder)) {
+    # If dataset folder exists, move its contents to download_path
+    files_to_move <- list.files(dataset_folder, full.names = TRUE)
+    file.copy(files_to_move, download_path, recursive = TRUE)
+  } else {
+    # If no specific dataset folder, move all contents except __MACOSX
+    all_contents <- list.files(temp_dir, full.names = TRUE)
+    files_to_move <- all_contents[!grepl("__MACOSX", all_contents)]
+    file.copy(files_to_move, download_path, recursive = TRUE)
+  }
+
+  # Clean up
+  unlink(temp_dir, recursive = TRUE)
+  unlink(file.path(download_path, paste0(data_set, ".zip")))
+
+  # Return download path
+  cli::cli_alert_success(
+    c(
+      "Sample dataset '{.val {data_set}}' ",
+      "downloaded to: {.file {download_path}}"
+    )
+  )
+  return(download_path)
+}

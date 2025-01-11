@@ -7,13 +7,13 @@ x <- wbw_read_raster(raster_path)
 
 # Path to terra's files
 if (requireNamespace("terra", quietly = TRUE)) {
-  library(terra)
-  f <- system.file("ex/elev.tif", package = "terra")
-} 
+	library(terra)
+	f <- system.file("ex/elev.tif", package = "terra")
+}
 
 # Helper functions
 skip_if_not_installed <- function(pkg) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    exit_file("Package", pkg, "not available")
-  }
+	if (!requireNamespace(pkg, quietly = TRUE)) {
+		exit_file("Package", pkg, "not available")
+	}
 }

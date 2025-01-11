@@ -39,30 +39,26 @@
 #' @seealso [wbw_to_degrees()], [wbw_to_radians()], [wbw_slope()]
 #'
 #' @export
-wbw_aspect <-
-  S7::new_generic(
-    name = "wbw_aspect",
-    dispatch_args = "dem",
-    fun = function(dem, z_factor = 1.0) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_aspect, WhiteboxRaster) <-
-  function(dem,
-           z_factor = 1.0) {
-    # Checks
-    check_env(wbe)
-    checkmate::assert_double(z_factor, len = 1)
-    # Estimate aspect
-    out <-
-      wbe$aspect(dem = dem@source, z_factor = z_factor)
-    # Return Raster
-    WhiteboxRaster(
-      name = paste0("Aspect"),
-      source = out
-    )
+wbw_aspect <- S7::new_generic(
+  name = "wbw_aspect",
+  dispatch_args = "dem",
+  fun = function(dem, z_factor = 1.0) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_aspect, WhiteboxRaster) <- function(dem, z_factor = 1.0) {
+  # Checks
+  check_env(wbe)
+  checkmate::assert_double(z_factor, len = 1)
+  # Estimate aspect
+  out <- wbe$aspect(dem = dem@source, z_factor = z_factor)
+  # Return Raster
+  WhiteboxRaster(
+    name = paste0("Aspect"),
+    source = out
+  )
+}
 
 #' Slope
 #' @rdname wbw_slope
@@ -98,36 +94,34 @@ S7::method(wbw_aspect, WhiteboxRaster) <-
 #' @seealso [wbw_to_degrees()], [wbw_to_radians()], [wbw_aspect()]
 #'
 #' @export
-wbw_slope <-
-  S7::new_generic(
-    name = "wbw_slope",
-    dispatch_args = "dem",
-    fun = function(dem, units = "degrees", z_factor = 1.0) {
-      S7::S7_dispatch()
-    }
-  )
-
-
-S7::method(wbw_slope, WhiteboxRaster) <-
-  function(dem,
-           units = "degrees",
-           z_factor = 1.0) {
-    # Checks
-    check_env(wbe)
-    units <- checkmate::matchArg(
-      units,
-      choices = c("radians", "degrees", "percent")
-    )
-    checkmate::assert_double(z_factor, len = 1)
-    # Estimate slope
-    out <-
-      wbe$slope(dem = dem@source, units = units, z_factor = z_factor)
-    # Return Raster
-    WhiteboxRaster(
-      name = paste0("Slope (", units, ")"),
-      source = out
-    )
+wbw_slope <- S7::new_generic(
+  name = "wbw_slope",
+  dispatch_args = "dem",
+  fun = function(dem, units = "degrees", z_factor = 1.0) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_slope, WhiteboxRaster) <- function(
+  dem,
+  units = "degrees",
+  z_factor = 1.0
+) {
+  # Checks
+  check_env(wbe)
+  units <- checkmate::matchArg(
+    units,
+    choices = c("radians", "degrees", "percent")
+  )
+  checkmate::assert_double(z_factor, len = 1)
+  # Estimate slope
+  out <- wbe$slope(dem = dem@source, units = units, z_factor = z_factor)
+  # Return Raster
+  WhiteboxRaster(
+    name = paste0("Slope (", units, ")"),
+    source = out
+  )
+}
 
 #' Terrain Ruggedness Index (TRI)
 #' @rdname wbw_ruggedness_index
@@ -158,25 +152,23 @@ S7::method(wbw_slope, WhiteboxRaster) <-
 #' @eval rd_example("wbw_ruggedness_index")
 #'
 #' @export
-wbw_ruggedness_index <-
-  S7::new_generic(
-    name = "wbw_ruggedness_index",
-    dispatch_args = "dem",
-    fun = function(dem) {
-      S7::S7_dispatch()
-    }
-  )
-
-S7::method(wbw_ruggedness_index, WhiteboxRaster) <-
-  function(dem) {
-    # Checks
-    check_env(wbe)
-    out <- wbe$ruggedness_index(input = dem@source)
-    WhiteboxRaster(
-      name = paste0("TRI"),
-      source = out
-    )
+wbw_ruggedness_index <- S7::new_generic(
+  name = "wbw_ruggedness_index",
+  dispatch_args = "dem",
+  fun = function(dem) {
+    S7::S7_dispatch()
   }
+)
+
+S7::method(wbw_ruggedness_index, WhiteboxRaster) <- function(dem) {
+  # Checks
+  check_env(wbe)
+  out <- wbe$ruggedness_index(input = dem@source)
+  WhiteboxRaster(
+    name = paste0("TRI"),
+    source = out
+  )
+}
 
 #' Fill Missing Data
 #' @keywords geomorphometry
@@ -216,45 +208,46 @@ S7::method(wbw_ruggedness_index, WhiteboxRaster) <-
 #' @eval rd_example("wbw_fill_missing_data")
 #'
 #' @export
-wbw_fill_missing_data <-
-  S7::new_generic(
-    name = "wbw_fill_missing_data",
-    dispatch_args = "x",
-    fun = function(x,
-                   filter_size = 11L,
-                   weight = 2,
-                   exclude_edge_nodata = FALSE) {
-      S7::S7_dispatch()
-    }
+wbw_fill_missing_data <- S7::new_generic(
+  name = "wbw_fill_missing_data",
+  dispatch_args = "x",
+  fun = function(
+    x,
+    filter_size = 11L,
+    weight = 2,
+    exclude_edge_nodata = FALSE
+  ) {
+    S7::S7_dispatch()
+  }
+)
+
+S7::method(wbw_fill_missing_data, WhiteboxRaster) <- function(
+  x,
+  filter_size = 11L,
+  weight = 2,
+  exclude_edge_nodata = FALSE
+) {
+  # Checks
+  check_env(wbe)
+  filter_size <- checkmate::asInteger(
+    filter_size,
+    lower = 0L,
+    len = 1L
+  )
+  checkmate::assert_double(weight, len = 1)
+  checkmate::assert_logical(exclude_edge_nodata, len = 1)
+
+  # WBT
+  out <- wbe$fill_missing_data(
+    dem = x@source,
+    filter_size = filter_size,
+    weight = weight,
+    exclude_edge_nodata = exclude_edge_nodata
   )
 
-S7::method(wbw_fill_missing_data, WhiteboxRaster) <-
-  function(x,
-           filter_size = 11L,
-           weight = 2,
-           exclude_edge_nodata = FALSE) {
-    # Checks
-    check_env(wbe)
-    filter_size <-
-      checkmate::asInteger(
-        filter_size,
-        lower = 0L,
-        len = 1L
-      )
-    checkmate::assert_double(weight, len = 1)
-    checkmate::assert_logical(exclude_edge_nodata, len = 1)
-
-    # WBT
-    out <- wbe$fill_missing_data(
-      dem = x@source,
-      filter_size = filter_size,
-      weight = weight,
-      exclude_edge_nodata = exclude_edge_nodata
-    )
-
-    # Return
-    WhiteboxRaster(
-      name = x@name,
-      source = out
-    )
-  }
+  # Return
+  WhiteboxRaster(
+    name = x@name,
+    source = out
+  )
+}
