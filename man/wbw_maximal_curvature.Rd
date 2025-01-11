@@ -28,7 +28,7 @@ surface (Florinsky, 2017). The values of this curvature are unbounded,
 and positive values correspond to ridge positions while negative values
 are indicative of closed depressions (Florinsky, 2016).
 
-Gaussian curvature is measured in units of \eqn{m^{-1}}.
+Maximal curvature is measured in units of \eqn{m^{-1}}.
 }
 \details{
 Curvature values are often very small and as such the user may opt to
@@ -67,6 +67,6 @@ Shary P. A., Sharaya L. S. and Mitusov A. V. (2002) Fundamental
 quantitative methods of land surface analysis. Geoderma 107: 1–32. \if{html}{\out{<br>}}
 }
 \seealso{
-\code{\link[=wbw_gaussian_curvature]{wbw_gaussian_curvature()}}
+\code{\link[=wbw_gaussian_curvature]{wbw_gaussian_curvature()}}, \code{\link[=wbw_minimal_curvature]{wbw_minimal_curvature()}}
 }
 \keyword{geomorphometry}
