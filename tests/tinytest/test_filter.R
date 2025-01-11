@@ -2,52 +2,68 @@ source("setup.R")
 
 # Test successful filter returns
 expect_inherits(
-  wbw_adaptive_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_adaptive_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_bilateral_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_bilateral_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_conservative_smoothing_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_conservative_smoothing_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_gaussian_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_gaussian_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_high_pass_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_high_pass_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_high_pass_median_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_high_pass_median_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_majority_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_majority_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_maximum_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_maximum_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_mean_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_mean_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_median_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_median_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_minimum_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_minimum_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_olympic_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_olympic_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_percentile_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_percentile_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_range_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_range_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_total_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_total_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 expect_inherits(
-  wbw_standard_deviation_filter(x), c("wbw::WhiteboxRaster", "S7_object")
+  wbw_standard_deviation_filter(x),
+  c("wbw::WhiteboxRaster", "S7_object")
 )
 
 # Test filter alterations
