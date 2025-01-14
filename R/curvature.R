@@ -360,10 +360,10 @@ S7::method(wbw_mean_curvature, WhiteboxRaster) <- function(
 #' @description
 #' This tool calculates the profile curvature from a digital elevation
 #' model (\eqn{dem}), or the rate of change in slope along a flow line.
-#' 
+#'
 #' Curvature is the second derivative of the topographic surface defined
-#'  by a DEM. Profile curvature characterizes the degree of downslope 
-#' acceleration or deceleration within the 
+#'  by a DEM. Profile curvature characterizes the degree of downslope
+#' acceleration or deceleration within the
 #' landscape (Gallant and Wilson, 2000).
 #'
 #' WhiteboxTools reports curvature in radians multiplied by 100 for easier
@@ -402,8 +402,8 @@ S7::method(wbw_mean_curvature, WhiteboxRaster) <- function(
 #'
 #' @eval rd_wbw_link("profile_curvature")
 #' @references
-#' Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes, 
-#'   in Terrain Analysis: Principles and Applications, edited by J. P. 
+#' Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes,
+#'   in Terrain Analysis: Principles and Applications, edited by J. P.
 #'   Wilson and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J. <br>
 #' Florinsky, I. (2016). Digital terrain analysis in soil science and
 #'   geology. Academic Press. <br>
@@ -445,6 +445,87 @@ S7::method(wbw_profile_curvature, WhiteboxRaster) <- function(
   # Return
   WhiteboxRaster(
     name = "Profile Curvature",
+    source = out
+  )
+}
+
+#' Plan Curvature
+#' @keywords geomorphometry
+#'
+#' @description
+#' This tool calculates the plan curvature (i.e. contour curvature), or
+#' the rate of change in aspect along a contour line, from a digital
+#' elevation model (\eqn{dem}). Curvature is the second derivative of the
+#' topographic surface defined by a DEM. Plan curvature characterizes the
+#'  degree of flow convergence or divergence within the
+#' landscape (Gallant and Wilson, 2000).
+#'
+#' @details
+#' WhiteboxTools reports curvature in degrees multiplied by 100 for easier 
+#' interpretation. The Z conversion factor (\eqn{z_factor}) is only important 
+#' when the vertical and horizontal units are not the same in the DEM. 
+#' When this is the case, the algorithm will multiply each elevation in the 
+#' DEM by the Z Conversion Factor. 
+#' 
+#' If the DEM is in the geographic coordinate system (latitude and longitude), 
+#' the following equation is used:
+#' 
+#' \deqn{zfactor = \frac{1.0}{111320.0 \times \cos(midlat)}}
+#' 
+#' The algorithm uses the same formula for the calculation of plan curvature 
+#' as Gallant and Wilson (2000). Plan curvature is negative for diverging 
+#' flow along ridges and positive for convergent areas, 
+#' e.g. along valley bottoms.
+#'
+#' @eval rd_input_raster("dem")
+#' @param log_transform \code{logical}, default \code{FALSE}. Wheter
+#' log-transform the output raster or not. See details.
+#' @param z_factor \code{double}, Z conversion factor is only important
+#' when the vertical and horizontal units are not the same in the DEM.
+#' When this is the case, the algorithm will multiply each elevation in the
+#' DEM by the Z conversion factor
+#'
+#' @return [WhiteboxRaster] object.
+#'
+#' @eval rd_wbw_link("plan_curvature")
+#' @references
+#' Gallant, J. C., and J. P. Wilson, 2000, Primary topographic attributes,
+#'   in Terrain Analysis: Principles and Applications, edited by J. P.
+#'   Wilson and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J. <br>
+#'
+#' @seealso [wbw_profile_curvature()]
+#'
+#' @eval rd_example("wbw_plan_curvature")
+#'
+#' @export
+wbw_plan_curvature <- S7::new_generic(
+  name = "wbw_plan_curvature",
+  dispatch_args = "dem",
+  fun = function(dem, log_transform = FALSE, z_factor = 1) {
+    S7::S7_dispatch()
+  }
+)
+
+S7::method(wbw_plan_curvature, WhiteboxRaster) <- function(
+  dem,
+  log_transform = FALSE,
+  z_factor = 1
+) {
+  # Checks
+  check_env(wbe)
+  checkmate::assert_logical(log_transform, len = 1)
+  checkmate::assert_double(z_factor, len = 1)
+
+  # WBT
+  out <- wbe$plan_curvature(
+    dem = dem@source,
+    log_transform = log_transform,
+    z_factor = z_factor
+  )
+
+  # Return
+  WhiteboxRaster(
+    name = "Plan Curvature",
     source = out
   )
 }

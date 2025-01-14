@@ -86,18 +86,18 @@ S7::method(wbw_adaptive_filter, WhiteboxRaster) <- function(
 #' similarity to the center pixel.
 #'
 #' The size of the filter is determined by setting the standard deviation
-#' distance parameter (`sigma_dist`); the larger the standard deviation the
+#' distance parameter (\code{sigma_dist}); the larger the standard deviation the
 #' larger the resulting filter kernel.
 #' The standard deviation can be any number in the range
 #' 0.5-20 and is specified in the unit of pixels. The standard deviation
-#' intensity parameter (`sigma_int`), specified in the same units as the
+#' intensity parameter (\code{sigma_int}), specified in the same units as the
 #' z-values, determines the intensity domain contribution to kernel weightings.
 #'
 #' @eval rd_input_raster("x")
 #' @param sigma_dist \code{double}, standard deviation distance parameter in
 #' **pixels**.
 #' @param sigma_int \code{double}, standard deviation intensity parameter,
-#' in the same units as z-units of input raster `x` (usually, meters).
+#' in the same units as z-units of input raster \code{x} (usually, meters).
 #'
 #' @return [WhiteboxRaster] object containing filtered values
 #'
