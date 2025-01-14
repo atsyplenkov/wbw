@@ -493,7 +493,7 @@ S7::method(wbw_profile_curvature, WhiteboxRaster) <- function(
 #'   in Terrain Analysis: Principles and Applications, edited by J. P.
 #'   Wilson and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J. <br>
 #'
-#' @seealso [wbw_total_curvature()], [wbw_profile_curvature()]
+#' @seealso [wbw_profile_curvature()]
 #'
 #' @eval rd_example("wbw_plan_curvature")
 #'

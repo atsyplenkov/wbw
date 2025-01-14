@@ -58,6 +58,6 @@ in Terrain Analysis: Principles and Applications, edited by J. P.
 Wilson and J. C. Gallant pp. 51-86, John Wiley, Hoboken, N.J. \if{html}{\out{<br>}}
 }
 \seealso{
-\code{\link[=wbw_total_curvature]{wbw_total_curvature()}}, \code{\link[=wbw_profile_curvature]{wbw_profile_curvature()}}
+\code{\link[=wbw_profile_curvature]{wbw_profile_curvature()}}
 }
 \keyword{geomorphometry}
